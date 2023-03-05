@@ -1,0 +1,7577 @@
+[
+  {
+    "id": 0,
+    "name": "clrs",
+    "family": "clrs",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0100",
+      "1000"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 1,
+    "name": "clrt",
+    "family": "clrt",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0000",
+      "1000"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 2,
+    "name": "clrmac",
+    "family": "clrmac",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0010",
+      "1000"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 3,
+    "name": "div0u",
+    "family": "div0u",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0001",
+      "1001"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 4,
+    "name": "ldtlb",
+    "family": "ldtlb",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0011",
+      "1000"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 5,
+    "name": "nop",
+    "family": "nop",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0000",
+      "1001"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 6,
+    "name": "rte",
+    "family": "rte",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0010",
+      "1011"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 7,
+    "name": "rts",
+    "family": "rts",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0000",
+      "1011"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 8,
+    "name": "sets",
+    "family": "sets",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0101",
+      "1000"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 9,
+    "name": "sett",
+    "family": "sett",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0001",
+      "1000"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 10,
+    "name": "sleep",
+    "family": "sleep",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "0001",
+      "1011"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 11,
+    "name": "cmp/pl rn",
+    "family": "cmp/pl",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "0101"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 12,
+    "name": "cmp/pz rn",
+    "family": "cmp/pz",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "0001"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 13,
+    "name": "dt rn",
+    "family": "dt",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "0000"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 14,
+    "name": "movt rn",
+    "family": "movt",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0010",
+      "1001"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 15,
+    "name": "rotl rn",
+    "family": "rotl",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "0100"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 16,
+    "name": "rotr rn",
+    "family": "rotr",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "0101"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 17,
+    "name": "rotcl rn",
+    "family": "rotcl",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "0100"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 18,
+    "name": "rotcr rn",
+    "family": "rotcr",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "0101"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 19,
+    "name": "shal rn",
+    "family": "shal",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "0000"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 20,
+    "name": "shar rn",
+    "family": "shar",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "0001"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 21,
+    "name": "shll rn",
+    "family": "shll",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "0000"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 22,
+    "name": "shlr rn",
+    "family": "shlr",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "0001"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 23,
+    "name": "shll2 rn",
+    "family": "shll2",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "1000"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 24,
+    "name": "shlr2 rn",
+    "family": "shlr2",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "1001"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 25,
+    "name": "shll8 rn",
+    "family": "shll8",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "1000"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 26,
+    "name": "shlr8 rn",
+    "family": "shlr8",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "1001"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 27,
+    "name": "shll16 rn",
+    "family": "shll16",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "1000"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 28,
+    "name": "shlr16 rn",
+    "family": "shlr16",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "1001"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 29,
+    "name": "add rm, rn",
+    "family": "add",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "1100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 30,
+    "name": "addc rm, rn",
+    "family": "addc",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 31,
+    "name": "addv rm, rn",
+    "family": "addv",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "1111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 32,
+    "name": "and rm, rn",
+    "family": "and",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "1001"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 33,
+    "name": "cmp/eq rm, rn",
+    "family": "cmp/eq",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "0000"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 34,
+    "name": "cmp/hs rm, rn",
+    "family": "cmp/hs",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "0010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 35,
+    "name": "cmp/ge rm, rn",
+    "family": "cmp/ge",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "0011"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 36,
+    "name": "cmp/hi rm, rn",
+    "family": "cmp/hi",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 37,
+    "name": "cmp/gt rm, rn",
+    "family": "cmp/gt",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 38,
+    "name": "cmp/str rm, rn",
+    "family": "cmp/str",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "1100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 39,
+    "name": "div1 rm, rn",
+    "family": "div1",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "0100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 40,
+    "name": "div0s rm, rn",
+    "family": "div0s",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 41,
+    "name": "dmuls.l rm, rn",
+    "family": "dmuls",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "1101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 42,
+    "name": "dmulu.l rm, rn",
+    "family": "dmulu",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "0101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 43,
+    "name": "exts.b rm, rn",
+    "family": "exts",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 44,
+    "name": "exts.w rm, rn",
+    "family": "exts",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "1111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 45,
+    "name": "extu.b rm, rn",
+    "family": "extu",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "1100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 46,
+    "name": "extu.w rm, rn",
+    "family": "extu",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "1101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 47,
+    "name": "mov rm, rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "0011"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 48,
+    "name": "mul.l rm, rn",
+    "family": "mul",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      null,
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 49,
+    "name": "muls.w rm, rn",
+    "family": "muls",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "1111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 50,
+    "name": "mulu.w rm, rn",
+    "family": "mulu",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 51,
+    "name": "neg rm, rn",
+    "family": "neg",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "1011"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 52,
+    "name": "negc rm, rn",
+    "family": "negc",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 53,
+    "name": "not rm, rn",
+    "family": "not",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 54,
+    "name": "or rm, rn",
+    "family": "or",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "1011"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 55,
+    "name": "shad rm, rn",
+    "family": "shad",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      null,
+      "1100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 56,
+    "name": "shld rm, rn",
+    "family": "shld",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      null,
+      "1101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 57,
+    "name": "sub rm, rn",
+    "family": "sub",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "1000"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 58,
+    "name": "subc rm, rn",
+    "family": "subc",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 59,
+    "name": "subv rm, rn",
+    "family": "subv",
+    "formatString": "TODO",
+    "opcode": [
+      "0011",
+      null,
+      null,
+      "1011"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 60,
+    "name": "swap.b rm, rn",
+    "family": "swap",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "1000"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 61,
+    "name": "swap.w rm, rn",
+    "family": "swap",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "1001"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 62,
+    "name": "tst rm, rn",
+    "family": "tst",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "1000"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 63,
+    "name": "xor rm, rn",
+    "family": "xor",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 64,
+    "name": "xtrct rm, rn",
+    "family": "xtrct",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "1101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 65,
+    "name": "ldc rm, sr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "sr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 26
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 66,
+    "name": "ldc rm, gbr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 67,
+    "name": "ldc rm, vbr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "vbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 28
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 68,
+    "name": "ldc rm, ssr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0011",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "ssr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 31
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 69,
+    "name": "ldc rm, spc",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0100",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "spc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 32
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 70,
+    "name": "ldc rm, r0_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1000",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r0_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 16
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 71,
+    "name": "ldc rm, r1_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1001",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r1_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 17
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 72,
+    "name": "ldc rm, r2_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1010",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r2_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 18
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 73,
+    "name": "ldc rm, r3_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1011",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r3_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 19
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 74,
+    "name": "ldc rm, r4_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1100",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r4_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 20
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 75,
+    "name": "ldc rm, r5_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1101",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r5_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 21
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 76,
+    "name": "ldc rm, r6_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1110",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r6_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 22
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 77,
+    "name": "ldc rm, r7_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1111",
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r7_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 23
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 78,
+    "name": "lds rm, mach",
+    "family": "lds",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "mach": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 29
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 79,
+    "name": "lds rm, macl",
+    "family": "lds",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "macl": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 30
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 80,
+    "name": "lds rm, pr",
+    "family": "lds",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "pr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 25
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 81,
+    "name": "stc sr, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0000",
+      "0010"
+    ],
+    "operands": {
+      "sr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 26
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 82,
+    "name": "stc gbr, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0001",
+      "0010"
+    ],
+    "operands": {
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 83,
+    "name": "stc vbr, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0010",
+      "0010"
+    ],
+    "operands": {
+      "vbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 28
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 84,
+    "name": "stc ssr, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0011",
+      "0010"
+    ],
+    "operands": {
+      "ssr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 31
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 85,
+    "name": "stc spc, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0100",
+      "0010"
+    ],
+    "operands": {
+      "spc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 32
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 86,
+    "name": "stc r0_bank, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1000",
+      "0010"
+    ],
+    "operands": {
+      "r0_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 16
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 87,
+    "name": "stc r1_bank, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1001",
+      "0010"
+    ],
+    "operands": {
+      "r1_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 17
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 88,
+    "name": "stc r2_bank, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1010",
+      "0010"
+    ],
+    "operands": {
+      "r2_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 18
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 89,
+    "name": "stc r3_bank, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1011",
+      "0010"
+    ],
+    "operands": {
+      "r3_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 19
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 90,
+    "name": "stc r4_bank, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1100",
+      "0010"
+    ],
+    "operands": {
+      "r4_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 20
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 91,
+    "name": "stc r5_bank, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1101",
+      "0010"
+    ],
+    "operands": {
+      "r5_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 21
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 92,
+    "name": "stc r6_bank, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1110",
+      "0010"
+    ],
+    "operands": {
+      "r6_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 22
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 93,
+    "name": "stc r7_bank, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1111",
+      "0010"
+    ],
+    "operands": {
+      "r7_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 23
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 94,
+    "name": "sts mach, rn",
+    "family": "sts",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0000",
+      "1010"
+    ],
+    "operands": {
+      "mach": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 29
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 95,
+    "name": "sts macl, rn",
+    "family": "sts",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0001",
+      "1010"
+    ],
+    "operands": {
+      "macl": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 30
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 96,
+    "name": "sts pr, rn",
+    "family": "sts",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0010",
+      "1010"
+    ],
+    "operands": {
+      "pr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 25
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 97,
+    "name": "jmp @rn",
+    "family": "jmp",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "1011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 98,
+    "name": "jsr @rn",
+    "family": "jsr",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "1011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 99,
+    "name": "pref @rn",
+    "family": "pref",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1000",
+      "0011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 100,
+    "name": "tas.b @rn",
+    "family": "tas",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "1011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 1,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 101,
+    "name": "mov.b rm, @rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "0000"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 1,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 102,
+    "name": "mov.w rm, @rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "0001"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 2,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 103,
+    "name": "mov.l rm, @rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "0010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 104,
+    "name": "mov.b @rm, rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "0000"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 1,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 105,
+    "name": "mov.w @rm, rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "0001"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 2,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 106,
+    "name": "mov.l @rm, rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "0010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 107,
+    "name": "mac.l @rm+, @rn+",
+    "family": "mac",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      null,
+      "1111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 108,
+    "name": "mac.w @rm+, @rn+",
+    "family": "mac",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      null,
+      "1111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 2,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 2,
+        "preDecrement": false,
+        "postIncrement": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 109,
+    "name": "mov.b @rm+, rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "0100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 1,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 110,
+    "name": "mov.w @rm+, rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "0101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 2,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 111,
+    "name": "mov.l @rm+, rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0110",
+      null,
+      null,
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 112,
+    "name": "ldc.l @rm+, sr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "sr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 26
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 113,
+    "name": "ldc.l @rm+, gbr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 114,
+    "name": "ldc.l @rm+, vbr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "vbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 28
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 115,
+    "name": "ldc.l @rm+, ssr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0011",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "ssr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 31
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 116,
+    "name": "ldc.l @rm+, spc",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0100",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "spc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 32
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 117,
+    "name": "ldc.l @rm+, r0_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1000",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r0_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 16
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 118,
+    "name": "ldc.l @rm+, r1_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1001",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r1_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 17
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 119,
+    "name": "ldc.l @rm+, r2_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1010",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r2_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 18
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 120,
+    "name": "ldc.l @rm+, r3_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1011",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r3_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 19
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 121,
+    "name": "ldc.l @rm+, r4_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1100",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r4_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 20
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 122,
+    "name": "ldc.l @rm+, r5_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1101",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r5_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 21
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 123,
+    "name": "ldc.l @rm+, r6_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1110",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r6_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 22
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 124,
+    "name": "ldc.l @rm+, r7_bank",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1111",
+      "0111"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r7_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 23
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 125,
+    "name": "lds.l @rm+, mach",
+    "family": "lds",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "mach": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 29
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 126,
+    "name": "lds.l @rm+, macl",
+    "family": "lds",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "macl": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 30
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 127,
+    "name": "lds.l @rm+, pr",
+    "family": "lds",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "pr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 25
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 128,
+    "name": "mov.b rm, @-rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "0100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 1,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 129,
+    "name": "mov.w rm, @-rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "0101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 2,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 130,
+    "name": "mov.l rm, @-rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0010",
+      null,
+      null,
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 131,
+    "name": "stc.l sr, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "0011"
+    ],
+    "operands": {
+      "sr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 26
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 132,
+    "name": "stc.l gbr, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "0011"
+    ],
+    "operands": {
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 133,
+    "name": "stc.l vbr, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "0011"
+    ],
+    "operands": {
+      "vbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 28
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 134,
+    "name": "stc.l ssr, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0011",
+      "0011"
+    ],
+    "operands": {
+      "ssr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 31
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 135,
+    "name": "stc.l spc, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0100",
+      "0011"
+    ],
+    "operands": {
+      "spc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 32
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 136,
+    "name": "stc.l r0_bank, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1000",
+      "0011"
+    ],
+    "operands": {
+      "r0_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 16
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 137,
+    "name": "stc.l r1_bank, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1001",
+      "0011"
+    ],
+    "operands": {
+      "r1_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 17
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 138,
+    "name": "stc.l r2_bank, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1010",
+      "0011"
+    ],
+    "operands": {
+      "r2_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 18
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 139,
+    "name": "stc.l r3_bank, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1011",
+      "0011"
+    ],
+    "operands": {
+      "r3_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 19
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 140,
+    "name": "stc.l r4_bank, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1100",
+      "0011"
+    ],
+    "operands": {
+      "r4_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 20
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 141,
+    "name": "stc.l r5_bank, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1101",
+      "0011"
+    ],
+    "operands": {
+      "r5_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 21
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 142,
+    "name": "stc.l r6_bank, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1110",
+      "0011"
+    ],
+    "operands": {
+      "r6_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 22
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 143,
+    "name": "stc.l r7_bank, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1111",
+      "0011"
+    ],
+    "operands": {
+      "r7_bank": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 23
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 144,
+    "name": "sts.l mach, @-rn",
+    "family": "sts",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0000",
+      "0010"
+    ],
+    "operands": {
+      "mach": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 29
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 145,
+    "name": "sts.l macl, @-rn",
+    "family": "sts",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0001",
+      "0010"
+    ],
+    "operands": {
+      "macl": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 30
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 146,
+    "name": "sts.l pr, @-rn",
+    "family": "sts",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0010",
+      "0010"
+    ],
+    "operands": {
+      "pr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 25
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 147,
+    "name": "mov.b r0, @(disp,rn)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "0000",
+      null,
+      null
+    ],
+    "operands": {
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "disp"
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 148,
+    "name": "mov.w r0, @(disp,rn)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "0001",
+      null,
+      null
+    ],
+    "operands": {
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 2,
+        "offsetBy": "disp"
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 149,
+    "name": "mov.l rm, @(disp,rn)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0001",
+      null,
+      null,
+      null
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "offsetBy": "disp"
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 150,
+    "name": "mov.b @(disp,rm), r0",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "0100",
+      null,
+      null
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "disp"
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 151,
+    "name": "mov.w @(disp,rm), r0",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "0101",
+      null,
+      null
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 2,
+        "offsetBy": "disp"
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 152,
+    "name": "mov.l @(disp,rm), rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0101",
+      null,
+      null,
+      null
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 4,
+        "offsetBy": "disp"
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 153,
+    "name": "mov.b rm, @(r0,rn)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      null,
+      "0100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "r0"
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 154,
+    "name": "mov.w rm, @(r0,rn)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      null,
+      "0101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 2,
+        "offsetBy": "r0"
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 155,
+    "name": "mov.l rm, @(r0,rn)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      null,
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "offsetBy": "r0"
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 156,
+    "name": "mov.b @(r0,rm), rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      null,
+      "1100"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "r0"
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 157,
+    "name": "mov.w @(r0,rm), rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      null,
+      "1101"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 2,
+        "offsetBy": "r0"
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 158,
+    "name": "mov.l @(r0,rm), rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      null,
+      "1110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "0000"
+        ],
+        "shift": 4,
+        "indirect": true,
+        "indirectSize": 4,
+        "offsetBy": "r0"
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 159,
+    "name": "mov.b r0, @(disp,gbr)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "0000",
+      null,
+      null
+    ],
+    "operands": {
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "disp"
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 160,
+    "name": "mov.w r0, @(disp,gbr)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "0001",
+      null,
+      null
+    ],
+    "operands": {
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27,
+        "indirect": true,
+        "indirectSize": 2,
+        "offsetBy": "disp"
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 161,
+    "name": "mov.l r0, @(disp,gbr)",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "0010",
+      null,
+      null
+    ],
+    "operands": {
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27,
+        "indirect": true,
+        "indirectSize": 4,
+        "offsetBy": "disp"
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 162,
+    "name": "mov.b @(disp,gbr), r0",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "0100",
+      null,
+      null
+    ],
+    "operands": {
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "disp"
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 163,
+    "name": "mov.w @(disp,gbr), r0",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "0101",
+      null,
+      null
+    ],
+    "operands": {
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27,
+        "indirect": true,
+        "indirectSize": 2,
+        "offsetBy": "disp"
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 164,
+    "name": "mov.l @(disp,gbr), r0",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "0110",
+      null,
+      null
+    ],
+    "operands": {
+      "gbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 27,
+        "indirect": true,
+        "indirectSize": 4,
+        "offsetBy": "disp"
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 165,
+    "name": "and.b #imm, @(r0,gbr)",
+    "family": "and",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "1101",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "gb": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "0000"
+        ],
+        "shift": 16,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "r0"
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 166,
+    "name": "or.b #imm, @(r0,gbr)",
+    "family": "or",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "1111",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "gb": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "0000"
+        ],
+        "shift": 16,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "r0"
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 167,
+    "name": "tst.b #imm, @(r0,gbr)",
+    "family": "tst",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "1100",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "gb": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "0000"
+        ],
+        "shift": 16,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "r0"
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 168,
+    "name": "xor.b #imm, @(r0,gbr)",
+    "family": "xor",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "1110",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "gb": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "0000",
+          "0000"
+        ],
+        "shift": 16,
+        "indirect": true,
+        "indirectSize": 1,
+        "offsetBy": "r0"
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 1
+  },
+  {
+    "id": 169,
+    "name": "mov.w @(disp,pc), rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1001",
+      null,
+      null,
+      null
+    ],
+    "operands": {
+      "pc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 24,
+        "indirect": true,
+        "indirectSize": 2,
+        "offsetBy": "disp"
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 2
+  },
+  {
+    "id": 170,
+    "name": "mov.l @(disp,pc), rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1101",
+      null,
+      null,
+      null
+    ],
+    "operands": {
+      "pc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 24,
+        "indirect": true,
+        "indirectSize": 4,
+        "offsetBy": "disp"
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 171,
+    "name": "mova.l @(disp,pc), r0",
+    "family": "mova",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "0111",
+      null,
+      null
+    ],
+    "operands": {
+      "pc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 24,
+        "indirect": true,
+        "indirectSize": 4,
+        "offsetBy": "disp"
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 172,
+    "name": "braf rm",
+    "family": "braf",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0010",
+      "0011"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 173,
+    "name": "bsrf rm",
+    "family": "bsrf",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0000",
+      "0011"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 174,
+    "name": "bf jump8",
+    "family": "bf",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "1011",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 175,
+    "name": "bf.s jump8",
+    "family": "bf",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "1111",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": true,
+    "instructionSize": 4
+  },
+  {
+    "id": 176,
+    "name": "bt jump8",
+    "family": "bt",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "1001",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 177,
+    "name": "bt.s jump8",
+    "family": "bt",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "1101",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": true,
+    "instructionSize": 4
+  },
+  {
+    "id": 178,
+    "name": "bra jump12",
+    "family": "bra",
+    "formatString": "TODO",
+    "opcode": [
+      "1010",
+      null,
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 179,
+    "name": "bsr jump12",
+    "family": "bsr",
+    "formatString": "TODO",
+    "opcode": [
+      "1011",
+      null,
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 180,
+    "name": "add #imm, rn",
+    "family": "add",
+    "formatString": "TODO",
+    "opcode": [
+      "0111",
+      null,
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 181,
+    "name": "and #imm, r0",
+    "family": "and",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "1001",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 182,
+    "name": "cmp/eq #imm, r0",
+    "family": "cmp/eq",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "1000",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 183,
+    "name": "mov #imm, rn",
+    "family": "mov",
+    "formatString": "TODO",
+    "opcode": [
+      "1110",
+      null,
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 184,
+    "name": "or #imm, r0",
+    "family": "or",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "1011",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 185,
+    "name": "tst #imm, r0",
+    "family": "tst",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "1000",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 186,
+    "name": "xor #imm, r0",
+    "family": "xor",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "1010",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 187,
+    "name": "trapa #imm",
+    "family": "trapa",
+    "formatString": "TODO",
+    "opcode": [
+      "1100",
+      "0011",
+      null,
+      null
+    ],
+    "operands": {
+      "imm": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 188,
+    "name": "movco.l r0, @rn",
+    "family": "movco",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0111",
+      "0011"
+    ],
+    "operands": {
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 189,
+    "name": "movli.l @rm, r0",
+    "family": "movli",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0110",
+      "0011"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 190,
+    "name": "movua.l @rm, r0",
+    "family": "movua",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1010",
+      "1001"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 191,
+    "name": "movua.l @rm+, r0",
+    "family": "movua",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1110",
+      "1001"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 192,
+    "name": "movca.l r0, @rn",
+    "family": "movca",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1100",
+      "0011"
+    ],
+    "operands": {
+      "r0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 0
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 193,
+    "name": "icbi @rn",
+    "family": "icbi",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1110",
+      "0011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 194,
+    "name": "ocbi @rn",
+    "family": "ocbi",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1001",
+      "0011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 195,
+    "name": "ocbp @rn",
+    "family": "ocbp",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1010",
+      "0011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 196,
+    "name": "ocbwb @rn",
+    "family": "ocbwb",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1011",
+      "0011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 197,
+    "name": "prefi @rn",
+    "family": "prefi",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1101",
+      "0011"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 198,
+    "name": "synco",
+    "family": "synco",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      "0000",
+      "1010",
+      "1011"
+    ],
+    "operands": {},
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 199,
+    "name": "ldc rm, sgr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0011",
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "sgr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 33
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 200,
+    "name": "ldc rm, dbr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1111",
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "dbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 34
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 201,
+    "name": "ldc.l @rm+, sgr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0011",
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "sgr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 33
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 202,
+    "name": "ldc.l @rm+, dbr",
+    "family": "ldc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1111",
+      "0110"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": false,
+        "postIncrement": true
+      },
+      "dbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 34
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 203,
+    "name": "stc sgr, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "0011",
+      "1010"
+    ],
+    "operands": {
+      "sgr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 33
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 204,
+    "name": "stc dbr, rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0000",
+      null,
+      "1111",
+      "1010"
+    ],
+    "operands": {
+      "dbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 34
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 205,
+    "name": "stc.l sgr, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0011",
+      "0010"
+    ],
+    "operands": {
+      "sgr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 33
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 206,
+    "name": "stc.l dbr, @-rn",
+    "family": "stc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1111",
+      "0010"
+    ],
+    "operands": {
+      "dbr": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 34
+      },
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": true,
+        "indirectSize": 4,
+        "preDecrement": true,
+        "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  }
+]
