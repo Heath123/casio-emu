@@ -1,13 +1,13 @@
-OUTPUT_FORMAT(binary)
+/* OUTPUT_FORMAT(binary) */
 OUTPUT_ARCH(sh3)
  
 /* Entry point.  Not really important here, since doing binary output */
-ENTRY(_initialize)
+ENTRY(initialize)
  
 MEMORY
 {
-        rom (rx) : o = 0x0, l = 960k
-        ram (rwx) : o = 0xf0000, l = 32k
+        rom (rx) : o = 0x00300200, l = 500k
+        ram (rwx) : o = 0x08100200, l = 800k
 }
  
 SECTIONS

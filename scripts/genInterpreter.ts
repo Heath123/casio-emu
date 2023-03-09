@@ -79,12 +79,63 @@ function sanitizeName(name: string): string {
 // This is a dictionary of instruction IDs to names of handlers
 let instructionHandlers: { [key: number]: string } = {}
 
+function genRead(sourceOperandName: string, sourceOperand: Operand, varName: string): string {
+  let code = ``
+  if (sourceOperand.type === 'register') {
+    if (sourceOperand.indirect) {
+      code += `u32 ${varName} = readMemory((cpu.reg.regArray[${sourceOperandName}]`
+      if (sourceOperandName === 'pc' && sourceOperand.indirectSize == 4) {
+        code += ` & 0xFFFFFFFC)`
+      } else {
+        code += `)`
+      }
+      if (sourceOperand.offsetBy) {
+        let offsetBy = sourceOperand.offsetBy === 'r0' ? 'cpu.reg.regArray[0]' : sourceOperand.offsetBy
+        if (offsetBy === 'disp') {
+          code += ` + (${offsetBy} * ${sourceOperand.indirectSize})`
+        } else {
+          code += ` + (${offsetBy})`
+        }
+      }
+      code += `, ${sourceOperand.indirectSize});\n`
+      // If indirectSize is not 4, we need to sign extend it
+      if (sourceOperand.indirectSize !== 4) {
+        code += `${varName} = s_ext(${varName}, ${sourceOperand.indirectSize * 8});\n`
+      }
+    } else {
+      code += `u32 ${varName} = cpu.reg.regArray[${sourceOperandName}];\n`
+    }
+  } else if (sourceOperand.type === 'immediate') {
+    if (isConstant(sourceOperand)) {
+      // This doesn't seem to be used so there's no need to implement it
+      throw new Error('Constant immediate operand not supported')
+    }
+    if (sourceOperand.signed) {
+      // Count the bits in mask
+      // e.g. ["0000", "0000", "1111", "1111"]
+
+      let bitCount = 0
+      for (const mask of sourceOperand.mask) {
+        for (const bit of mask) {
+          if (bit === '1') {
+            bitCount++
+          }
+        }
+      }
+
+      code += `u32 ${varName} = s_ext(${sourceOperandName}, ${bitCount});\n`
+    } else {
+      code += `u32 ${varName} = ${sourceOperandName};\n`
+    }
+  }
+  return code
+}
+
 let finalCode = ``
 for (const instruction of instructions) {
   let funcName = `autogen_${sanitizeName(instruction.name)}`
   let code = `
   void ${funcName}(u16 instr) {
-    u32* dest;
     #ifdef PRINT_INSTRUCTIONS
     printf(${JSON.stringify(instruction.name + '\n')});
     #endif\n`
@@ -96,65 +147,29 @@ for (const instruction of instructions) {
     } else if (!operand.isConstant) {
       code += `u32 ${name} = (instr & 0b${operand.mask.join('')}) >> ${operand.shift};\n`
     }
+
+    // Pre-decrement
+    if (operand.preDecrement) {
+      code += `cpu.reg.regArray[${name}] -= ${operand.indirectSize};\n`
+    }
   }
 
-  let usedTemp: boolean = false
-  let destinationOperandName: string
-  let destinationOperand: Operand | ConstantOperand
   if (Object.keys(instruction.operands).length === 0) {
     code += `u32 src = 0;\n`
-    code += `dest = (void*) 0;\n`
+    code += `u32 dst = 0;\n`
+    // Call the instruction function
+    code += `u32 result = ${sanitizeName(instruction.family)}(instr, src, dst);\n`
   } else {
     // Read the source operand
     // Assume that the first operand is the source for now
     const sourceOperandName = Object.keys(instruction.operands)[0]
     const sourceOperand = Object.values(instruction.operands)[0]
-    if (sourceOperand.type === 'register') {
-      if (sourceOperand.preDecrement) {
-        code += `cpu.reg.regArray[${sourceOperandName}] -= ${sourceOperand.indirectSize};\n`
-      }
-      if (sourceOperand.indirect) {
-        code += `u32 src = readMemory(cpu.reg.regArray[${sourceOperandName}]`
-        if (sourceOperand.offsetBy) {
-          let offsetBy = sourceOperand.offsetBy === 'r0' ? 'cpu.reg.regArray[0]' : sourceOperand.offsetBy
-          code += ` + (${offsetBy} * ${sourceOperand.indirectSize})`
-        }
-        code += `, ${sourceOperand.indirectSize});\n`
-      } else {
-        code += `u32 src = cpu.reg.regArray[${sourceOperandName}];\n`
-      }
-      if (sourceOperand.postIncrement) {
-        code += `cpu.reg.regArray[${sourceOperandName}] += ${sourceOperand.indirectSize};\n`
-      }
-    } else if (sourceOperand.type === 'immediate') {
-      if (isConstant(sourceOperand)) {
-        // This doesn't seem to be used so there's no need to implement it
-        throw new Error('Constant immediate operand not supported')
-      }
-      if (sourceOperand.signed) {
-        // Count the bits in mask
-        // e.g. ["0000", "0000", "1111", "1111"]
+    code += genRead(sourceOperandName, sourceOperand, 'src')
 
-        let bitCount = 0
-        for (const mask of sourceOperand.mask) {
-          for (const bit of mask) {
-            if (bit === '1') {
-              bitCount++
-            }
-          }
-        }
-
-        code += `u32 src = s_ext(${sourceOperandName}, ${bitCount});\n`
-      } else {
-        code += `u32 src = ${sourceOperandName};\n`
-      }
-    }
-
-    // Read the destination operand into a pointer
+    // Read the destination operand, which is sometimes used as a source too
     // Assume that the second operand is the destination for now
-
-    // If there are at least two operands, the second one is the destination
-    // Otherwise the first one is both the source and the destination
+    let destinationOperandName: string
+    let destinationOperand: Operand | ConstantOperand
     if (Object.keys(instruction.operands).length >= 2) {
       destinationOperandName = Object.keys(instruction.operands)[1]
       destinationOperand = Object.values(instruction.operands)[1]
@@ -162,42 +177,44 @@ for (const instruction of instructions) {
       destinationOperandName = Object.keys(instruction.operands)[0]
       destinationOperand = Object.values(instruction.operands)[0]
     }
+    code += genRead(destinationOperandName, destinationOperand, 'dst')
+  
+    // Call the instruction function
+    code += `u32 result = ${sanitizeName(instruction.family)}(instr, src, dst);\n`
+    
+    // Store the result in the destination operand
+
+    // If there are at least two operands, the second one is the destination
+    // Otherwise the first one is both the source and the destination
     if (destinationOperand.type === 'register') {
-      if (destinationOperand.preDecrement) {
-        code += `cpu.reg.regArray[${destinationOperandName}] -= ${destinationOperand.indirectSize};\n`
-      }
       if (destinationOperand.indirect) {
-        if (destinationOperand.indirectSize === 4) {
-          code += `dest = getMemoryPtr(cpu.reg.regArray[${destinationOperandName}]);\n`
-        } else {
-          // Use a temporary variable as the write target
-          code += `u32 tmp = 0;\n`
-          code += `dest = &tmp;\n`
-          usedTemp = true
+        code += `writeMemory(cpu.reg.regArray[${destinationOperandName}]`
+        if (destinationOperand.offsetBy) {
+          let offsetBy = destinationOperand.offsetBy === 'r0' ? 'cpu.reg.regArray[0]' : destinationOperand.offsetBy
+          if (offsetBy === 'disp') {
+            code += ` + (${offsetBy} * ${destinationOperand.indirectSize})`
+          } else {
+            code += ` + (${offsetBy})`
+          }
         }
+        code += `, ${destinationOperand.indirectSize}, result);\n`
       } else {
-        code += `dest = &cpu.reg.regArray[${destinationOperandName}];\n`
-      }
-      if (destinationOperand.postIncrement) {
-        code += `cpu.reg.regArray[${destinationOperandName}] += ${destinationOperand.indirectSize};\n`
+        code += `cpu.reg.regArray[${destinationOperandName}] = result;\n`
       }
     } else if (destinationOperand.type === 'immediate') {
       // This can happen if the instruction has one operand and it's treated as both the source and the destination
-      // In reality it's not used as a destination, so just set the destination to a null pointer
-      if (Object.keys(instruction.operands).length === 1) {
-        code += `dest = (void*) 0;\n`
-      } else {
+      // In reality it's not used as a destination, so just ignore it
+      if (Object.keys(instruction.operands).length !== 1) {
         throw new Error('Immediate destination operand? That doesn\'t make sense')
       }
     }
   }
 
-  // Call the instruction function
-  code += `${sanitizeName(instruction.family)}(src, dest);\n`
-
-  // If we used a temporary variable, write it back to memory
-  if (usedTemp) {
-    code += `writeMemory(cpu.reg.regArray[${destinationOperandName}], tmp, ${(destinationOperand as Operand).indirectSize});\n`
+  // Post-increment
+  for (const [name, operand] of Object.entries(instruction.operands)) {
+    if (operand.postIncrement) {
+      code += `cpu.reg.regArray[${name}] += ${operand.indirectSize};\n`
+    }
   }
 
   code += '}'

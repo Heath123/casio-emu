@@ -2,6 +2,24 @@
 
 #include "int.h"
 
+struct SR_parts {
+  u32 T : 1;
+  u32 S : 1;
+  u32 RF : 2;
+  u32 IMASK : 4;
+  u32 Q : 1;
+  u32 M : 1;
+  u32 DMY : 1;
+  u32 DMX : 1;
+  u32 DSP : 1;
+  u32 reserved_1 : 3;
+  u32 RC : 11;
+  u32 BL : 1;
+  u32 RB : 1;
+  u32 MD : 1;
+  u32 reserved_2 : 1;
+};
+
 typedef struct {
   union {
     u32 regArray[16 + 8 + 11];
@@ -32,7 +50,11 @@ typedef struct {
       u32 r7_banked;
       u32 PC;
       u32 PR;
-      u32 SR;
+      // TODO: endianness?
+      union {
+        u32 SR;
+        struct SR_parts SR_parts;
+      };
       u32 GBR;
       u32 VBR;
       u32 MACH;
@@ -52,3 +74,4 @@ typedef struct CpuState {
   bool branchDelayDone;
   u32 branchTarget;
 } CpuState;
+

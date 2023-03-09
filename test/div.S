@@ -1,0 +1,85 @@
+.global ___sdivsi3
+
+___sdivsi3:
+  mov     r4,r1
+  mov     r5,r0
+  tst     r0,r0
+  bt      div0
+  mov     #0,r2
+  div0s   r2,r1
+  subc    r3,r3
+  subc    r2,r1
+  div0s   r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  div1    r0,r3
+  rotcl   r1
+  addc    r2,r1
+  rts
+  mov     r1,r0
+
+div0:
+  rts
+  mov     #0,r0
+  nop

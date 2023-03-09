@@ -3410,7 +3410,7 @@
   },
   {
     "id": 97,
-    "name": "jmp @rn",
+    "name": "jmp rn",
     "family": "jmp",
     "formatString": "TODO",
     "opcode": [
@@ -3430,8 +3430,7 @@
           "0000"
         ],
         "shift": 8,
-        "indirect": true,
-        "indirectSize": 4,
+        "indirect": false,
         "preDecrement": false,
         "postIncrement": false
       }
@@ -3441,7 +3440,7 @@
   },
   {
     "id": 98,
-    "name": "jsr @rn",
+    "name": "jsr rn",
     "family": "jsr",
     "formatString": "TODO",
     "opcode": [
@@ -3461,8 +3460,7 @@
           "0000"
         ],
         "shift": 8,
-        "indirect": true,
-        "indirectSize": 4,
+        "indirect": false,
         "preDecrement": false,
         "postIncrement": false
       }

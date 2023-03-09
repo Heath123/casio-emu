@@ -1,1927 +1,1915 @@
 // clrs
 void autogen_clrs(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("clrs\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  clrs(src, dest);
+  u32 dst = 0;
+  u32 result = clrs(instr, src, dst);
 }
 
 // clrt
 void autogen_clrt(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("clrt\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  clrt(src, dest);
+  u32 dst = 0;
+  u32 result = clrt(instr, src, dst);
 }
 
 // clrmac
 void autogen_clrmac(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("clrmac\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  clrmac(src, dest);
+  u32 dst = 0;
+  u32 result = clrmac(instr, src, dst);
 }
 
 // div0u
 void autogen_div0u(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("div0u\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  div0u(src, dest);
+  u32 dst = 0;
+  u32 result = div0u(instr, src, dst);
 }
 
 // ldtlb
 void autogen_ldtlb(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldtlb\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  ldtlb(src, dest);
+  u32 dst = 0;
+  u32 result = ldtlb(instr, src, dst);
 }
 
 // nop
 void autogen_nop(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("nop\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  nop(src, dest);
+  u32 dst = 0;
+  u32 result = nop(instr, src, dst);
 }
 
 // rte
 void autogen_rte(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("rte\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  rte(src, dest);
+  u32 dst = 0;
+  u32 result = rte(instr, src, dst);
 }
 
 // rts
 void autogen_rts(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("rts\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  rts(src, dest);
+  u32 dst = 0;
+  u32 result = rts(instr, src, dst);
 }
 
 // sets
 void autogen_sets(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sets\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  sets(src, dest);
+  u32 dst = 0;
+  u32 result = sets(instr, src, dst);
 }
 
 // sett
 void autogen_sett(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sett\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  sett(src, dest);
+  u32 dst = 0;
+  u32 result = sett(instr, src, dst);
 }
 
 // sleep
 void autogen_sleep(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sleep\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  sleep(src, dest);
+  u32 dst = 0;
+  u32 result = sleep(instr, src, dst);
 }
 
 // cmp/pl rn
 void autogen_cmp_pl_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/pl rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  cmp_pl(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = cmp_pl(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // cmp/pz rn
 void autogen_cmp_pz_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/pz rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  cmp_pz(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = cmp_pz(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // dt rn
 void autogen_dt_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("dt rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  dt(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = dt(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // movt rn
 void autogen_movt_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("movt rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  movt(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = movt(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // rotl rn
 void autogen_rotl_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("rotl rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  rotl(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = rotl(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // rotr rn
 void autogen_rotr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("rotr rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  rotr(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = rotr(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // rotcl rn
 void autogen_rotcl_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("rotcl rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  rotcl(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = rotcl(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // rotcr rn
 void autogen_rotcr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("rotcr rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  rotcr(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = rotcr(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shal rn
 void autogen_shal_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shal rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shal(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shal(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shar rn
 void autogen_shar_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shar rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shar(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shar(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shll rn
 void autogen_shll_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shll rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shll(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shll(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shlr rn
 void autogen_shlr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shlr rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shlr(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shlr(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shll2 rn
 void autogen_shll2_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shll2 rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shll2(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shll2(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shlr2 rn
 void autogen_shlr2_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shlr2 rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shlr2(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shlr2(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shll8 rn
 void autogen_shll8_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shll8 rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shll8(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shll8(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shlr8 rn
 void autogen_shlr8_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shlr8 rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shlr8(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shlr8(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shll16 rn
 void autogen_shll16_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shll16 rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shll16(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shll16(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shlr16 rn
 void autogen_shlr16_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shlr16 rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[n];
-  dest = &cpu.reg.regArray[n];
-  shlr16(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shlr16(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // add rm, rn
 void autogen_add_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("add rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  add(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = add(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // addc rm, rn
 void autogen_addc_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("addc rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  addc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = addc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // addv rm, rn
 void autogen_addv_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("addv rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  addv(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = addv(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // and rm, rn
 void autogen_and_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("and rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  and(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = and(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // cmp/eq rm, rn
 void autogen_cmp_eq_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/eq rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  cmp_eq(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = cmp_eq(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // cmp/hs rm, rn
 void autogen_cmp_hs_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/hs rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  cmp_hs(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = cmp_hs(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // cmp/ge rm, rn
 void autogen_cmp_ge_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/ge rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  cmp_ge(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = cmp_ge(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // cmp/hi rm, rn
 void autogen_cmp_hi_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/hi rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  cmp_hi(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = cmp_hi(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // cmp/gt rm, rn
 void autogen_cmp_gt_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/gt rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  cmp_gt(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = cmp_gt(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // cmp/str rm, rn
 void autogen_cmp_str_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/str rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  cmp_str(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = cmp_str(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // div1 rm, rn
 void autogen_div1_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("div1 rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  div1(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = div1(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // div0s rm, rn
 void autogen_div0s_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("div0s rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  div0s(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = div0s(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // dmuls.l rm, rn
 void autogen_dmuls_l_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("dmuls.l rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  dmuls(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = dmuls(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // dmulu.l rm, rn
 void autogen_dmulu_l_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("dmulu.l rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  dmulu(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = dmulu(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // exts.b rm, rn
 void autogen_exts_b_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("exts.b rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  exts(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = exts(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // exts.w rm, rn
 void autogen_exts_w_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("exts.w rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  exts(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = exts(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // extu.b rm, rn
 void autogen_extu_b_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("extu.b rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  extu(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = extu(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // extu.w rm, rn
 void autogen_extu_w_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("extu.w rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  extu(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = extu(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mov rm, rn
 void autogen_mov_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mul.l rm, rn
 void autogen_mul_l_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mul.l rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  mul(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mul(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // muls.w rm, rn
 void autogen_muls_w_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("muls.w rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  muls(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = muls(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mulu.w rm, rn
 void autogen_mulu_w_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mulu.w rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  mulu(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mulu(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // neg rm, rn
 void autogen_neg_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("neg rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  neg(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = neg(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // negc rm, rn
 void autogen_negc_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("negc rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  negc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = negc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // not rm, rn
 void autogen_not_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("not rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  not(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = not(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // or rm, rn
 void autogen_or_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("or rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  or(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = or(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shad rm, rn
 void autogen_shad_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shad rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  shad(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shad(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // shld rm, rn
 void autogen_shld_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("shld rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  shld(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = shld(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // sub rm, rn
 void autogen_sub_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sub rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  sub(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = sub(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // subc rm, rn
 void autogen_subc_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("subc rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  subc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = subc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // subv rm, rn
 void autogen_subv_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("subv rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  subv(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = subv(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // swap.b rm, rn
 void autogen_swap_b_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("swap.b rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  swap(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = swap(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // swap.w rm, rn
 void autogen_swap_w_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("swap.w rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  swap(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = swap(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // tst rm, rn
 void autogen_tst_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("tst rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  tst(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = tst(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // xor rm, rn
 void autogen_xor_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("xor rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  xor(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = xor(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // xtrct rm, rn
 void autogen_xtrct_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("xtrct rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[n];
-  xtrct(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = xtrct(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // ldc rm, sr
 void autogen_ldc_rm_sr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, sr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 sr = 26;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[sr];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[sr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[sr] = result;
 }
 
 // ldc rm, gbr
 void autogen_ldc_rm_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, gbr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 gbr = 27;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[gbr];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[gbr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[gbr] = result;
 }
 
 // ldc rm, vbr
 void autogen_ldc_rm_vbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, vbr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 vbr = 28;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[vbr];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[vbr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[vbr] = result;
 }
 
 // ldc rm, ssr
 void autogen_ldc_rm_ssr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, ssr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 ssr = 31;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[ssr];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[ssr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[ssr] = result;
 }
 
 // ldc rm, spc
 void autogen_ldc_rm_spc(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, spc\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 spc = 32;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[spc];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[spc];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[spc] = result;
 }
 
 // ldc rm, r0_bank
 void autogen_ldc_rm_r0_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, r0_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r0_bank = 16;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[r0_bank];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[r0_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r0_bank] = result;
 }
 
 // ldc rm, r1_bank
 void autogen_ldc_rm_r1_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, r1_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r1_bank = 17;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[r1_bank];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[r1_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r1_bank] = result;
 }
 
 // ldc rm, r2_bank
 void autogen_ldc_rm_r2_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, r2_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r2_bank = 18;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[r2_bank];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[r2_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r2_bank] = result;
 }
 
 // ldc rm, r3_bank
 void autogen_ldc_rm_r3_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, r3_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r3_bank = 19;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[r3_bank];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[r3_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r3_bank] = result;
 }
 
 // ldc rm, r4_bank
 void autogen_ldc_rm_r4_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, r4_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r4_bank = 20;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[r4_bank];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[r4_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r4_bank] = result;
 }
 
 // ldc rm, r5_bank
 void autogen_ldc_rm_r5_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, r5_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r5_bank = 21;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[r5_bank];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[r5_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r5_bank] = result;
 }
 
 // ldc rm, r6_bank
 void autogen_ldc_rm_r6_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, r6_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r6_bank = 22;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[r6_bank];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[r6_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r6_bank] = result;
 }
 
 // ldc rm, r7_bank
 void autogen_ldc_rm_r7_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, r7_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r7_bank = 23;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[r7_bank];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[r7_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r7_bank] = result;
 }
 
 // lds rm, mach
 void autogen_lds_rm_mach(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("lds rm, mach\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 mach = 29;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[mach];
-  lds(src, dest);
+  u32 dst = cpu.reg.regArray[mach];
+  u32 result = lds(instr, src, dst);
+  cpu.reg.regArray[mach] = result;
 }
 
 // lds rm, macl
 void autogen_lds_rm_macl(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("lds rm, macl\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 macl = 30;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[macl];
-  lds(src, dest);
+  u32 dst = cpu.reg.regArray[macl];
+  u32 result = lds(instr, src, dst);
+  cpu.reg.regArray[macl] = result;
 }
 
 // lds rm, pr
 void autogen_lds_rm_pr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("lds rm, pr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 pr = 25;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[pr];
-  lds(src, dest);
+  u32 dst = cpu.reg.regArray[pr];
+  u32 result = lds(instr, src, dst);
+  cpu.reg.regArray[pr] = result;
 }
 
 // stc sr, rn
 void autogen_stc_sr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc sr, rn\n");
   #endif
   u32 sr = 26;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[sr];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc gbr, rn
 void autogen_stc_gbr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc gbr, rn\n");
   #endif
   u32 gbr = 27;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[gbr];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc vbr, rn
 void autogen_stc_vbr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc vbr, rn\n");
   #endif
   u32 vbr = 28;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[vbr];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc ssr, rn
 void autogen_stc_ssr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc ssr, rn\n");
   #endif
   u32 ssr = 31;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[ssr];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc spc, rn
 void autogen_stc_spc_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc spc, rn\n");
   #endif
   u32 spc = 32;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[spc];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc r0_bank, rn
 void autogen_stc_r0_bank_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc r0_bank, rn\n");
   #endif
   u32 r0_bank = 16;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r0_bank];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc r1_bank, rn
 void autogen_stc_r1_bank_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc r1_bank, rn\n");
   #endif
   u32 r1_bank = 17;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r1_bank];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc r2_bank, rn
 void autogen_stc_r2_bank_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc r2_bank, rn\n");
   #endif
   u32 r2_bank = 18;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r2_bank];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc r3_bank, rn
 void autogen_stc_r3_bank_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc r3_bank, rn\n");
   #endif
   u32 r3_bank = 19;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r3_bank];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc r4_bank, rn
 void autogen_stc_r4_bank_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc r4_bank, rn\n");
   #endif
   u32 r4_bank = 20;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r4_bank];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc r5_bank, rn
 void autogen_stc_r5_bank_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc r5_bank, rn\n");
   #endif
   u32 r5_bank = 21;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r5_bank];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc r6_bank, rn
 void autogen_stc_r6_bank_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc r6_bank, rn\n");
   #endif
   u32 r6_bank = 22;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r6_bank];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc r7_bank, rn
 void autogen_stc_r7_bank_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc r7_bank, rn\n");
   #endif
   u32 r7_bank = 23;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r7_bank];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // sts mach, rn
 void autogen_sts_mach_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sts mach, rn\n");
   #endif
   u32 mach = 29;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[mach];
-  dest = &cpu.reg.regArray[n];
-  sts(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = sts(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // sts macl, rn
 void autogen_sts_macl_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sts macl, rn\n");
   #endif
   u32 macl = 30;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[macl];
-  dest = &cpu.reg.regArray[n];
-  sts(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = sts(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // sts pr, rn
 void autogen_sts_pr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sts pr, rn\n");
   #endif
   u32 pr = 25;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[pr];
-  dest = &cpu.reg.regArray[n];
-  sts(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = sts(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
-// jmp @rn
-void autogen_jmp_at_rn(u16 instr) {
-  u32* dest;
+// jmp rn
+void autogen_jmp_rn(u16 instr) {
   #ifdef PRINT_INSTRUCTIONS
-  printf("jmp @rn\n");
+  printf("jmp rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 4);
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  jmp(src, dest);
+  u32 src = cpu.reg.regArray[n];
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = jmp(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
-// jsr @rn
-void autogen_jsr_at_rn(u16 instr) {
-  u32* dest;
+// jsr rn
+void autogen_jsr_rn(u16 instr) {
   #ifdef PRINT_INSTRUCTIONS
-  printf("jsr @rn\n");
+  printf("jsr rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 4);
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  jsr(src, dest);
+  u32 src = cpu.reg.regArray[n];
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = jsr(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // pref @rn
 void autogen_pref_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("pref @rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 4);
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  pref(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[n]), 4);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = pref(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // tas.b @rn
 void autogen_tas_b_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("tas.b @rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 1);
-  u32 tmp = 0;
-  dest = &tmp;
-  tas(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 1);
+  u32 src = readMemory((cpu.reg.regArray[n]), 1);
+  src = s_ext(src, 8);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 1);
+  dst = s_ext(dst, 8);
+  u32 result = tas(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 1, result);
 }
 
 // mov.b rm, @rn
 void autogen_mov_b_rm_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b rm, @rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 1);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 1);
+  dst = s_ext(dst, 8);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 1, result);
 }
 
 // mov.w rm, @rn
 void autogen_mov_w_rm_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w rm, @rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 2);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 2);
+  dst = s_ext(dst, 16);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 2, result);
 }
 
 // mov.l rm, @rn
 void autogen_mov_l_rm_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l rm, @rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  mov(src, dest);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // mov.b @rm, rn
 void autogen_mov_b_at_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b @rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m], 1);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]), 1);
+  src = s_ext(src, 8);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mov.w @rm, rn
 void autogen_mov_w_at_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w @rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m], 2);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]), 2);
+  src = s_ext(src, 16);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mov.l @rm, rn
 void autogen_mov_l_at_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l @rm, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mac.l @rm+, @rn+
 void autogen_mac_l_at_rm_plus_at_rn_plus_(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mac.l @rm+, @rn+\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = mac(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
   cpu.reg.regArray[m] += 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
   cpu.reg.regArray[n] += 4;
-  mac(src, dest);
 }
 
 // mac.w @rm+, @rn+
 void autogen_mac_w_at_rm_plus_at_rn_plus_(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mac.w @rm+, @rn+\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m], 2);
+  u32 src = readMemory((cpu.reg.regArray[m]), 2);
+  src = s_ext(src, 16);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 2);
+  dst = s_ext(dst, 16);
+  u32 result = mac(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 2, result);
   cpu.reg.regArray[m] += 2;
-  u32 tmp = 0;
-  dest = &tmp;
   cpu.reg.regArray[n] += 2;
-  mac(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 2);
 }
 
 // mov.b @rm+, rn
 void autogen_mov_b_at_rm_plus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b @rm+, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m], 1);
+  u32 src = readMemory((cpu.reg.regArray[m]), 1);
+  src = s_ext(src, 8);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
   cpu.reg.regArray[m] += 1;
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
 }
 
 // mov.w @rm+, rn
 void autogen_mov_w_at_rm_plus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w @rm+, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m], 2);
+  u32 src = readMemory((cpu.reg.regArray[m]), 2);
+  src = s_ext(src, 16);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
   cpu.reg.regArray[m] += 2;
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
 }
 
 // mov.l @rm+, rn
 void autogen_mov_l_at_rm_plus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l @rm+, rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
 }
 
 // ldc.l @rm+, sr
 void autogen_ldc_l_at_rm_plus_sr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, sr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 sr = 26;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[sr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[sr] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[sr];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, gbr
 void autogen_ldc_l_at_rm_plus_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, gbr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 gbr = 27;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[gbr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[gbr] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[gbr];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, vbr
 void autogen_ldc_l_at_rm_plus_vbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, vbr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 vbr = 28;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[vbr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[vbr] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[vbr];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, ssr
 void autogen_ldc_l_at_rm_plus_ssr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, ssr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 ssr = 31;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[ssr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[ssr] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[ssr];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, spc
 void autogen_ldc_l_at_rm_plus_spc(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, spc\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 spc = 32;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[spc];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[spc] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[spc];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, r0_bank
 void autogen_ldc_l_at_rm_plus_r0_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, r0_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r0_bank = 16;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r0_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r0_bank] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r0_bank];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, r1_bank
 void autogen_ldc_l_at_rm_plus_r1_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, r1_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r1_bank = 17;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r1_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r1_bank] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r1_bank];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, r2_bank
 void autogen_ldc_l_at_rm_plus_r2_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, r2_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r2_bank = 18;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r2_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r2_bank] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r2_bank];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, r3_bank
 void autogen_ldc_l_at_rm_plus_r3_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, r3_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r3_bank = 19;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r3_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r3_bank] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r3_bank];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, r4_bank
 void autogen_ldc_l_at_rm_plus_r4_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, r4_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r4_bank = 20;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r4_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r4_bank] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r4_bank];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, r5_bank
 void autogen_ldc_l_at_rm_plus_r5_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, r5_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r5_bank = 21;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r5_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r5_bank] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r5_bank];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, r6_bank
 void autogen_ldc_l_at_rm_plus_r6_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, r6_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r6_bank = 22;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r6_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r6_bank] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r6_bank];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, r7_bank
 void autogen_ldc_l_at_rm_plus_r7_bank(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, r7_bank\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r7_bank = 23;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r7_bank];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[r7_bank] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r7_bank];
-  ldc(src, dest);
 }
 
 // lds.l @rm+, mach
 void autogen_lds_l_at_rm_plus_mach(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("lds.l @rm+, mach\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 mach = 29;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[mach];
+  u32 result = lds(instr, src, dst);
+  cpu.reg.regArray[mach] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[mach];
-  lds(src, dest);
 }
 
 // lds.l @rm+, macl
 void autogen_lds_l_at_rm_plus_macl(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("lds.l @rm+, macl\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 macl = 30;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[macl];
+  u32 result = lds(instr, src, dst);
+  cpu.reg.regArray[macl] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[macl];
-  lds(src, dest);
 }
 
 // lds.l @rm+, pr
 void autogen_lds_l_at_rm_plus_pr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("lds.l @rm+, pr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 pr = 25;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[pr];
+  u32 result = lds(instr, src, dst);
+  cpu.reg.regArray[pr] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[pr];
-  lds(src, dest);
 }
 
 // mov.b rm, @-rn
 void autogen_mov_b_rm_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b rm, @-rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[m];
   cpu.reg.regArray[n] -= 1;
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 1);
+  u32 src = cpu.reg.regArray[m];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 1);
+  dst = s_ext(dst, 8);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 1, result);
 }
 
 // mov.w rm, @-rn
 void autogen_mov_w_rm_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w rm, @-rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[m];
   cpu.reg.regArray[n] -= 2;
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 2);
+  u32 src = cpu.reg.regArray[m];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 2);
+  dst = s_ext(dst, 16);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 2, result);
 }
 
 // mov.l rm, @-rn
 void autogen_mov_l_rm_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l rm, @-rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[m];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  mov(src, dest);
+  u32 src = cpu.reg.regArray[m];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l sr, @-rn
 void autogen_stc_l_sr_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l sr, @-rn\n");
   #endif
   u32 sr = 26;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[sr];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[sr];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l gbr, @-rn
 void autogen_stc_l_gbr_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l gbr, @-rn\n");
   #endif
   u32 gbr = 27;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[gbr];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[gbr];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l vbr, @-rn
 void autogen_stc_l_vbr_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l vbr, @-rn\n");
   #endif
   u32 vbr = 28;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[vbr];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[vbr];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l ssr, @-rn
 void autogen_stc_l_ssr_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l ssr, @-rn\n");
   #endif
   u32 ssr = 31;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[ssr];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[ssr];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l spc, @-rn
 void autogen_stc_l_spc_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l spc, @-rn\n");
   #endif
   u32 spc = 32;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[spc];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[spc];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l r0_bank, @-rn
 void autogen_stc_l_r0_bank_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l r0_bank, @-rn\n");
   #endif
   u32 r0_bank = 16;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[r0_bank];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[r0_bank];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l r1_bank, @-rn
 void autogen_stc_l_r1_bank_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l r1_bank, @-rn\n");
   #endif
   u32 r1_bank = 17;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[r1_bank];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[r1_bank];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l r2_bank, @-rn
 void autogen_stc_l_r2_bank_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l r2_bank, @-rn\n");
   #endif
   u32 r2_bank = 18;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[r2_bank];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[r2_bank];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l r3_bank, @-rn
 void autogen_stc_l_r3_bank_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l r3_bank, @-rn\n");
   #endif
   u32 r3_bank = 19;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[r3_bank];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[r3_bank];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l r4_bank, @-rn
 void autogen_stc_l_r4_bank_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l r4_bank, @-rn\n");
   #endif
   u32 r4_bank = 20;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[r4_bank];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[r4_bank];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l r5_bank, @-rn
 void autogen_stc_l_r5_bank_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l r5_bank, @-rn\n");
   #endif
   u32 r5_bank = 21;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[r5_bank];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[r5_bank];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l r6_bank, @-rn
 void autogen_stc_l_r6_bank_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l r6_bank, @-rn\n");
   #endif
   u32 r6_bank = 22;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[r6_bank];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[r6_bank];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l r7_bank, @-rn
 void autogen_stc_l_r7_bank_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l r7_bank, @-rn\n");
   #endif
   u32 r7_bank = 23;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[r7_bank];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[r7_bank];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // sts.l mach, @-rn
 void autogen_sts_l_mach_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sts.l mach, @-rn\n");
   #endif
   u32 mach = 29;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[mach];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  sts(src, dest);
+  u32 src = cpu.reg.regArray[mach];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = sts(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // sts.l macl, @-rn
 void autogen_sts_l_macl_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sts.l macl, @-rn\n");
   #endif
   u32 macl = 30;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[macl];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  sts(src, dest);
+  u32 src = cpu.reg.regArray[macl];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = sts(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // sts.l pr, @-rn
 void autogen_sts_l_pr_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("sts.l pr, @-rn\n");
   #endif
   u32 pr = 25;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[pr];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  sts(src, dest);
+  u32 src = cpu.reg.regArray[pr];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = sts(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // mov.b r0, @(disp,rn)
 void autogen_mov_b_r0_at_disp_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b r0, @(disp,rn)\n");
   #endif
@@ -1929,15 +1917,14 @@ void autogen_mov_b_r0_at_disp_rn(u16 instr) {
   u32 n = (instr & 0b0000000011110000) >> 4;
   u32 disp = (instr & 0b0000000000001111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 1);
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (disp * 1), 1);
+  dst = s_ext(dst, 8);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n] + (disp * 1), 1, result);
 }
 
 // mov.w r0, @(disp,rn)
 void autogen_mov_w_r0_at_disp_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w r0, @(disp,rn)\n");
   #endif
@@ -1945,15 +1932,14 @@ void autogen_mov_w_r0_at_disp_rn(u16 instr) {
   u32 n = (instr & 0b0000000011110000) >> 4;
   u32 disp = (instr & 0b0000000000001111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 2);
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (disp * 2), 2);
+  dst = s_ext(dst, 16);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n] + (disp * 2), 2, result);
 }
 
 // mov.l rm, @(disp,rn)
 void autogen_mov_l_rm_at_disp_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l rm, @(disp,rn)\n");
   #endif
@@ -1961,137 +1947,139 @@ void autogen_mov_l_rm_at_disp_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 disp = (instr & 0b0000000000001111) >> 0;
   u32 src = cpu.reg.regArray[m];
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  mov(src, dest);
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (disp * 4), 4);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n] + (disp * 4), 4, result);
 }
 
 // mov.b @(disp,rm), r0
 void autogen_mov_b_at_disp_rm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b @(disp,rm), r0\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 r0 = 0;
   u32 disp = (instr & 0b0000000000001111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[m] + (disp * 1), 1);
-  dest = &cpu.reg.regArray[r0];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]) + (disp * 1), 1);
+  src = s_ext(src, 8);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // mov.w @(disp,rm), r0
 void autogen_mov_w_at_disp_rm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w @(disp,rm), r0\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 r0 = 0;
   u32 disp = (instr & 0b0000000000001111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[m] + (disp * 2), 2);
-  dest = &cpu.reg.regArray[r0];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]) + (disp * 2), 2);
+  src = s_ext(src, 16);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // mov.l @(disp,rm), rn
 void autogen_mov_l_at_disp_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l @(disp,rm), rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 disp = (instr & 0b0000000000001111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[m] + (disp * 4), 4);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]) + (disp * 4), 4);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mov.b rm, @(r0,rn)
 void autogen_mov_b_rm_at_r0_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b rm, @(r0,rn)\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 1);
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (cpu.reg.regArray[0]), 1);
+  dst = s_ext(dst, 8);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n] + (cpu.reg.regArray[0]), 1, result);
 }
 
 // mov.w rm, @(r0,rn)
 void autogen_mov_w_rm_at_r0_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w rm, @(r0,rn)\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[n], tmp, 2);
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (cpu.reg.regArray[0]), 2);
+  dst = s_ext(dst, 16);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n] + (cpu.reg.regArray[0]), 2, result);
 }
 
 // mov.l rm, @(r0,rn)
 void autogen_mov_l_rm_at_r0_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l rm, @(r0,rn)\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  mov(src, dest);
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (cpu.reg.regArray[0]), 4);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n] + (cpu.reg.regArray[0]), 4, result);
 }
 
 // mov.b @(r0,rm), rn
 void autogen_mov_b_at_r0_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b @(r0,rm), rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m] + (cpu.reg.regArray[0] * 1), 1);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]) + (cpu.reg.regArray[0]), 1);
+  src = s_ext(src, 8);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mov.w @(r0,rm), rn
 void autogen_mov_w_at_r0_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w @(r0,rm), rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m] + (cpu.reg.regArray[0] * 2), 2);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]) + (cpu.reg.regArray[0]), 2);
+  src = s_ext(src, 16);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mov.l @(r0,rm), rn
 void autogen_mov_l_at_r0_rm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l @(r0,rm), rn\n");
   #endif
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[m] + (cpu.reg.regArray[0] * 4), 4);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]) + (cpu.reg.regArray[0]), 4);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mov.b r0, @(disp,gbr)
 void autogen_mov_b_r0_at_disp_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b r0, @(disp,gbr)\n");
   #endif
@@ -2099,15 +2087,14 @@ void autogen_mov_b_r0_at_disp_gbr(u16 instr) {
   u32 gbr = 27;
   u32 disp = (instr & 0b0000000011111111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[gbr], tmp, 1);
+  u32 dst = readMemory((cpu.reg.regArray[gbr]) + (disp * 1), 1);
+  dst = s_ext(dst, 8);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[gbr] + (disp * 1), 1, result);
 }
 
 // mov.w r0, @(disp,gbr)
 void autogen_mov_w_r0_at_disp_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w r0, @(disp,gbr)\n");
   #endif
@@ -2115,15 +2102,14 @@ void autogen_mov_w_r0_at_disp_gbr(u16 instr) {
   u32 gbr = 27;
   u32 disp = (instr & 0b0000000011111111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 tmp = 0;
-  dest = &tmp;
-  mov(src, dest);
-  writeMemory(cpu.reg.regArray[gbr], tmp, 2);
+  u32 dst = readMemory((cpu.reg.regArray[gbr]) + (disp * 2), 2);
+  dst = s_ext(dst, 16);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[gbr] + (disp * 2), 2, result);
 }
 
 // mov.l r0, @(disp,gbr)
 void autogen_mov_l_r0_at_disp_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l r0, @(disp,gbr)\n");
   #endif
@@ -2131,596 +2117,588 @@ void autogen_mov_l_r0_at_disp_gbr(u16 instr) {
   u32 gbr = 27;
   u32 disp = (instr & 0b0000000011111111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  dest = getMemoryPtr(cpu.reg.regArray[gbr]);
-  mov(src, dest);
+  u32 dst = readMemory((cpu.reg.regArray[gbr]) + (disp * 4), 4);
+  u32 result = mov(instr, src, dst);
+  writeMemory(cpu.reg.regArray[gbr] + (disp * 4), 4, result);
 }
 
 // mov.b @(disp,gbr), r0
 void autogen_mov_b_at_disp_gbr_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.b @(disp,gbr), r0\n");
   #endif
   u32 gbr = 27;
   u32 r0 = 0;
   u32 disp = (instr & 0b0000000011111111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[gbr] + (disp * 1), 1);
-  dest = &cpu.reg.regArray[r0];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[gbr]) + (disp * 1), 1);
+  src = s_ext(src, 8);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // mov.w @(disp,gbr), r0
 void autogen_mov_w_at_disp_gbr_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w @(disp,gbr), r0\n");
   #endif
   u32 gbr = 27;
   u32 r0 = 0;
   u32 disp = (instr & 0b0000000011111111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[gbr] + (disp * 2), 2);
-  dest = &cpu.reg.regArray[r0];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[gbr]) + (disp * 2), 2);
+  src = s_ext(src, 16);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // mov.l @(disp,gbr), r0
 void autogen_mov_l_at_disp_gbr_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l @(disp,gbr), r0\n");
   #endif
   u32 gbr = 27;
   u32 r0 = 0;
   u32 disp = (instr & 0b0000000011111111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[gbr] + (disp * 4), 4);
-  dest = &cpu.reg.regArray[r0];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[gbr]) + (disp * 4), 4);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // and.b #imm, @(r0,gbr)
 void autogen_and_b_imm_at_r0_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("and.b #imm, @(r0,gbr)\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 gb = (instr & 0b0000000000000000) >> 16;
   u32 src = s_ext(imm, 8);
-  u32 tmp = 0;
-  dest = &tmp;
-  and(src, dest);
-  writeMemory(cpu.reg.regArray[gb], tmp, 1);
+  u32 dst = readMemory((cpu.reg.regArray[gb]) + (cpu.reg.regArray[0]), 1);
+  dst = s_ext(dst, 8);
+  u32 result = and(instr, src, dst);
+  writeMemory(cpu.reg.regArray[gb] + (cpu.reg.regArray[0]), 1, result);
 }
 
 // or.b #imm, @(r0,gbr)
 void autogen_or_b_imm_at_r0_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("or.b #imm, @(r0,gbr)\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 gb = (instr & 0b0000000000000000) >> 16;
   u32 src = s_ext(imm, 8);
-  u32 tmp = 0;
-  dest = &tmp;
-  or(src, dest);
-  writeMemory(cpu.reg.regArray[gb], tmp, 1);
+  u32 dst = readMemory((cpu.reg.regArray[gb]) + (cpu.reg.regArray[0]), 1);
+  dst = s_ext(dst, 8);
+  u32 result = or(instr, src, dst);
+  writeMemory(cpu.reg.regArray[gb] + (cpu.reg.regArray[0]), 1, result);
 }
 
 // tst.b #imm, @(r0,gbr)
 void autogen_tst_b_imm_at_r0_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("tst.b #imm, @(r0,gbr)\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 gb = (instr & 0b0000000000000000) >> 16;
   u32 src = s_ext(imm, 8);
-  u32 tmp = 0;
-  dest = &tmp;
-  tst(src, dest);
-  writeMemory(cpu.reg.regArray[gb], tmp, 1);
+  u32 dst = readMemory((cpu.reg.regArray[gb]) + (cpu.reg.regArray[0]), 1);
+  dst = s_ext(dst, 8);
+  u32 result = tst(instr, src, dst);
+  writeMemory(cpu.reg.regArray[gb] + (cpu.reg.regArray[0]), 1, result);
 }
 
 // xor.b #imm, @(r0,gbr)
 void autogen_xor_b_imm_at_r0_gbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("xor.b #imm, @(r0,gbr)\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 gb = (instr & 0b0000000000000000) >> 16;
   u32 src = s_ext(imm, 8);
-  u32 tmp = 0;
-  dest = &tmp;
-  xor(src, dest);
-  writeMemory(cpu.reg.regArray[gb], tmp, 1);
+  u32 dst = readMemory((cpu.reg.regArray[gb]) + (cpu.reg.regArray[0]), 1);
+  dst = s_ext(dst, 8);
+  u32 result = xor(instr, src, dst);
+  writeMemory(cpu.reg.regArray[gb] + (cpu.reg.regArray[0]), 1, result);
 }
 
 // mov.w @(disp,pc), rn
 void autogen_mov_w_at_disp_pc_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.w @(disp,pc), rn\n");
   #endif
   u32 pc = 24;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 disp = (instr & 0b0000000011111111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[pc] + (disp * 2), 2);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[pc]) + (disp * 2), 2);
+  src = s_ext(src, 16);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mov.l @(disp,pc), rn
 void autogen_mov_l_at_disp_pc_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov.l @(disp,pc), rn\n");
   #endif
   u32 pc = 24;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 disp = (instr & 0b0000000011111111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[pc] + (disp * 4), 4);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[pc] & 0xFFFFFFFC) + (disp * 4), 4);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // mova.l @(disp,pc), r0
 void autogen_mova_l_at_disp_pc_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mova.l @(disp,pc), r0\n");
   #endif
   u32 pc = 24;
   u32 r0 = 0;
   u32 disp = (instr & 0b0000000011111111) >> 0;
-  u32 src = readMemory(cpu.reg.regArray[pc] + (disp * 4), 4);
-  dest = &cpu.reg.regArray[r0];
-  mova(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[pc] & 0xFFFFFFFC) + (disp * 4), 4);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = mova(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // braf rm
 void autogen_braf_rm(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("braf rm\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[m];
-  braf(src, dest);
+  u32 dst = cpu.reg.regArray[m];
+  u32 result = braf(instr, src, dst);
+  cpu.reg.regArray[m] = result;
 }
 
 // bsrf rm
 void autogen_bsrf_rm(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("bsrf rm\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[m];
-  bsrf(src, dest);
+  u32 dst = cpu.reg.regArray[m];
+  u32 result = bsrf(instr, src, dst);
+  cpu.reg.regArray[m] = result;
 }
 
 // bf jump8
 void autogen_bf_jump8(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("bf jump8\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 src = s_ext(imm, 8);
-  dest = (void*) 0;
-  bf(src, dest);
+  u32 dst = s_ext(imm, 8);
+  u32 result = bf(instr, src, dst);
 }
 
 // bf.s jump8
 void autogen_bf_s_jump8(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("bf.s jump8\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 src = s_ext(imm, 8);
-  dest = (void*) 0;
-  bf(src, dest);
+  u32 dst = s_ext(imm, 8);
+  u32 result = bf(instr, src, dst);
 }
 
 // bt jump8
 void autogen_bt_jump8(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("bt jump8\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 src = s_ext(imm, 8);
-  dest = (void*) 0;
-  bt(src, dest);
+  u32 dst = s_ext(imm, 8);
+  u32 result = bt(instr, src, dst);
 }
 
 // bt.s jump8
 void autogen_bt_s_jump8(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("bt.s jump8\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 src = s_ext(imm, 8);
-  dest = (void*) 0;
-  bt(src, dest);
+  u32 dst = s_ext(imm, 8);
+  u32 result = bt(instr, src, dst);
 }
 
 // bra jump12
 void autogen_bra_jump12(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("bra jump12\n");
   #endif
   u32 imm = (instr & 0b0000111111111111) >> 0;
   u32 src = s_ext(imm, 12);
-  dest = (void*) 0;
-  bra(src, dest);
+  u32 dst = s_ext(imm, 12);
+  u32 result = bra(instr, src, dst);
 }
 
 // bsr jump12
 void autogen_bsr_jump12(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("bsr jump12\n");
   #endif
   u32 imm = (instr & 0b0000111111111111) >> 0;
   u32 src = s_ext(imm, 12);
-  dest = (void*) 0;
-  bsr(src, dest);
+  u32 dst = s_ext(imm, 12);
+  u32 result = bsr(instr, src, dst);
 }
 
 // add #imm, rn
 void autogen_add_imm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("add #imm, rn\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = s_ext(imm, 8);
-  dest = &cpu.reg.regArray[n];
-  add(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = add(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // and #imm, r0
 void autogen_and_imm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("and #imm, r0\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 r0 = 0;
   u32 src = s_ext(imm, 8);
-  dest = &cpu.reg.regArray[r0];
-  and(src, dest);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = and(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // cmp/eq #imm, r0
 void autogen_cmp_eq_imm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("cmp/eq #imm, r0\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 r0 = 0;
   u32 src = s_ext(imm, 8);
-  dest = &cpu.reg.regArray[r0];
-  cmp_eq(src, dest);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = cmp_eq(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // mov #imm, rn
 void autogen_mov_imm_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("mov #imm, rn\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = s_ext(imm, 8);
-  dest = &cpu.reg.regArray[n];
-  mov(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = mov(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // or #imm, r0
 void autogen_or_imm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("or #imm, r0\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 r0 = 0;
   u32 src = s_ext(imm, 8);
-  dest = &cpu.reg.regArray[r0];
-  or(src, dest);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = or(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // tst #imm, r0
 void autogen_tst_imm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("tst #imm, r0\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 r0 = 0;
   u32 src = s_ext(imm, 8);
-  dest = &cpu.reg.regArray[r0];
-  tst(src, dest);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = tst(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // xor #imm, r0
 void autogen_xor_imm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("xor #imm, r0\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 r0 = 0;
   u32 src = s_ext(imm, 8);
-  dest = &cpu.reg.regArray[r0];
-  xor(src, dest);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = xor(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // trapa #imm
 void autogen_trapa_imm(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("trapa #imm\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 src = s_ext(imm, 8);
-  dest = (void*) 0;
-  trapa(src, dest);
+  u32 dst = s_ext(imm, 8);
+  u32 result = trapa(instr, src, dst);
 }
 
 // movco.l r0, @rn
 void autogen_movco_l_r0_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("movco.l r0, @rn\n");
   #endif
   u32 r0 = 0;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r0];
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  movco(src, dest);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = movco(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // movli.l @rm, r0
 void autogen_movli_l_at_rm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("movli.l @rm, r0\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r0 = 0;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
-  dest = &cpu.reg.regArray[r0];
-  movli(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = movli(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // movua.l @rm, r0
 void autogen_movua_l_at_rm_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("movua.l @rm, r0\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r0 = 0;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
-  dest = &cpu.reg.regArray[r0];
-  movua(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = movua(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
 }
 
 // movua.l @rm+, r0
 void autogen_movua_l_at_rm_plus_r0(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("movua.l @rm+, r0\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 r0 = 0;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[r0];
+  u32 result = movua(instr, src, dst);
+  cpu.reg.regArray[r0] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[r0];
-  movua(src, dest);
 }
 
 // movca.l r0, @rn
 void autogen_movca_l_r0_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("movca.l r0, @rn\n");
   #endif
   u32 r0 = 0;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r0];
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  movca(src, dest);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = movca(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // icbi @rn
 void autogen_icbi_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("icbi @rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 4);
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  icbi(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[n]), 4);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = icbi(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // ocbi @rn
 void autogen_ocbi_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ocbi @rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 4);
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  ocbi(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[n]), 4);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = ocbi(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // ocbp @rn
 void autogen_ocbp_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ocbp @rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 4);
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  ocbp(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[n]), 4);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = ocbp(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // ocbwb @rn
 void autogen_ocbwb_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ocbwb @rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 4);
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  ocbwb(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[n]), 4);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = ocbwb(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // prefi @rn
 void autogen_prefi_at_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("prefi @rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory(cpu.reg.regArray[n], 4);
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  prefi(src, dest);
+  u32 src = readMemory((cpu.reg.regArray[n]), 4);
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = prefi(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // synco
 void autogen_synco(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("synco\n");
   #endif
   u32 src = 0;
-  dest = (void*) 0;
-  synco(src, dest);
+  u32 dst = 0;
+  u32 result = synco(instr, src, dst);
 }
 
 // ldc rm, sgr
 void autogen_ldc_rm_sgr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, sgr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 sgr = 33;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[sgr];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[sgr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[sgr] = result;
 }
 
 // ldc rm, dbr
 void autogen_ldc_rm_dbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc rm, dbr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 dbr = 34;
   u32 src = cpu.reg.regArray[m];
-  dest = &cpu.reg.regArray[dbr];
-  ldc(src, dest);
+  u32 dst = cpu.reg.regArray[dbr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[dbr] = result;
 }
 
 // ldc.l @rm+, sgr
 void autogen_ldc_l_at_rm_plus_sgr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, sgr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 sgr = 33;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[sgr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[sgr] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[sgr];
-  ldc(src, dest);
 }
 
 // ldc.l @rm+, dbr
 void autogen_ldc_l_at_rm_plus_dbr(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("ldc.l @rm+, dbr\n");
   #endif
   u32 m = (instr & 0b0000111100000000) >> 8;
   u32 dbr = 34;
-  u32 src = readMemory(cpu.reg.regArray[m], 4);
+  u32 src = readMemory((cpu.reg.regArray[m]), 4);
+  u32 dst = cpu.reg.regArray[dbr];
+  u32 result = ldc(instr, src, dst);
+  cpu.reg.regArray[dbr] = result;
   cpu.reg.regArray[m] += 4;
-  dest = &cpu.reg.regArray[dbr];
-  ldc(src, dest);
 }
 
 // stc sgr, rn
 void autogen_stc_sgr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc sgr, rn\n");
   #endif
   u32 sgr = 33;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[sgr];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc dbr, rn
 void autogen_stc_dbr_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc dbr, rn\n");
   #endif
   u32 dbr = 34;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[dbr];
-  dest = &cpu.reg.regArray[n];
-  stc(src, dest);
+  u32 dst = cpu.reg.regArray[n];
+  u32 result = stc(instr, src, dst);
+  cpu.reg.regArray[n] = result;
 }
 
 // stc.l sgr, @-rn
 void autogen_stc_l_sgr_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l sgr, @-rn\n");
   #endif
   u32 sgr = 33;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[sgr];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[sgr];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 // stc.l dbr, @-rn
 void autogen_stc_l_dbr_at_minus_rn(u16 instr) {
-  u32* dest;
   #ifdef PRINT_INSTRUCTIONS
   printf("stc.l dbr, @-rn\n");
   #endif
   u32 dbr = 34;
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = cpu.reg.regArray[dbr];
   cpu.reg.regArray[n] -= 4;
-  dest = getMemoryPtr(cpu.reg.regArray[n]);
-  stc(src, dest);
+  u32 src = cpu.reg.regArray[dbr];
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
+  u32 result = stc(instr, src, dst);
+  writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
 void (*instructionHandlers[65536])(u16) = {
@@ -19119,7 +19097,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -19151,7 +19129,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -19375,7 +19353,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -19407,7 +19385,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -19631,7 +19609,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -19663,7 +19641,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -19887,7 +19865,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -19919,7 +19897,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -20143,7 +20121,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -20175,7 +20153,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -20399,7 +20377,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -20431,7 +20409,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -20655,7 +20633,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -20687,7 +20665,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -20911,7 +20889,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -20943,7 +20921,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -21167,7 +21145,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -21199,7 +21177,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -21423,7 +21401,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -21455,7 +21433,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -21679,7 +21657,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -21711,7 +21689,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -21935,7 +21913,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -21967,7 +21945,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -22191,7 +22169,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -22223,7 +22201,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -22447,7 +22425,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -22479,7 +22457,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -22703,7 +22681,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -22735,7 +22713,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,
@@ -22959,7 +22937,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll2_rn,
   autogen_shlr2_rn,
   autogen_lds_rm_mach,
-  autogen_jsr_at_rn,
+  autogen_jsr_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_sr,
@@ -22991,7 +22969,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_shll16_rn,
   autogen_shlr16_rn,
   autogen_lds_rm_pr,
-  autogen_jmp_at_rn,
+  autogen_jmp_rn,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
   autogen_ldc_rm_vbr,

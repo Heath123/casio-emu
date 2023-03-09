@@ -9,8 +9,8 @@ extern CpuState cpu;
 
 // https://stackoverflow.com/a/17719010/4012708
 u32 s_ext(u32 arg, u32 n) {
-    int mask = 1U << (n - 1);
-    return (arg ^ mask) - mask;
+  int mask = 1U << (n - 1);
+  return (arg ^ mask) - mask;
 }
 
 void delayedBranch(u32 target) {
@@ -23,446 +23,832 @@ void invalid(u16 instr) {
   exit(1);
 }
 
-void clrs(u32 src, u32* dest) {
+u32 clrs(u16 instr, u32 src, u32 dst) {
   printf("clrs: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void clrt(u32 src, u32* dest) {
-  printf("clrt: not implemented\n");
-  exit(1);
+u32 clrt(u16 instr, u32 src, u32 dst) {
+  cpu.reg.SR_parts.T = 0;
+  return dst;
 }
 
-void clrmac(u32 src, u32* dest) {
+u32 clrmac(u16 instr, u32 src, u32 dst) {
   printf("clrmac: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void div0u(u32 src, u32* dest) {
-  printf("div0u: not implemented\n");
-  exit(1);
+u32 div0u(u16 instr, u32 src, u32 dst) {
+  cpu.reg.SR_parts.M = 0;
+  cpu.reg.SR_parts.Q = 0;
+  cpu.reg.SR_parts.T = 0;
+  return dst;
 }
 
-void ldtlb(u32 src, u32* dest) {
+u32 ldtlb(u16 instr, u32 src, u32 dst) {
   printf("ldtlb: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void nop(u32 src, u32* dest) {
+u32 nop(u16 instr, u32 src, u32 dst) {
   // Do nothing
+  return dst;
 }
 
-void rte(u32 src, u32* dest) {
+u32 rte(u16 instr, u32 src, u32 dst) {
   printf("rte: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void rts(u32 src, u32* dest) {
+u32 rts(u16 instr, u32 src, u32 dst) {
   delayedBranch(cpu.reg.PR);
+  return dst;
 }
 
-void sets(u32 src, u32* dest) {
+u32 sets(u16 instr, u32 src, u32 dst) {
   printf("sets: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void sett(u32 src, u32* dest) {
-  printf("sett: not implemented\n");
-  exit(1);
+u32 sett(u16 instr, u32 src, u32 dst) {
+  cpu.reg.SR_parts.T = 1;
+  return dst;
 }
 
-void sleep(u32 src, u32* dest) {
+u32 sleep(u16 instr, u32 src, u32 dst) {
   printf("sleep: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void cmp_pl(u32 src, u32* dest) {
-  printf("cmp_pl: not implemented\n");
-  exit(1);
+u32 cmp_pl(u16 instr, u32 src, u32 dst) {
+  if ((i32) src > 0) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void cmp_pz(u32 src, u32* dest) {
-  printf("cmp_pz: not implemented\n");
-  exit(1);
+u32 cmp_pz(u16 instr, u32 src, u32 dst) {
+  if ((i32) src >= 0) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void dt(u32 src, u32* dest) {
-  printf("dt: not implemented\n");
-  exit(1);
+u32 dt(u16 instr, u32 src, u32 dst) {
+  dst--;
+  if (dst == 0) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void movt(u32 src, u32* dest) {
-  printf("movt: not implemented\n");
-  exit(1);
+u32 movt(u16 instr, u32 src, u32 dst) {
+  return cpu.reg.SR_parts.T;
 }
 
-void rotl(u32 src, u32* dest) {
+u32 rotl(u16 instr, u32 src, u32 dst) {
   printf("rotl: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void rotr(u32 src, u32* dest) {
-  printf("rotr: not implemented\n");
-  exit(1);
+u32 rotr(u16 instr, u32 src, u32 dst) {
+  if ((dst & 0x00000001) == 0) {
+    cpu.reg.SR_parts.T = 0;
+  } else {
+    cpu.reg.SR_parts.T = 1;
+  }
+
+  dst >>= 1;
+
+  if (cpu.reg.SR_parts.T == 1) {
+    dst |= 0x80000000;
+  } else {
+    dst &= 0x7FFFFFFF;
+  }
+
+  return dst;
 }
 
-void rotcl(u32 src, u32* dest) {
-  printf("rotcl: not implemented\n");
-  exit(1);
+u32 rotcl(u16 instr, u32 src, u32 dst) {
+  i32 temp;
+
+  if ((src & 0x80000000) == 0) {
+    temp = 0;
+  } else {
+    temp = 1;
+  }
+
+  src <<= 1;
+
+  if (cpu.reg.SR_parts.T == 1) {
+    src |= 0x00000001;
+  } else {
+    src &= 0xFFFFFFFE;
+  }
+  if (temp == 1) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return src;
 }
 
-void rotcr(u32 src, u32* dest) {
-  printf("rotcr: not implemented\n");
-  exit(1);
+u32 rotcr(u16 instr, u32 src, u32 dst) {
+  i32 temp;
+  if ((dst & 0x00000001) == 0) {
+    temp = 0;
+  } else {
+    temp = 1;
+  }
+
+  dst >>= 1;
+
+  if (cpu.reg.SR_parts.T == 1) {
+    dst |= 0x80000000;
+  } else {
+    dst &= 0x7FFFFFFF;
+  }
+
+  if (temp == 1) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void shal(u32 src, u32* dest) {
+u32 shal(u16 instr, u32 src, u32 dst) {
   printf("shal: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void shar(u32 src, u32* dest) {
-  printf("shar: not implemented\n");
-  exit(1);
+u32 shar(u16 instr, u32 src, u32 dst) {
+  u32 rn = dst;
+
+  i32 temp;
+  if ((rn&0x00000001)==0) cpu.reg.SR_parts.T = 0;
+  else cpu.reg.SR_parts.T = 1;
+  if ((rn&0x80000000)==0) temp = 0;
+  else temp = 1;
+  rn >>= 1;
+  if (temp==1) rn |= 0x80000000;
+  else rn &= 0x7FFFFFFF;
+
+  return rn;
 }
 
-void shll(u32 src, u32* dest) {
-  printf("shll: not implemented\n");
-  exit(1);
+u32 shll(u16 instr, u32 src, u32 dst) {
+  if ((src & 0x80000000) == 0) {
+    cpu.reg.SR_parts.T = 0;
+  } else {
+    cpu.reg.SR_parts.T = 1;
+  }
+  return src << 1;
 }
 
-void shlr(u32 src, u32* dest) {
-  printf("shlr: not implemented\n");
-  exit(1);
+u32 shlr(u16 instr, u32 src, u32 dst) {
+  if ((dst & 0x00000001) == 0) {
+    cpu.reg.SR_parts.T = 0;
+  } else {
+    cpu.reg.SR_parts.T = 1;
+  }
+
+  dst >>= 1;
+  dst &= 0x7FFFFFFF;
+
+  return dst;
 }
 
-void shll2(u32 src, u32* dest) {
-  printf("shll2: not implemented\n");
-  exit(1);
+u32 shll2(u16 instr, u32 src, u32 dst) {
+  return src << 2;
 }
 
-void shlr2(u32 src, u32* dest) {
-  printf("shlr2: not implemented\n");
-  exit(1);
+u32 shlr2(u16 instr, u32 src, u32 dst) {
+  dst >>= 2;
+  dst &= 0x3FFFFFFF;
+  return dst;
 }
 
-void shll8(u32 src, u32* dest) {
-  printf("shll8: not implemented\n");
-  exit(1);
+u32 shll8(u16 instr, u32 src, u32 dst) {
+  return src << 8;
 }
 
-void shlr8(u32 src, u32* dest) {
-  printf("shlr8: not implemented\n");
-  exit(1);
+u32 shlr8(u16 instr, u32 src, u32 dst) {
+  dst >>= 8;
+  dst &= 0x00FFFFFF;
+  return dst;
 }
 
-void shll16(u32 src, u32* dest) {
-  printf("shll16: not implemented\n");
-  exit(1);
+u32 shll16(u16 instr, u32 src, u32 dst) {
+  return src << 16;
 }
 
-void shlr16(u32 src, u32* dest) {
-  printf("shlr16: not implemented\n");
-  exit(1);
+u32 shlr16(u16 instr, u32 src, u32 dst) {
+  dst >>= 16;
+  dst &= 0x0000FFFF;
+  return dst;
 }
 
-void add(u32 src, u32* dest) {
-  printf("add: not implemented\n");
-  exit(1);
+u32 add(u16 instr, u32 src, u32 dst) {
+  return src + dst;
 }
 
-void addc(u32 src, u32* dest) {
-  printf("addc: not implemented\n");
-  exit(1);
+u32 addc(u16 instr, u32 src, u32 dst) {
+  u32 tmp1 = dst + src;
+  u32 tmp0 = dst;
+  dst = tmp1 + cpu.reg.SR_parts.T;
+  if (tmp0 > tmp1) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+  if (tmp1 > dst) {
+    cpu.reg.SR_parts.T = 1;
+  }
+  return dst;
 }
 
-void addv(u32 src, u32* dest) {
+u32 addv(u16 instr, u32 src, u32 dst) {
   printf("addv: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void and(u32 src, u32* dest) {
-  printf("and: not implemented\n");
-  exit(1);
+u32 and(u16 instr, u32 src, u32 dst) {
+  return dst & src;
 }
 
-void cmp_eq(u32 src, u32* dest) {
-  printf("cmp_eq: not implemented\n");
-  exit(1);
+u32 cmp_eq(u16 instr, u32 src, u32 dst) {
+  if (dst == src) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void cmp_hs(u32 src, u32* dest) {
-  printf("cmp_hs: not implemented\n");
-  exit(1);
+u32 cmp_hs(u16 instr, u32 src, u32 dst) {
+  if (dst >= src) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void cmp_ge(u32 src, u32* dest) {
-  printf("cmp_ge: not implemented\n");
-  exit(1);
+u32 cmp_ge(u16 instr, u32 src, u32 dst) {
+  if ((i32) dst >= (i32) src) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void cmp_hi(u32 src, u32* dest) {
-  printf("cmp_hi: not implemented\n");
-  exit(1);
+u32 cmp_hi(u16 instr, u32 src, u32 dst) {
+  if (dst > src) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void cmp_gt(u32 src, u32* dest) {
-  printf("cmp_gt: not implemented\n");
-  exit(1);
+u32 cmp_gt(u16 instr, u32 src, u32 dst) {
+  if ((i32) dst > (i32) src) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  return dst;
 }
 
-void cmp_str(u32 src, u32* dest) {
+u32 cmp_str(u16 instr, u32 src, u32 dst) {
   printf("cmp_str: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void div1(u32 src, u32* dest) {
-  printf("div1: not implemented\n");
-  exit(1);
+u32 div1(u16 instr, u32 src, u32 dst) {
+  u32 tmp0, tmp2;
+  u8 old_q, tmp1;
+  old_q = cpu.reg.SR_parts.Q;
+  cpu.reg.SR_parts.Q = (u8)((0x80000000 & dst) != 0);
+  tmp2 = src;
+  dst <<= 1;
+  dst |= (u32)cpu.reg.SR_parts.T;
+  switch (old_q) {
+  case 0:
+    switch (cpu.reg.SR_parts.M) {
+    case 0:
+      tmp0 = dst;
+      dst -= tmp2;
+      tmp1 = (dst > tmp0);
+      switch (cpu.reg.SR_parts.Q) {
+      case 0:
+        cpu.reg.SR_parts.Q = tmp1;
+        break;
+      case 1:
+        cpu.reg.SR_parts.Q = (u8)(tmp1 == 0);
+        break;
+      }
+      break;
+    case 1:
+      tmp0 = dst;
+      dst += tmp2;
+      tmp1 = (dst < tmp0);
+      switch (cpu.reg.SR_parts.Q) {
+      case 0:
+        cpu.reg.SR_parts.Q = (u8)(tmp1 == 0);
+        break;
+      case 1:
+        cpu.reg.SR_parts.Q = tmp1;
+        break;
+      }
+      break;
+    }
+    break;
+  case 1:
+    switch (cpu.reg.SR_parts.M) {
+    case 0:
+      tmp0 = dst;
+      dst += tmp2;
+      tmp1 = (dst < tmp0);
+      switch (cpu.reg.SR_parts.Q) {
+      case 0:
+        cpu.reg.SR_parts.Q = tmp1;
+        break;
+      case 1:
+        cpu.reg.SR_parts.Q = (u8)(tmp1 == 0);
+        break;
+      }
+      break;
+    case 1:
+      tmp0 = dst;
+      dst -= tmp2;
+      tmp1 = (dst > tmp0);
+      switch (cpu.reg.SR_parts.Q) {
+      case 0:
+        cpu.reg.SR_parts.Q = (u8)(tmp1 == 0);
+        break;
+      case 1:
+        cpu.reg.SR_parts.Q = tmp1;
+        break;
+      }
+      break;
+    }
+    break;
+  }
+  cpu.reg.SR_parts.T = (cpu.reg.SR_parts.Q == cpu.reg.SR_parts.M);
+  return dst;
 }
 
-void div0s(u32 src, u32* dest) {
-  printf("div0s: not implemented\n");
-  exit(1);
+u32 div0s(u16 instr, u32 src, u32 dst) {
+  if ((dst & 0x80000000) == 0) {
+    cpu.reg.SR_parts.Q = 0;
+  } else {
+    cpu.reg.SR_parts.Q = 1;
+  }
+  if ((src & 0x80000000) == 0) {
+    cpu.reg.SR_parts.M = 0;
+  } else {
+    cpu.reg.SR_parts.M = 1;
+  }
+  cpu.reg.SR_parts.T = !(cpu.reg.SR_parts.M == cpu.reg.SR_parts.Q);
+
+  return dst;
 }
 
-void dmuls(u32 src, u32* dest) {
-  printf("dmuls: not implemented\n");
-  exit(1);
+u32 dmuls(u16 instr, u32 src, u32 dst) {
+  // TODO: simplify this
+  u32 RnL,RnH,RmL,RmH,Res0,Res1,Res2;
+  u32 temp0,temp1,temp2,temp3;
+  long tempm,tempn,fnLmL;
+  tempn = (i32)dst;
+  tempm = (i32)src;
+  if (tempn<0) tempn = 0 - tempn;
+  if (tempm<0) tempm = 0 - tempm;
+  if ((i32)(dst^src)<0) fnLmL = -1;
+  else fnLmL = 0;
+  temp1 = (u32)tempn;
+  temp2 = (u32)tempm;
+  RnL = temp1&0x0000FFFF;
+  RnH = (temp1>>16)&0x0000FFFF;
+  RmL = temp2&0x0000FFFF;
+  RmH = (temp2>>16)&0x0000FFFF;
+  temp0 = RmL*RnL;
+  temp1 = RmH*RnL;
+  temp2 = RmL*RnH;
+  temp3 = RmH*RnH;
+  Res2 = 0;
+  Res1 = temp1+temp2;
+  if (Res1<temp1) Res2 += 0x00010000;
+  temp1 = (Res1<<16)&0xFFFF0000;
+  Res0 = temp0 + temp1;
+  if (Res0<temp0) Res2++;
+  Res2 = Res2 + ((Res1>>16)&0x0000FFFF) + temp3;
+  if (fnLmL<0) {
+  Res2 = ~ Res2;
+  if (Res0==0)
+  Res2++;
+  else
+  Res0 = (
+  ~Res0) + 1;
+  }
+  cpu.reg.MACH = Res2;
+  cpu.reg.MACL = Res0;
+
+  return dst;
 }
 
-void dmulu(u32 src, u32* dest) {
-  printf("dmulu: not implemented\n");
-  exit(1);
+u32 dmulu(u16 instr, u32 src, u32 dst) {
+  // TODO: simplify this
+  u32 RnL,RnH,RmL,RmH,Res0,Res1,Res2;
+  u32 temp0,temp1,temp2,temp3;
+  RnL = dst & 0x0000FFFF;
+  RnH = (dst>>16) & 0x0000FFFF;
+  RmL = src & 0x0000FFFF;
+  RmH = (src>>16) & 0x0000FFFF;
+  temp0 = RmL*RnL;
+  temp1 = RmH*RnL;
+  temp2 = RmL*RnH;
+  temp3 = RmH*RnH;
+  Res2 = 0;
+  Res1 = temp1 + temp2;
+  if (Res1<temp1) Res2 += 0x00010000;
+  temp1 = (Res1<<16) & 0xFFFF0000;
+  Res0 = temp0 + temp1;
+  if (Res0<temp0) Res2++;
+  Res2 = Res2 + ((Res1>>16)&0x0000FFFF) + temp3;
+  cpu.reg.MACH = Res2;
+  cpu.reg.MACL = Res0;
+
+  return dst;
 }
 
-void exts(u32 src, u32* dest) {
-  printf("exts: not implemented\n");
-  exit(1);
+u32 exts(u16 instr, u32 src, u32 dst) {
+  // Check the last bit of the instruction
+  if (instr & 0x1) {
+    // extu.w
+    return (i32) (i16) src;
+  } else {
+    // extu.b
+    return (i32) (i8) src;
+  }
 }
 
-void extu(u32 src, u32* dest) {
-  printf("extu: not implemented\n");
-  exit(1);
+u32 extu(u16 instr, u32 src, u32 dst) {
+  // Check the last bit of the instruction
+  if (instr & 0x1) {
+    // extu.w
+    return src & 0xFFFF;
+  } else {
+    // extu.b
+    return src & 0xFF;
+  }
 }
 
-void mov(u32 src, u32* dest) {
-  *dest = src;
+u32 mov(u16 instr, u32 src, u32 dst) {
+  return src;
 }
 
-void mul(u32 src, u32* dest) {
-  printf("mul: not implemented\n");
-  exit(1);
+u32 mul(u16 instr, u32 src, u32 dst) {
+  cpu.reg.MACL = src * dst;
+  return dst;
 }
 
-void muls(u32 src, u32* dest) {
+u32 muls(u16 instr, u32 src, u32 dst) {
   printf("muls: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void mulu(u32 src, u32* dest) {
+u32 mulu(u16 instr, u32 src, u32 dst) {
   printf("mulu: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void neg(u32 src, u32* dest) {
-  printf("neg: not implemented\n");
-  exit(1);
+u32 neg(u16 instr, u32 src, u32 dst) {
+  return 0 - (i32) src;
 }
 
-void negc(u32 src, u32* dest) {
-  printf("negc: not implemented\n");
-  exit(1);
+u32 negc(u16 instr, u32 src, u32 dst) {
+  u32 temp;
+  temp = 0 - src;
+  dst = temp - cpu.reg.SR_parts.T;
+  if (0 < temp) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+  if (temp < dst) {
+    cpu.reg.SR_parts.T = 1;
+  }
+
+  return dst;
 }
 
-void not(u32 src, u32* dest) {
-  printf("not: not implemented\n");
-  exit(1);
+u32 not(u16 instr, u32 src, u32 dst) {
+  return ~src;
 }
 
-void or(u32 src, u32* dest) {
-  printf("or: not implemented\n");
-  exit(1);
+u32 or(u16 instr, u32 src, u32 dst) {
+  return dst | src;
 }
 
-void shad(u32 src, u32* dest) {
-  printf("shad: not implemented\n");
-  exit(1);
+u32 shad(u16 instr, u32 src, u32 dst) {
+  u32 sgn = src & 0x80000000;
+
+  if (sgn == 0) {
+    dst <<= (src & 0x1F);
+  } else if ((src & 0x1F) == 0) {
+    if ((dst & 0x80000000) == 0) {
+      dst = 0;
+    } else {
+      dst = 0xFFFFFFFF;
+    }
+  } else {
+    dst = (i32)dst >> ((~src & 0x1F) + 1);
+  }
+
+  return dst;
 }
 
-void shld(u32 src, u32* dest) {
-  printf("shld: not implemented\n");
-  exit(1);
+u32 shld(u16 instr, u32 src, u32 dst) {
+  i32 sgn = src & 0x80000000;
+  if (sgn == 0) {
+    dst <<= (src & 0x1F);
+  } else if ((src & 0x1F) == 0) {
+    dst = 0;
+  } else {
+    dst = (u32) dst >> ((~src & 0x1F) + 1);
+  }
+
+  return dst;
 }
 
-void sub(u32 src, u32* dest) {
-  printf("sub: not implemented\n");
-  exit(1);
+u32 sub(u16 instr, u32 src, u32 dst) {
+  return dst - src;
 }
 
-void subc(u32 src, u32* dest) {
-  printf("subc: not implemented\n");
-  exit(1);
+u32 subc(u16 instr, u32 src, u32 dst) {
+  u32 tmp1 = dst - src;
+  u32 tmp0 = dst;
+
+  dst = tmp1 - cpu.reg.SR_parts.T;
+
+  if (tmp0 < tmp1) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
+  if (tmp1 < dst) {
+    cpu.reg.SR_parts.T = 1;
+  }
+
+  return dst;
 }
 
-void subv(u32 src, u32* dest) {
+u32 subv(u16 instr, u32 src, u32 dst) {
   printf("subv: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void swap(u32 src, u32* dest) {
-  printf("swap: not implemented\n");
-  exit(1);
+u32 swap(u16 instr, u32 src, u32 dst) {
+  // Is the last bit is 0, swap bytes, otherwise swap words
+  bool word = instr & 0b1;
+  if (!word) {
+    u32 temp0 = src & 0xFFFF0000;
+    u32 temp1 = (src & 0x000000FF) << 8;
+    dst = (src & 0x0000FF00) >> 8;
+    dst = dst | temp1 | temp0;
+  } else {
+    u32 temp = (src >> 16) & 0x0000FFFF;
+    dst = src << 16;
+    dst |= temp;
+  }
+  return dst;
 }
 
-void tst(u32 src, u32* dest) {
-  printf("tst: not implemented\n");
-  exit(1);
+u32 tst(u16 instr, u32 src, u32 dst) {
+  cpu.reg.SR_parts.T = ((src & dst) == 0) ? 1 : 0;
+  return dst;
 }
 
-void xor(u32 src, u32* dest) {
-  printf("xor: not implemented\n");
-  exit(1);
+u32 xor(u16 instr, u32 src, u32 dst) {
+  return src ^ dst;
 }
 
-void xtrct(u32 src, u32* dest) {
-  printf("xtrct: not implemented\n");
-  exit(1);
+u32 xtrct(u16 instr, u32 src, u32 dst) {
+  u32 temp = (src << 16) & 0xFFFF0000;
+  dst = (dst >> 16) & 0x0000FFFF;
+  dst |= temp;
+
+  return dst;
 }
 
-void ldc(u32 src, u32* dest) {
+u32 ldc(u16 instr, u32 src, u32 dst) {
   printf("ldc: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void lds(u32 src, u32* dest) {
-  printf("lds: not implemented\n");
-  exit(1);
+u32 lds(u16 instr, u32 src, u32 dst) {
+  return src;
 }
 
-void stc(u32 src, u32* dest) {
+u32 stc(u16 instr, u32 src, u32 dst) {
   printf("stc: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void sts(u32 src, u32* dest) {
-  printf("sts: not implemented\n");
-  exit(1);
+u32 sts(u16 instr, u32 src, u32 dst) {
+  return src;
 }
 
-void jmp(u32 src, u32* dest) {
-  printf("jmp: not implemented\n");
-  exit(1);
+u32 jmp(u16 instr, u32 src, u32 dst) {
+  delayedBranch(src);
+  return dst;
 }
 
-void jsr(u32 src, u32* dest) {
-  printf("jsr: not implemented\n");
-  exit(1);
+u32 jsr(u16 instr, u32 src, u32 dst) {
+  // If PC + 2 is 32-bit aligned
+  // if ((((cpu.reg.PC - 4) + 2) & 0x3) == 0) {
+  //   cpu.reg.PR = (cpu.reg.PC - 4) + 6;
+  // } else {
+  //   cpu.reg.PR = (cpu.reg.PC - 4) + 4;
+  // }
+  cpu.reg.PR = cpu.reg.PC;
+  delayedBranch(src);
+  return dst;
 }
 
-void pref(u32 src, u32* dest) {
+u32 pref(u16 instr, u32 src, u32 dst) {
   printf("pref: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void tas(u32 src, u32* dest) {
+u32 tas(u16 instr, u32 src, u32 dst) {
   printf("tas: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void mac(u32 src, u32* dest) {
+u32 mac(u16 instr, u32 src, u32 dst) {
   printf("mac: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void mova(u32 src, u32* dest) {
-  printf("mova: not implemented\n");
-  exit(1);
+u32 mova(u16 instr, u32 src, u32 dst) {
+  u32 pc = 24;
+  u32 n = (instr & 0b0000111100000000) >> 8;
+  u32 disp = (instr & 0b0000000011111111) >> 0;
+  
+  return (cpu.reg.regArray[pc] & 0xFFFFFFFC) + (disp * 4);
 }
 
-void braf(u32 src, u32* dest) {
-  printf("braf: not implemented\n");
-  exit(1);
+u32 braf(u16 instr, u32 src, u32 dst) {
+  delayedBranch((cpu.reg.PC - 4) + src + 4);
+  return dst;
 }
 
-void bsrf(u32 src, u32* dest) {
+u32 bsrf(u16 instr, u32 src, u32 dst) {
   printf("bsrf: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void bf(u32 src, u32* dest) {
-  printf("bf: not implemented\n");
-  exit(1);
+u32 bf(u16 instr, u32 src, u32 dst) {
+  bool delaySlot = (instr & 0b0000010000000000) != 0;
+  if (cpu.reg.SR_parts.T == 0) {
+    u32 newPC = (cpu.reg.PC - 4) + (src * 2) + 4; 
+    if (delaySlot) {
+      delayedBranch(newPC);
+    } else {
+      cpu.reg.PC = newPC + 2;
+    }
+  }
+  return dst;
 }
 
-void bt(u32 src, u32* dest) {
-  printf("bt: not implemented\n");
-  exit(1);
+u32 bt(u16 instr, u32 src, u32 dst) {
+  bool delaySlot = (instr & 0b0000010000000000) != 0;
+  if (cpu.reg.SR_parts.T == 1) {
+    u32 newPC = (cpu.reg.PC - 4) + (src * 2) + 4;
+    if (delaySlot) {
+      delayedBranch(newPC);
+    } else {
+      cpu.reg.PC = newPC + 2;
+    }
+  }
+  return dst;
 }
 
-void bra(u32 src, u32* dest) {
-  printf("bra: not implemented\n");
-  exit(1);
+u32 bra(u16 instr, u32 src, u32 dst) {
+  delayedBranch((cpu.reg.PC - 4) + (src * 2) + 4);
+  return dst;
 }
 
-void bsr(u32 src, u32* dest) {
-  printf("bsr: not implemented\n");
-  exit(1);
+u32 bsr(u16 instr, u32 src, u32 dst) {
+  cpu.reg.PR = cpu.reg.PC;
+  bra(instr, src, dst);
+  return dst;
 }
 
-void trapa(u32 src, u32* dest) {
+u32 trapa(u16 instr, u32 src, u32 dst) {
   printf("trapa: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void movco(u32 src, u32* dest) {
+u32 movco(u16 instr, u32 src, u32 dst) {
   printf("movco: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void movli(u32 src, u32* dest) {
+u32 movli(u16 instr, u32 src, u32 dst) {
   printf("movli: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void movua(u32 src, u32* dest) {
+u32 movua(u16 instr, u32 src, u32 dst) {
   printf("movua: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void movca(u32 src, u32* dest) {
+u32 movca(u16 instr, u32 src, u32 dst) {
   printf("movca: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void icbi(u32 src, u32* dest) {
+u32 icbi(u16 instr, u32 src, u32 dst) {
   printf("icbi: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void ocbi(u32 src, u32* dest) {
+u32 ocbi(u16 instr, u32 src, u32 dst) {
   printf("ocbi: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void ocbp(u32 src, u32* dest) {
+u32 ocbp(u16 instr, u32 src, u32 dst) {
   printf("ocbp: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void ocbwb(u32 src, u32* dest) {
+u32 ocbwb(u16 instr, u32 src, u32 dst) {
   printf("ocbwb: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void prefi(u32 src, u32* dest) {
+u32 prefi(u16 instr, u32 src, u32 dst) {
   printf("prefi: not implemented\n");
   exit(1);
+  return dst;
 }
 
-void synco(u32 src, u32* dest) {
+u32 synco(u16 instr, u32 src, u32 dst) {
   printf("synco: not implemented\n");
   exit(1);
+  return dst;
 }
 
 #include "generated_instructions.h"
