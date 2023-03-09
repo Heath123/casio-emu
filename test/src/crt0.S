@@ -29,7 +29,6 @@ bssLoop:
     mov.b r1, @-r2          ! Delay slot
 bssDone:
 
-    ! mov.l spVal, r15
     mov.l main, r7
     jmp @r7
     nop
@@ -37,8 +36,7 @@ bssDone:
 
 ! Constants
     .align 4
-spVal:
-    .long 0x10000000
+
 main:
     .long _main
 

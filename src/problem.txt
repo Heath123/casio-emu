@@ -1,7 +1,0 @@
-SR = 0x00000000
-R0 = 0xA
-R3 = 0
-
-div1 r0, r3
-Correct: R3 = 0xFFFFFFF6
-Actual:  R3 = 0x00000000
