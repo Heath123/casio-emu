@@ -1,0 +1,139 @@
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "../int.h"
+#include "../hardware/tlb/tlb.h"
+#include "../hardware/display/display.h"
+#include "../hardware/timers/timers.h"
+#include "../cpu.h"
+
+extern CpuState cpu;
+
+// This is expected to always return a 32-bit value;
+// the caller is responsible for masking it to the correct size.
+bool readSpecial(u32 realAddress, u32* value, u32 size) {
+  // Round down to the nearest 4 bytes
+  u32 address = realAddress & ~0x3;
+
+  // Check if it's a special address
+  switch (address) {
+    case 0xff00000c:
+      // TEA
+      *value = cpu.reg.TEA;
+      return true;
+    case 0xff000020:
+      // TRA
+      *value = cpu.reg.TRA;
+      return true;
+    case 0xff000024:
+      // EXPEVT
+      *value = cpu.reg.EXPEVT;
+      return true;
+    case 0xff000030:
+      // Processor version register
+      // TODO: This may be the value for the CG20
+      *value = 0x10300B00;
+      return true;
+    case 0xff000044:
+      // Product register
+      // TODO: This may be the value for the CG20
+      *value = 0x00002C00;
+      return true;
+    case 0xff2f0000:
+      // CPU Operation Mode Register
+      *value = 0x00a7ffd0;
+      return true;
+    case 0xff000070:
+      // Physical Address Space Control Register
+      *value = 0x00000082;
+      return true;
+    case 0xff000078:
+      // Instruction Re-Fetch Inhibit Control Register
+      *value = 0x00000000;
+      return true;
+    case 0xa4150000:
+    case 0xa4150024:
+    case 0xa4150044:
+    case 0xa4150050:
+    case 0xfec10004:
+    case 0xfec10008:
+    case 0xfec1000c:
+    case 0xfec10014:
+    case 0xfec10024:
+    case 0xfec10028:
+    case 0xfec1002c:
+    case 0xfec10034:
+      // Related to clock speed
+      // TODO
+      *value = 0x00000000;
+      return true;
+    case 0xa405013c:
+    case 0xb4000000:
+      // This is handled in the display code
+      // TODO: This is a range of addresses, not a single address
+      return readDisplay(realAddress, value, size);
+    case 0xa4490004:
+      return readTimers(realAddress, value, size);
+  }
+
+  if (address >= 0xf2000000 && address <= 0xf37fffff ) {
+    printf("ITLB reads not implemented!\n");
+    exit(1);
+  }
+
+  if (address >= 0xf6000000 && address <= 0xf70fffff) {
+    *value = utlbRead(address);
+    return true;
+  }
+
+  if (address >= 0xa4080000 && address <= 0xa408002C) {
+    printf("Warning: Unimplemented read from interrupt priority register!\n");
+    *value = 0;
+    return true;
+  }
+
+  if (address >= 0xa4080080 && address <= 0xa40800b0) {
+    printf("Warning: Unimplemented read from interrupt mask register!\n");
+    *value = 0;
+    return true;
+  }
+
+  return false;
+}
+
+// A bitmask is provided to allow the caller to only write to certain bits
+// We could just make the calle work all that out but this way is consistent
+// with the readSpecial function and probably makes it easier to implement
+bool writeSpecial(u32 realAddress, u32 value, u32 size, u32 bitmask) {
+  // Round down to the nearest 4 bytes
+  u32 address = realAddress & ~0x3;
+
+  switch (address) {
+    case 0xff2f0000:
+      // CPU Operation Mode Register
+      printf("Warning: CPU Operation Mode Register write not implemented!\n");
+      return true;
+    case 0xff000070:
+      // Physical Address Space Control Register
+      printf("Warning: Physical Address Space Control Register write not implemented!\n");
+      return true;
+    case 0xa4150044:
+      // Clock speed
+      // TODO
+      return true;
+    case 0xa405013c:
+    case 0xb4000000:
+      // This is handled in the display code
+      return writeDisplay(realAddress, value, size, bitmask);
+    case 0xa4490004:
+      return writeTimers(realAddress, value, size, bitmask);
+  }
+
+  if (address >= 0xa4080000 && address <= 0xa408002C) {
+    printf("Warning: Unimplemented write to interrupt priority register!\n");
+    return true;
+  }
+
+  return false;
+}

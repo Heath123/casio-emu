@@ -1,27 +1,48 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+// #include <unistd.h>
 
 #include "cpu.h"
 #include "instructions.h"
-#include "memory.h"
+#include "./memory/memory.h"
 #include "config.h"
+#include "gui/gui.h"
+#include "hardware/fake/fake.h"
+#include "hardware/cpuRegisters/cpuRegisters.h"
+#include "hardware/tlb/tlb.h"
+#include "hardware/display/display.h"
 
 CpuState cpu;
 
+void test(void);
+
 int main(int argc, char *argv[]) {
   initMemory();
+  initCpuRegisters();
+  initTlb();
+  initFake();
+  initDisplay();
+  initGui();
 
   cpu.isBranchDelaySlot = false;
   cpu.branchDelayDone = false;
   cpu.branchTarget = 0;
 
-  cpu.reg.PC = 0x00300200;
+  cpu.reg.PC = 0x00300000;
 
   // Return address
   cpu.reg.PR = 0xffffffff;
-  // cpu.reg.r15 = 0x10000000; // Stack pointer
+  cpu.reg.r15 = 0x8c080000; // Stack pointer, at the top of user memory
+  unsigned int iterations = 0;
   while (cpu.reg.PC != 0xffffffff) {
+    iterations++;
+    if (iterations % 2048 == 0) {
+      handleEvents();
+    }
+
+    if (cpu.isSleeping) continue;
+
     #ifdef PRINT_INSTRUCTIONS
     if (cpu.isBranchDelaySlot) {
       printf("Branch delay slot:\n");
@@ -33,6 +54,51 @@ int main(int argc, char *argv[]) {
       cpu.branchDelayDone = true;
     }
 
+    if (cpu.reg.PC == 0xfffffe00) {
+      if (cpu.reg.r4 == 0) {
+        printf("Print: null string\n");
+      } else {
+        // Read until we hit a null byte
+        u32 addr = cpu.reg.r4;
+        while (readMemory(addr, 1) != 0) {
+          printf("%c", readMemory(addr, 1));
+          addr++;
+        }
+        printf("\n");
+      }
+      // Set PC to PR (return)
+      cpu.reg.PC = cpu.reg.PR;
+    }
+    if (cpu.reg.PC == 0xffffff00) {
+      printf("%d\n", cpu.reg.r4);
+      // Set PC to PR (return)
+      cpu.reg.PC = cpu.reg.PR;
+    }
+    if (cpu.reg.PC == 0xfffffd00) {
+      printf("%08X\n", cpu.reg.r4);
+      // Set PC to PR (return)
+      cpu.reg.PC = cpu.reg.PR;
+    }
+    if (cpu.reg.PC == 0xfffffc00) {
+      // Copy pixels to screen
+      u16 framebuffer[396 * 224] = {0xffff};
+      u32 addr = cpu.reg.r4;
+      for (int i = 0; i < 396 * 224; i++) {
+        framebuffer[i] = 0xffff;
+      }
+      for (int i = 0; i < 396 * 224; i++) {
+        framebuffer[i] = readMemory(addr, 2);
+        addr += 2;
+      }
+      updateDisplay(framebuffer);
+      // Sleep for 3 seconds
+      // sleep(3);
+
+      // while (1) {}
+
+      // Set PC to PR (return)
+      cpu.reg.PC = cpu.reg.PR;
+    }
     if (cpu.reg.PC == 0x80010070) {
       #ifdef PRINT_INSTRUCTIONS
       printf("Syscall table call! r0 = %d\n", cpu.reg.r0);

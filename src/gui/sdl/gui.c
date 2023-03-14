@@ -1,0 +1,126 @@
+#include <SDL2/SDL.h>
+#include <stdio.h>
+
+#include "../../int.h"
+
+#define RGB(r,g,b) ((((r) >> 1) << 11) | ((g) << 5) | ((b) >> 1))
+
+// int main(int argc, char* argv[]) {
+//   return 0;
+// }
+
+typedef uint16_t color_t;
+
+SDL_Renderer* renderer;
+SDL_Texture* framebuffer;
+
+void initGui(void) {
+  // Initialize SDL
+  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
+    exit(1);
+  }
+
+  // Create a window and renderer
+  SDL_Window* window = SDL_CreateWindow("Emulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 396, 224, 0);
+  if (!window) {
+    SDL_Log("Failed to create window: %s", SDL_GetError());
+    exit(1);
+  }
+  renderer = SDL_CreateRenderer(window, -1, 0);
+  if (!renderer) {
+    SDL_Log("Failed to create renderer: %s", SDL_GetError());
+    exit(1);
+  }
+
+  // Create a texture to use as a framebuffer
+  framebuffer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STREAMING, 396, 224);
+  if (!framebuffer) {
+    SDL_Log("Failed to create framebuffer: %s", SDL_GetError());
+    exit(1);
+  }
+
+  // Allocate an array to use as the framebuffer data
+  // gint_vram = calloc(396 * 224, sizeof(color_t));
+
+//   uint16_t bg_color = RGB(0, 0, 0);
+
+//   // Main loop
+//   const int target_frame_time = 1000 / 60;  // 60 FPS
+//   uint32_t last_frame_time = SDL_GetTicks();
+//   while (1) {
+//     // Handle events
+//     SDL_Event event;
+//     while (SDL_PollEvent(&event)) {
+//       switch (event.type) {
+//         case SDL_QUIT:
+//           goto cleanup;
+//           break;
+//         case SDL_KEYDOWN:
+//           if (event.key.repeat == 0) {
+//               if (event.key.keysym.sym == SDLK_SPACE) {
+//                 bg_color = RGB(63, 0, 0); // Red
+//               } else if (event.key.keysym.sym == SDLK_RETURN) {
+//                 bg_color = RGB(0, 63, 0); // Green
+//               } else if (event.key.keysym.sym == SDLK_TAB) {
+//                 bg_color = RGB(0, 0, 63); // Blue
+//               }
+//           }
+//           break;
+//       }
+//     }
+
+//     // Update the framebuffer data
+//     for (int i = 0; i < 396 * 224; i++) {
+//       framebuffer_data[i] = bg_color;
+//     }
+
+//     // Update the texture with the new framebuffer data
+//     SDL_UpdateTexture(framebuffer, NULL, framebuffer_data, 396 * sizeof(uint16_t));
+
+//     // Clear the renderer and draw the framebuffer texture
+//     SDL_RenderClear(renderer);
+//     SDL_RenderCopy(renderer, framebuffer, NULL, NULL);
+//     SDL_RenderPresent(renderer);
+
+//     // Delay to maintain 60 FPS
+//     uint32_t current_time = SDL_GetTicks();
+//     uint32_t elapsed_time = current_time - last_frame_time;
+//     if (elapsed_time < target_frame_time) {
+//       SDL_Delay(target_frame_time - elapsed_time);
+//     }
+//     last_frame_time = current_time;
+//   }
+
+// cleanup:
+//   // Clean up resources and quit SDL
+//   free(framebuffer_data);
+//   SDL_DestroyTexture(framebuffer);
+//   SDL_DestroyRenderer(renderer);
+//   SDL_DestroyWindow(window);
+//   SDL_Quit();
+//   return 0;
+}
+
+void updateDisplay(u16* vram) {
+  // printf("updateDisplay called\n");
+  SDL_UpdateTexture(framebuffer, NULL, vram, 396 * sizeof(uint16_t));
+  SDL_RenderClear(renderer);
+  SDL_RenderCopy(renderer, framebuffer, NULL, NULL);
+  SDL_RenderPresent(renderer);
+
+  // Sleep for 3 seconds
+  // SDL_Delay(3000);
+}
+
+void handleEvents(void) {
+  // Handle events
+  SDL_Event event;
+  while (SDL_PollEvent(&event)) {
+    switch (event.type) {
+      case SDL_QUIT:
+        exit(0);
+        break;
+    }
+  }
+}

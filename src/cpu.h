@@ -1,3 +1,6 @@
+#ifndef CPU_H
+#define CPU_H
+
 #include <stdbool.h>
 
 #include "int.h"
@@ -22,7 +25,7 @@ struct SR_parts {
 
 typedef struct {
   union {
-    u32 regArray[16 + 8 + 11];
+    u32 regArray[16 + 8 + 14];
     struct {
       u32 r0;
       u32 r1;
@@ -63,6 +66,13 @@ typedef struct {
       u32 SPC;
       u32 SGR;
       u32 DBR;
+
+      // MMU-related registers
+      u32 TEA;
+
+      // Exceptions/interrupts
+      u32 EXPEVT;
+      u32 TRA;
     };
   };
 } CpuRegisters;
@@ -73,5 +83,9 @@ typedef struct CpuState {
   bool isBranchDelaySlot;
   bool branchDelayDone;
   u32 branchTarget;
+
+  bool isSleeping;
 } CpuState;
+
+#endif // CPU_H
 

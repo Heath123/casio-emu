@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "cpu.h"
-#include "memory.h"
+#include "memory/memory.h"
 #include "config.h"
 
 extern CpuState cpu;
@@ -81,8 +81,7 @@ u32 sett(u16 instr, u32 src, u32 dst) {
 }
 
 u32 sleep(u16 instr, u32 src, u32 dst) {
-  printf("sleep: not implemented\n");
-  exit(1);
+  cpu.isSleeping = true;
   return dst;
 }
 
@@ -548,8 +547,8 @@ u32 muls(u16 instr, u32 src, u32 dst) {
 }
 
 u32 mulu(u16 instr, u32 src, u32 dst) {
-  printf("mulu: not implemented\n");
-  exit(1);
+  cpu.reg.MACL = ((u32)(u16)dst * (u32)(u16)src);
+
   return dst;
 }
 
@@ -675,9 +674,7 @@ u32 xtrct(u16 instr, u32 src, u32 dst) {
 }
 
 u32 ldc(u16 instr, u32 src, u32 dst) {
-  printf("ldc: not implemented\n");
-  exit(1);
-  return dst;
+  return src;
 }
 
 u32 lds(u16 instr, u32 src, u32 dst) {
@@ -685,9 +682,7 @@ u32 lds(u16 instr, u32 src, u32 dst) {
 }
 
 u32 stc(u16 instr, u32 src, u32 dst) {
-  printf("stc: not implemented\n");
-  exit(1);
-  return dst;
+  return src;
 }
 
 u32 sts(u16 instr, u32 src, u32 dst) {
@@ -816,8 +811,9 @@ u32 movca(u16 instr, u32 src, u32 dst) {
 }
 
 u32 icbi(u16 instr, u32 src, u32 dst) {
-  printf("icbi: not implemented\n");
-  exit(1);
+  // nop
+  // TODO: implement if/when cache is implemented
+
   return dst;
 }
 
@@ -846,8 +842,8 @@ u32 prefi(u16 instr, u32 src, u32 dst) {
 }
 
 u32 synco(u16 instr, u32 src, u32 dst) {
-  printf("synco: not implemented\n");
-  exit(1);
+  // nop
+  // Probably not relevant unless we become cycle accurate
   return dst;
 }
 

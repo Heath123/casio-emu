@@ -110,3 +110,5 @@ a.out
 *.elf
 *.bin
 
+calc-emu-test
+build
