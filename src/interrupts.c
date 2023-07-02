@@ -7,13 +7,21 @@
 
 extern CpuState cpu;
 
-void raiseInterrupt(u32 code, u32 handler) {
-  printf("Interrupt raised!\n");
-  printf("%d %08X\n", cpu.reg.SR_parts.BL, cpu.reg.SR);
+// TODO: Interrupt priority
+void raiseInterrupt(u32 code, u32 handler, bool isException) {
+  cpu.interruptPending = true;
+  cpu.interruptCode = code;
+  cpu.interruptVector = handler;
+  cpu.interruptIsException = isException;
+}
+
+void handleInterrupt(u32 code, u32 handler, bool isException) {
+  // printf("Interrupt raised!\n");
   if (cpu.reg.SR_parts.BL) {
     // Interrupts are blocked
     // This would cause the CPU to reset
     printf("Interrupt within interrupt!\n");
+    printf("PC: %08X\n", cpu.reg.PC);
     exit(1);
   }
 
@@ -21,8 +29,10 @@ void raiseInterrupt(u32 code, u32 handler) {
   cpu.reg.SSR = cpu.reg.SR;
   cpu.reg.SGR = cpu.reg.r15;
 
-  // Blocks further interrupts
-  cpu.reg.SR_parts.BL = 1;
+  if (isException) {
+    // Blocks further interrupts
+    cpu.reg.SR_parts.BL = 1;
+  }
 
   // Put the CPU into privileged mode
   // We don't emulate user mode, so this is always set, but still
@@ -43,5 +53,9 @@ void raiseInterrupt(u32 code, u32 handler) {
 
   cpu.reg.EXPEVT = code;
   cpu.reg.TRA = 0; // TODO: What goes here?
-  cpu.reg.PC = handler + 2;
+  cpu.reg.PC = handler;
+
+  cpu.isSleeping = false;
+
+  // printf("Branching to interrupt handler at %08X\n", handler);
 }

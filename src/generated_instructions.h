@@ -1242,7 +1242,7 @@ void autogen_pref_at_rn(u16 instr) {
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = readMemory((cpu.reg.regArray[n]), 4);
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = pref(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1255,7 +1255,7 @@ void autogen_tas_b_at_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = readMemory((cpu.reg.regArray[n]), 1);
   src = s_ext(src, 8);
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 1);
   dst = s_ext(dst, 8);
   u32 result = tas(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 1, result);
@@ -1269,7 +1269,7 @@ void autogen_mov_b_rm_at_rn(u16 instr) {
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 1);
   dst = s_ext(dst, 8);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 1, result);
@@ -1283,7 +1283,7 @@ void autogen_mov_w_rm_at_rn(u16 instr) {
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 2);
   dst = s_ext(dst, 16);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 2, result);
@@ -1297,7 +1297,7 @@ void autogen_mov_l_rm_at_rn(u16 instr) {
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1351,7 +1351,7 @@ void autogen_mac_l_at_rm_plus_at_rn_plus_(u16 instr) {
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = readMemory((cpu.reg.regArray[m]), 4);
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = mac(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
   cpu.reg.regArray[m] += 4;
@@ -1367,7 +1367,7 @@ void autogen_mac_w_at_rm_plus_at_rn_plus_(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = readMemory((cpu.reg.regArray[m]), 2);
   src = s_ext(src, 16);
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 2);
   dst = s_ext(dst, 16);
   u32 result = mac(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 2, result);
@@ -1652,7 +1652,7 @@ void autogen_mov_b_rm_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 1;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 1);
   dst = s_ext(dst, 8);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 1, result);
@@ -1667,7 +1667,7 @@ void autogen_mov_w_rm_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 2;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 2);
   dst = s_ext(dst, 16);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 2, result);
@@ -1682,7 +1682,7 @@ void autogen_mov_l_rm_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1696,7 +1696,7 @@ void autogen_stc_l_sr_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[sr];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1710,7 +1710,7 @@ void autogen_stc_l_gbr_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[gbr];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1724,7 +1724,7 @@ void autogen_stc_l_vbr_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[vbr];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1738,7 +1738,7 @@ void autogen_stc_l_ssr_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[ssr];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1752,7 +1752,7 @@ void autogen_stc_l_spc_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[spc];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1766,7 +1766,7 @@ void autogen_stc_l_r0_bank_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[r0_bank];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1780,7 +1780,7 @@ void autogen_stc_l_r1_bank_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[r1_bank];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1794,7 +1794,7 @@ void autogen_stc_l_r2_bank_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[r2_bank];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1808,7 +1808,7 @@ void autogen_stc_l_r3_bank_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[r3_bank];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1822,7 +1822,7 @@ void autogen_stc_l_r4_bank_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[r4_bank];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1836,7 +1836,7 @@ void autogen_stc_l_r5_bank_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[r5_bank];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1850,7 +1850,7 @@ void autogen_stc_l_r6_bank_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[r6_bank];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1864,7 +1864,7 @@ void autogen_stc_l_r7_bank_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[r7_bank];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1878,7 +1878,7 @@ void autogen_sts_l_mach_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[mach];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = sts(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1892,7 +1892,7 @@ void autogen_sts_l_macl_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[macl];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = sts(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1906,7 +1906,7 @@ void autogen_sts_l_pr_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[pr];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = sts(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -1920,7 +1920,7 @@ void autogen_mov_b_r0_at_disp_rn(u16 instr) {
   u32 n = (instr & 0b0000000011110000) >> 4;
   u32 disp = (instr & 0b0000000000001111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (disp * 1), 1);
   dst = s_ext(dst, 8);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n] + (disp * 1), 1, result);
@@ -1935,7 +1935,7 @@ void autogen_mov_w_r0_at_disp_rn(u16 instr) {
   u32 n = (instr & 0b0000000011110000) >> 4;
   u32 disp = (instr & 0b0000000000001111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (disp * 2), 2);
   dst = s_ext(dst, 16);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n] + (disp * 2), 2, result);
@@ -1950,7 +1950,7 @@ void autogen_mov_l_rm_at_disp_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 disp = (instr & 0b0000000000001111) >> 0;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (disp * 4), 4);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n] + (disp * 4), 4, result);
 }
@@ -2007,7 +2007,7 @@ void autogen_mov_b_rm_at_r0_rn(u16 instr) {
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (cpu.reg.regArray[0]), 1);
   dst = s_ext(dst, 8);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n] + (cpu.reg.regArray[0]), 1, result);
@@ -2021,7 +2021,7 @@ void autogen_mov_w_rm_at_r0_rn(u16 instr) {
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (cpu.reg.regArray[0]), 2);
   dst = s_ext(dst, 16);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n] + (cpu.reg.regArray[0]), 2, result);
@@ -2035,7 +2035,7 @@ void autogen_mov_l_rm_at_r0_rn(u16 instr) {
   u32 m = (instr & 0b0000000011110000) >> 4;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[m];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]) + (cpu.reg.regArray[0]), 4);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[n] + (cpu.reg.regArray[0]), 4, result);
 }
@@ -2090,7 +2090,7 @@ void autogen_mov_b_r0_at_disp_gbr(u16 instr) {
   u32 gbr = 27;
   u32 disp = (instr & 0b0000000011111111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[gbr]) + (disp * 1), 1);
   dst = s_ext(dst, 8);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[gbr] + (disp * 1), 1, result);
@@ -2105,7 +2105,7 @@ void autogen_mov_w_r0_at_disp_gbr(u16 instr) {
   u32 gbr = 27;
   u32 disp = (instr & 0b0000000011111111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[gbr]) + (disp * 2), 2);
   dst = s_ext(dst, 16);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[gbr] + (disp * 2), 2, result);
@@ -2120,7 +2120,7 @@ void autogen_mov_l_r0_at_disp_gbr(u16 instr) {
   u32 gbr = 27;
   u32 disp = (instr & 0b0000000011111111) >> 0;
   u32 src = cpu.reg.regArray[r0];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[gbr]) + (disp * 4), 4);
   u32 result = mov(instr, src, dst);
   writeMemory(cpu.reg.regArray[gbr] + (disp * 4), 4, result);
 }
@@ -2177,7 +2177,7 @@ void autogen_and_b_imm_at_r0_gbr(u16 instr) {
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 gb = (instr & 0b0000000000000000) >> 16;
   u32 src = s_ext(imm, 8);
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[gb]) + (cpu.reg.regArray[0]), 1);
   dst = s_ext(dst, 8);
   u32 result = and(instr, src, dst);
   writeMemory(cpu.reg.regArray[gb] + (cpu.reg.regArray[0]), 1, result);
@@ -2191,7 +2191,7 @@ void autogen_or_b_imm_at_r0_gbr(u16 instr) {
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 gb = (instr & 0b0000000000000000) >> 16;
   u32 src = s_ext(imm, 8);
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[gb]) + (cpu.reg.regArray[0]), 1);
   dst = s_ext(dst, 8);
   u32 result = or(instr, src, dst);
   writeMemory(cpu.reg.regArray[gb] + (cpu.reg.regArray[0]), 1, result);
@@ -2205,7 +2205,7 @@ void autogen_tst_b_imm_at_r0_gbr(u16 instr) {
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 gb = (instr & 0b0000000000000000) >> 16;
   u32 src = s_ext(imm, 8);
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[gb]) + (cpu.reg.regArray[0]), 1);
   dst = s_ext(dst, 8);
   u32 result = tst(instr, src, dst);
   writeMemory(cpu.reg.regArray[gb] + (cpu.reg.regArray[0]), 1, result);
@@ -2219,7 +2219,7 @@ void autogen_xor_b_imm_at_r0_gbr(u16 instr) {
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 gb = (instr & 0b0000000000000000) >> 16;
   u32 src = s_ext(imm, 8);
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[gb]) + (cpu.reg.regArray[0]), 1);
   dst = s_ext(dst, 8);
   u32 result = xor(instr, src, dst);
   writeMemory(cpu.reg.regArray[gb] + (cpu.reg.regArray[0]), 1, result);
@@ -2430,7 +2430,7 @@ void autogen_tst_imm_r0(u16 instr) {
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
   u32 r0 = 0;
-  u32 src = s_ext(imm, 8);
+  u32 src = imm;
   u32 dst = cpu.reg.regArray[r0];
   u32 result = tst(instr, src, dst);
   cpu.reg.regArray[r0] = result;
@@ -2468,7 +2468,7 @@ void autogen_movco_l_r0_at_rn(u16 instr) {
   u32 r0 = 0;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r0];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = movco(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -2521,69 +2521,69 @@ void autogen_movca_l_r0_at_rn(u16 instr) {
   u32 r0 = 0;
   u32 n = (instr & 0b0000111100000000) >> 8;
   u32 src = cpu.reg.regArray[r0];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = movca(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
 
-// icbi @rn
-void autogen_icbi_at_rn(u16 instr) {
+// icbi rn
+void autogen_icbi_rn(u16 instr) {
   #ifdef PRINT_INSTRUCTIONS
-  printf("icbi @rn\n");
+  printf("icbi rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory((cpu.reg.regArray[n]), 4);
-  u32 dst = 0;
+  u32 src = cpu.reg.regArray[n];
+  u32 dst = cpu.reg.regArray[n];
   u32 result = icbi(instr, src, dst);
-  writeMemory(cpu.reg.regArray[n], 4, result);
+  cpu.reg.regArray[n] = result;
 }
 
-// ocbi @rn
-void autogen_ocbi_at_rn(u16 instr) {
+// ocbi rn
+void autogen_ocbi_rn(u16 instr) {
   #ifdef PRINT_INSTRUCTIONS
-  printf("ocbi @rn\n");
+  printf("ocbi rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory((cpu.reg.regArray[n]), 4);
-  u32 dst = 0;
+  u32 src = cpu.reg.regArray[n];
+  u32 dst = cpu.reg.regArray[n];
   u32 result = ocbi(instr, src, dst);
-  writeMemory(cpu.reg.regArray[n], 4, result);
+  cpu.reg.regArray[n] = result;
 }
 
-// ocbp @rn
-void autogen_ocbp_at_rn(u16 instr) {
+// ocbp rn
+void autogen_ocbp_rn(u16 instr) {
   #ifdef PRINT_INSTRUCTIONS
-  printf("ocbp @rn\n");
+  printf("ocbp rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory((cpu.reg.regArray[n]), 4);
-  u32 dst = 0;
+  u32 src = cpu.reg.regArray[n];
+  u32 dst = cpu.reg.regArray[n];
   u32 result = ocbp(instr, src, dst);
-  writeMemory(cpu.reg.regArray[n], 4, result);
+  cpu.reg.regArray[n] = result;
 }
 
-// ocbwb @rn
-void autogen_ocbwb_at_rn(u16 instr) {
+// ocbwb rn
+void autogen_ocbwb_rn(u16 instr) {
   #ifdef PRINT_INSTRUCTIONS
-  printf("ocbwb @rn\n");
+  printf("ocbwb rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory((cpu.reg.regArray[n]), 4);
-  u32 dst = 0;
+  u32 src = cpu.reg.regArray[n];
+  u32 dst = cpu.reg.regArray[n];
   u32 result = ocbwb(instr, src, dst);
-  writeMemory(cpu.reg.regArray[n], 4, result);
+  cpu.reg.regArray[n] = result;
 }
 
-// prefi @rn
-void autogen_prefi_at_rn(u16 instr) {
+// prefi rn
+void autogen_prefi_rn(u16 instr) {
   #ifdef PRINT_INSTRUCTIONS
-  printf("prefi @rn\n");
+  printf("prefi rn\n");
   #endif
   u32 n = (instr & 0b0000111100000000) >> 8;
-  u32 src = readMemory((cpu.reg.regArray[n]), 4);
-  u32 dst = 0;
+  u32 src = cpu.reg.regArray[n];
+  u32 dst = cpu.reg.regArray[n];
   u32 result = prefi(instr, src, dst);
-  writeMemory(cpu.reg.regArray[n], 4, result);
+  cpu.reg.regArray[n] = result;
 }
 
 // synco
@@ -2685,7 +2685,7 @@ void autogen_stc_l_sgr_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[sgr];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
 }
@@ -2699,9 +2699,50 @@ void autogen_stc_l_dbr_at_minus_rn(u16 instr) {
   u32 n = (instr & 0b0000111100000000) >> 8;
   cpu.reg.regArray[n] -= 4;
   u32 src = cpu.reg.regArray[dbr];
-  u32 dst = 0;
+  u32 dst = readMemory((cpu.reg.regArray[n]), 4);
   u32 result = stc(instr, src, dst);
   writeMemory(cpu.reg.regArray[n], 4, result);
+}
+
+// ldrs (disp,pc)
+void autogen_ldrs_disp_pc(u16 instr) {
+  #ifdef PRINT_INSTRUCTIONS
+  printf("ldrs (disp,pc)\n");
+  #endif
+  u32 pc = 24;
+  u32 rs = 38;
+  u32 disp = (instr & 0b0000000011111111) >> 0;
+  u32 src = cpu.reg.regArray[pc] + (disp * 2);
+  u32 dst = cpu.reg.regArray[rs];
+  u32 result = ldrs(instr, src, dst);
+  cpu.reg.regArray[rs] = result;
+}
+
+// ldre (disp,pc)
+void autogen_ldre_disp_pc(u16 instr) {
+  #ifdef PRINT_INSTRUCTIONS
+  printf("ldre (disp,pc)\n");
+  #endif
+  u32 pc = 24;
+  u32 re = 39;
+  u32 disp = (instr & 0b0000000011111111) >> 0;
+  u32 src = cpu.reg.regArray[pc] + (disp * 2);
+  u32 dst = cpu.reg.regArray[re];
+  u32 result = ldre(instr, src, dst);
+  cpu.reg.regArray[re] = result;
+}
+
+// ldrc rn
+void autogen_ldrc_rn(u16 instr) {
+  #ifdef PRINT_INSTRUCTIONS
+  printf("ldrc rn\n");
+  #endif
+  u32 n = (instr & 0b0000111100000000) >> 8;
+  u32 rc = 40;
+  u32 src = cpu.reg.regArray[n];
+  u32 dst = cpu.reg.regArray[rc];
+  u32 result = ldrc(instr, src, dst);
+  cpu.reg.regArray[rc] = result;
 }
 
 void (*instructionHandlers[65536])(u16) = {
@@ -2852,7 +2893,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -2868,7 +2909,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -2884,7 +2925,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -2916,7 +2957,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -2932,7 +2973,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3108,7 +3149,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3124,7 +3165,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3140,7 +3181,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3172,7 +3213,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3188,7 +3229,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3364,7 +3405,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3380,7 +3421,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3396,7 +3437,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3428,7 +3469,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3444,7 +3485,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3620,7 +3661,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3636,7 +3677,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3652,7 +3693,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3684,7 +3725,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3700,7 +3741,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3876,7 +3917,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3892,7 +3933,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3908,7 +3949,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3940,7 +3981,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -3956,7 +3997,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4132,7 +4173,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4148,7 +4189,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4164,7 +4205,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4196,7 +4237,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4212,7 +4253,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4388,7 +4429,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4404,7 +4445,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4420,7 +4461,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4452,7 +4493,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4468,7 +4509,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4644,7 +4685,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4660,7 +4701,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4676,7 +4717,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4708,7 +4749,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4724,7 +4765,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4900,7 +4941,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4916,7 +4957,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4932,7 +4973,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4964,7 +5005,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -4980,7 +5021,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5156,7 +5197,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5172,7 +5213,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5188,7 +5229,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5220,7 +5261,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5236,7 +5277,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5412,7 +5453,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5428,7 +5469,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5444,7 +5485,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5476,7 +5517,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5492,7 +5533,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5668,7 +5709,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5684,7 +5725,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5700,7 +5741,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5732,7 +5773,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5748,7 +5789,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5924,7 +5965,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5940,7 +5981,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5956,7 +5997,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -5988,7 +6029,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6004,7 +6045,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6180,7 +6221,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6196,7 +6237,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6212,7 +6253,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6244,7 +6285,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6260,7 +6301,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6436,7 +6477,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6452,7 +6493,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6468,7 +6509,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6500,7 +6541,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6516,7 +6557,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6692,7 +6733,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r1_bank_rn,
-  autogen_ocbi_at_rn,
+  autogen_ocbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6708,7 +6749,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r2_bank_rn,
-  autogen_ocbp_at_rn,
+  autogen_ocbp_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6724,7 +6765,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r3_bank_rn,
-  autogen_ocbwb_at_rn,
+  autogen_ocbwb_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6756,7 +6797,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r5_bank_rn,
-  autogen_prefi_at_rn,
+  autogen_prefi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -6772,7 +6813,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
   autogen_stc_r6_bank_rn,
-  autogen_icbi_at_rn,
+  autogen_icbi_rn,
   autogen_mov_b_rm_at_r0_rn,
   autogen_mov_w_rm_at_r0_rn,
   autogen_mov_l_rm_at_r0_rn,
@@ -19141,7 +19182,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -19397,7 +19438,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -19653,7 +19694,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -19909,7 +19950,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -20165,7 +20206,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -20421,7 +20462,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -20677,7 +20718,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -20933,7 +20974,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -21189,7 +21230,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -21445,7 +21486,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -21701,7 +21742,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -21957,7 +21998,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -22213,7 +22254,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -22469,7 +22510,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -22725,7 +22766,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -22981,7 +23022,7 @@ void (*instructionHandlers[65536])(u16) = {
   invalid,
   autogen_stc_l_sgr_at_minus_rn,
   autogen_stc_l_ssr_at_minus_rn,
-  invalid,
+  autogen_ldrc_rn,
   invalid,
   autogen_ldc_l_at_rm_plus_sgr,
   autogen_ldc_l_at_rm_plus_ssr,
@@ -38545,262 +38586,262 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_bf_jump8,
   autogen_bf_jump8,
   autogen_bf_jump8,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
+  autogen_ldrs_disp_pc,
   autogen_bt_s_jump8,
   autogen_bt_s_jump8,
   autogen_bt_s_jump8,
@@ -39057,262 +39098,262 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_bt_s_jump8,
   autogen_bt_s_jump8,
   autogen_bt_s_jump8,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
-  invalid,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
+  autogen_ldre_disp_pc,
   autogen_bf_s_jump8,
   autogen_bf_s_jump8,
   autogen_bf_s_jump8,

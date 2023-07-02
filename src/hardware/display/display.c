@@ -232,7 +232,7 @@ void expectSize(u32 size, u32 expected) {
 //   return false;
 // }
 
-u32 dispInterfaceRead(void) {
+u32 dispInterfaceRead(u32 addr, u32 size) {
   if (!(PRDR & 0x10)) {
     // Mode select, or something
     return mode;
@@ -272,7 +272,15 @@ u32 dispInterfaceRead(void) {
   }
 }
 
-void dispInterfaceWrite(u32 value) {
+void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
+  // printf("Write!\n");
+  // TODO: Is this valid for things other than pixel data?
+  if (size == 4) {
+    dispInterfaceWrite(addr, (value & 0xFFFF0000) >> 16, 2);
+    dispInterfaceWrite(addr, value & 0xFFFF, 2);
+    return;
+  }
+
   if (!(PRDR & 0x10)) {
     mode = value;
   } else {
@@ -297,6 +305,8 @@ void dispInterfaceWrite(u32 value) {
         break;
       case 0x202:
         pixels[ram_address_vertical][ram_address_horizontal] = value;
+        // printf("Set to %04x\n", value);
+        // printf("%d %d\n", ram_address_horizontal, ram_address_vertical);
 
         ram_address_horizontal++;
         if (ram_address_horizontal > horizontal_ram_end) {
@@ -308,6 +318,7 @@ void dispInterfaceWrite(u32 value) {
         }
         
         if (ram_address_horizontal == horizontal_ram_end && ram_address_vertical == vertical_ram_end) {
+          // printf("Update!");
           updateDisplay(&pixels[0][0]);
         }
         break;
@@ -319,6 +330,9 @@ void dispInterfaceWrite(u32 value) {
 }
 
 void initDisplay() {
-  defineReg("Port R data register", PRDR, 0xa405013c);
-  defineRegCB("Display Interface", dispInterfaceRead, dispInterfaceWrite, 0xb4000000, 2);
+  defineReg("Port R data", PRDR, 0xa405013c);
+  // TODO: Do 1 byte writes work? Here they will
+  // Also do reads, and writes of things that aren't pixel data, work too?
+  // TODO: Make this work in a range
+  defineRegCBUnsized("Display Interface", dispInterfaceRead, dispInterfaceWrite, 0xb4000000);
 }

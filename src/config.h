@@ -1,1 +1,2 @@
 // #define PRINT_INSTRUCTIONS
+// #define IGNORE_INVALID_ACCESS

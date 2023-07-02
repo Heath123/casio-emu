@@ -1,4 +1,6 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_keycode.h>
+#include <stdbool.h>
 #include <stdio.h>
 
 #include "../../int.h"
@@ -113,6 +115,22 @@ void updateDisplay(u16* vram) {
   // SDL_Delay(3000);
 }
 
+// TODO: This doesn't belong in the GUI code
+extern u16 KIUDATA[6];
+
+static void setKeydown(int basic_keycode, bool down) {
+  // printf("Key %d is now %s\n", basic_keycode, down ? "down" : "up");
+  i32 row = basic_keycode % 10;
+  i32 col = basic_keycode / 10 - 1;
+  i32 word = row >> 1;
+  i32 bit = col + 8 * (row & 1);
+  if (down) {
+    KIUDATA[word] |= 1 << bit;
+  } else {
+    KIUDATA[word] &= ~(1 << bit);
+  }
+}
+
 void handleEvents(void) {
   // Handle events
   SDL_Event event;
@@ -120,6 +138,101 @@ void handleEvents(void) {
     switch (event.type) {
       case SDL_QUIT:
         exit(0);
+        break;
+      // Window repaint
+      case SDL_WINDOWEVENT:
+        if (event.window.event == SDL_WINDOWEVENT_EXPOSED) {
+          SDL_RenderPresent(renderer);
+        }
+        break;
+      // Enter is assigned to EXE (key code 31)
+      case SDL_KEYDOWN:
+        if (event.key.repeat == 0) {
+          // Enter
+          if (event.key.keysym.sym == SDLK_RETURN) {
+            setKeydown(31, true);
+          }
+          // Up
+          else if (event.key.keysym.sym == SDLK_UP) {
+            setKeydown(28, true);
+          }
+          // Down
+          else if (event.key.keysym.sym == SDLK_DOWN) {
+            setKeydown(37, true);
+          }
+          // Left
+          else if (event.key.keysym.sym == SDLK_LEFT) {
+            setKeydown(38, true);
+          }
+          // Right
+          else if (event.key.keysym.sym == SDLK_RIGHT) {
+            setKeydown(27, true);
+          }
+          // 1
+          else if (event.key.keysym.sym == SDLK_1) {
+            setKeydown(72, true);
+          }
+          // +
+          else if (event.key.keysym.sym == SDLK_EQUALS) {
+            setKeydown(42, true);
+          }
+          // x
+          else if (event.key.keysym.sym == SDLK_x) {
+            setKeydown(76, true);
+          }
+          // Squared
+          else if (event.key.keysym.sym == SDLK_2) {
+            setKeydown(76, true);
+          }
+          // sin
+          else if (event.key.keysym.sym == SDLK_s) {
+            setKeydown(46, true);
+          }
+        }
+        break;
+      case SDL_KEYUP:
+        if (event.key.repeat == 0) {
+          // Enter
+          if (event.key.keysym.sym == SDLK_RETURN) {
+            setKeydown(31, false);
+          }
+          // Up
+          else if (event.key.keysym.sym == SDLK_UP) {
+            setKeydown(28, false);
+          }
+          // Down
+          else if (event.key.keysym.sym == SDLK_DOWN) {
+            setKeydown(37, false);
+          }
+          // Left
+          else if (event.key.keysym.sym == SDLK_LEFT) {
+            setKeydown(38, false);
+          }
+          // Right
+          else if (event.key.keysym.sym == SDLK_RIGHT) {
+            setKeydown(27, false);
+          }
+          // 1
+          else if (event.key.keysym.sym == SDLK_1) {
+            setKeydown(72, false);
+          }
+          // +
+          else if (event.key.keysym.sym == SDLK_EQUALS) {
+            setKeydown(42, false);
+          }
+          // x
+          else if (event.key.keysym.sym == SDLK_x) {
+            setKeydown(76, false);
+          }
+          // Squared
+          else if (event.key.keysym.sym == SDLK_2) {
+            setKeydown(76, false);
+          }
+          // sin
+          else if (event.key.keysym.sym == SDLK_s) {
+            setKeydown(46, false);
+          }
+        }
         break;
     }
   }

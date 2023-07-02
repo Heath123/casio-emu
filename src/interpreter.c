@@ -8,21 +8,32 @@
 #include "./memory/memory.h"
 #include "config.h"
 #include "gui/gui.h"
-#include "hardware/fake/fake.h"
+#include "hardware/timers/timers.h"
 #include "hardware/cpuRegisters/cpuRegisters.h"
 #include "hardware/tlb/tlb.h"
 #include "hardware/display/display.h"
+#include "hardware/keyboard/keyboard.h"
+#include "hardware/intc/intc.h"
+#include "hardware/dma/dma.h"
+#include "hardware/power/power.h"
+#include "interrupts.h"
 
-CpuState cpu;
+CpuState cpu = {0};
 
 void test(void);
+
+// bool trace = false;
 
 int main(int argc, char *argv[]) {
   initMemory();
   initCpuRegisters();
   initTlb();
-  initFake();
+  initTimers();
   initDisplay();
+  initKeyboard();
+  initIntc();
+  initDma();
+  initPower();
   initGui();
 
   cpu.isBranchDelaySlot = false;
@@ -35,12 +46,53 @@ int main(int argc, char *argv[]) {
   cpu.reg.PR = 0xffffffff;
   cpu.reg.r15 = 0x8c080000; // Stack pointer, at the top of user memory
   unsigned int iterations = 0;
-  while (cpu.reg.PC != 0xffffffff) {
+  while (true) {
     iterations++;
     if (iterations % 2048 == 0) {
       handleEvents();
     }
 
+    // if (trace) {
+      // printf("PC: %08x\n", cpu.reg.PC);
+    //   printf("RS: %08x, RE: %08x, RC: %08x\n", cpu.reg.RS, cpu.reg.RE, cpu.reg.RC);
+    // }
+    // printf("r0: %08X, r1: %08X, r2: %08X, r3: %08X, r4: %08X, r5: %08X, r6: %08X, r7: %08X, r8: %08X,\n", cpu.reg.r0, cpu.reg.r1, cpu.reg.r2, cpu.reg.r3, cpu.reg.r4, cpu.reg.r5, cpu.reg.r6, cpu.reg.r7, cpu.reg.r8);
+    // printf("r9: %08X, r10: %08X, r11: %08X, r12: %08X, r13: %08X, r14: %08X, r15: %08X, PR: %08X, T: %d, SR: %08X\n", cpu.reg.r9, cpu.reg.r10, cpu.reg.r11, cpu.reg.r12, cpu.reg.r13, cpu.reg.r14, cpu.reg.r15, cpu.reg.PR, cpu.reg.SR_parts.T, cpu.reg.SR);
+    if (iterations % 2048 * 2048 == 0 && !cpu.isSleeping) {
+      // if (cpu.reg.PC != 0x003641dc && cpu.reg.PC != 0x003641cc && cpu.reg.PC != 0x00364224 && cpu.reg.PC != 0x003641d8 && cpu.reg.PC != 0x003f879a && cpu.reg.PC != 0x003f20aa && cpu.reg.PC != 0x0036415e) {
+        printf("PC: %08x\n", cpu.reg.PC);
+      // }
+      
+      // Print the program counter
+    //   if (cpu.reg.PC == 0x0041c1a2) {
+    //     // Try to do a stack trace
+    //     // Print anything on the stack that looks like an address
+    //     printf("Stack: ");
+    //     u32 stackPointer = cpu.reg.r15;
+    //     while (stackPointer < 0x8C1DFFFF) {
+    //       u32 thing = readMemory(stackPointer, 4);
+    //       if (thing > 0x00300000 && thing < 0x00500000) {
+    //         printf("%08x ", thing);
+    //       }
+    //       stackPointer += 4;
+    //     }
+    //     printf("\n");
+    //     exit(1);
+    //   }
+    }
+
+    updateTimers();
+
+    // TODO: How do interrupts act on branch delay slots?
+    if (cpu.interruptPending && !cpu.isBranchDelaySlot) {
+      cpu.interruptPending = false;
+      handleInterrupt(cpu.interruptCode, cpu.interruptVector, cpu.interruptIsException);
+    }
+
+    // if (cpu.isSleeping) {
+    //   cpu.isSleeping = false;
+    //   generateIntcInterrupt();
+    // }
     if (cpu.isSleeping) continue;
 
     #ifdef PRINT_INSTRUCTIONS
@@ -64,7 +116,7 @@ int main(int argc, char *argv[]) {
           printf("%c", readMemory(addr, 1));
           addr++;
         }
-        printf("\n");
+        // printf("\n");
       }
       // Set PC to PR (return)
       cpu.reg.PC = cpu.reg.PR;
@@ -133,9 +185,22 @@ int main(int argc, char *argv[]) {
     #ifdef PRINT_INSTRUCTIONS
     printf("%x: ", cpu.reg.PC);
     #endif
+
+    // TODO: Instead of doing this should we just wrap all writes to SR?
+    bool prevBank = cpu.reg.SR_parts.RB;
+
     cpu.reg.PC += 4;
     runInstr(instr);
     cpu.reg.PC -= 2;
+
+    if (cpu.reg.SR_parts.RB != prevBank) {
+      // Switch to the new bank
+      for (int i = 0; i < 8; i++) {
+        u32 temp = cpu.reg.regArray[i];
+        cpu.reg.regArray[i] = cpu.reg.regArray[i + 16];
+        cpu.reg.regArray[i + 16] = temp;
+      }
+    }
 
     #ifdef PRINT_INSTRUCTIONS
     printf("r0: %08X, r1: %08X, r2: %08X, r3: %08X, r4: %08X, r5: %08X, r6: %08X, r7: %08X, r8: %08X,\n", cpu.reg.r0, cpu.reg.r1, cpu.reg.r2, cpu.reg.r3, cpu.reg.r4, cpu.reg.r5, cpu.reg.r6, cpu.reg.r7, cpu.reg.r8);
@@ -145,6 +210,14 @@ int main(int argc, char *argv[]) {
     if (cpu.branchDelayDone) {
       cpu.reg.PC = cpu.branchTarget;
       cpu.branchDelayDone = false;
+    }
+
+    // DSP repeat control
+    // If we just finished executing the end instruction, jump to the start instruction and decrement the counter
+    if (cpu.reg.PC - 2 == cpu.reg.RE && cpu.reg.RC > 1) {
+      // printf("JUMP BACK!\n");
+      cpu.reg.PC = cpu.reg.RS;
+      cpu.reg.RC--;
     }
   }
   

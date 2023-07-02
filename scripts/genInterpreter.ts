@@ -103,7 +103,16 @@ function genRead(sourceOperandName: string, sourceOperand: Operand, varName: str
         code += `${varName} = s_ext(${varName}, ${sourceOperand.indirectSize * 8});\n`
       }
     } else {
-      code += `u32 ${varName} = cpu.reg.regArray[${sourceOperandName}];\n`
+      code += `u32 ${varName} = cpu.reg.regArray[${sourceOperandName}]`;
+      if (sourceOperand.offsetBy) {
+        let offsetBy = sourceOperand.offsetBy === 'r0' ? 'cpu.reg.regArray[0]' : sourceOperand.offsetBy
+        if (offsetBy === 'disp') {
+          code += ` + (${offsetBy} * ${sourceOperand.indirectSize})`
+        } else {
+          code += ` + (${offsetBy})`
+        }
+      }
+      code += `;\n`
     }
   } else if (sourceOperand.type === 'immediate') {
     if (isConstant(sourceOperand)) {

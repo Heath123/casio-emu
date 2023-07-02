@@ -19,7 +19,7 @@ void delayedBranch(u32 target) {
 }
 
 void invalid(u16 instr) {
-  printf("Invalid instruction: %04x\n", instr);
+  printf("Invalid instruction: %04x at %08x\n", instr, cpu.reg.PC - 4);
   exit(1);
 }
 
@@ -59,8 +59,14 @@ u32 nop(u16 instr, u32 src, u32 dst) {
 }
 
 u32 rte(u16 instr, u32 src, u32 dst) {
-  printf("rte: not implemented\n");
-  exit(1);
+  cpu.reg.SR = cpu.reg.SSR;
+  // printf("RTE to %08X\n", cpu.reg.SPC);
+  delayedBranch(cpu.reg.SPC);
+
+  // printf("r0: %08X, r1: %08X, r2: %08X, r3: %08X, r4: %08X, r5: %08X, r6: %08X, r7: %08X, r8: %08X,\n", cpu.reg.r0, cpu.reg.r1, cpu.reg.r2, cpu.reg.r3, cpu.reg.r4, cpu.reg.r5, cpu.reg.r6, cpu.reg.r7, cpu.reg.r8);
+  // printf("r9: %08X, r10: %08X, r11: %08X, r12: %08X, r13: %08X, r14: %08X, r15: %08X, PR: %08X, T: %d, SR: %08X\n", cpu.reg.r9, cpu.reg.r10, cpu.reg.r11, cpu.reg.r12, cpu.reg.r13, cpu.reg.r14, cpu.reg.r15, cpu.reg.PR, cpu.reg.SR_parts.T, cpu.reg.SR);
+
+
   return dst;
 }
 
@@ -347,8 +353,20 @@ u32 cmp_gt(u16 instr, u32 src, u32 dst) {
 }
 
 u32 cmp_str(u16 instr, u32 src, u32 dst) {
-  printf("cmp_str: not implemented\n");
-  exit(1);
+  u32 temp;
+  i32 HH, HL, LH, LL;
+  temp = dst ^ src;
+  HH = (temp & 0xFF000000) >> 24;
+  HL = (temp & 0x00FF0000) >> 16;
+  LH = (temp & 0x0000FF00) >> 8;
+  LL = temp & 0x000000FF;
+  HH = HH && HL && LH && LL;
+  if (HH == 0) {
+    cpu.reg.SR_parts.T = 1;
+  } else {
+    cpu.reg.SR_parts.T = 0;
+  }
+
   return dst;
 }
 
@@ -541,8 +559,8 @@ u32 mul(u16 instr, u32 src, u32 dst) {
 }
 
 u32 muls(u16 instr, u32 src, u32 dst) {
-  printf("muls: not implemented\n");
-  exit(1);
+  cpu.reg.MACL = ((i32)(i16)dst * (i32)(i16)src);
+
   return dst;
 }
 
@@ -738,8 +756,8 @@ u32 braf(u16 instr, u32 src, u32 dst) {
 }
 
 u32 bsrf(u16 instr, u32 src, u32 dst) {
-  printf("bsrf: not implemented\n");
-  exit(1);
+  cpu.reg.PR = cpu.reg.PC;
+  delayedBranch((cpu.reg.PC - 4) + src + 4);
   return dst;
 }
 
@@ -824,8 +842,9 @@ u32 ocbi(u16 instr, u32 src, u32 dst) {
 }
 
 u32 ocbp(u16 instr, u32 src, u32 dst) {
-  printf("ocbp: not implemented\n");
-  exit(1);
+  // nop
+  // TODO: implement if/when cache is implemented
+
   return dst;
 }
 
@@ -845,6 +864,26 @@ u32 synco(u16 instr, u32 src, u32 dst) {
   // nop
   // Probably not relevant unless we become cycle accurate
   return dst;
+}
+
+u32 ldrs(u16 instr, u32 src, u32 dst) {
+  // printf("ldrs: %08x\n", src);
+  return src;
+}
+
+u32 ldre(u16 instr, u32 src, u32 dst) {
+  // printf("ldre: %08x\n", src);
+  return src;
+}
+
+extern bool trace;
+
+u32 ldrc(u16 instr, u32 src, u32 dst) {
+  // printf("ldrc: %08x\n", src);
+  // printf("At %08x\n", cpu.reg.PC - 4);
+  // exit(1);
+  // trace = 1;
+  return src;
 }
 
 #include "generated_instructions.h"

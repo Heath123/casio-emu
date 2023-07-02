@@ -4,12 +4,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <endian.h>
+#include <execinfo.h>
 
 #include "../int.h"
 #include "specialAddrs.h"
 #include "../cpu.h"
 #include "../interrupts.h"
 #include "../hardware/display/display.h"
+#include "../config.h"
 
 extern CpuState cpu;
 
@@ -29,7 +31,8 @@ void createMemArea(void* hostMem, u32 start, u32 end) {
 }
 
 void* allocMemArea(u32 start, u32 end) {
-  void* hostMem = calloc(end - start, 1);
+  void* hostMem = malloc(end - start);
+  memset(hostMem, 0x55, end - start);
   createMemArea(hostMem, start, end);
   return hostMem;
 }
@@ -43,7 +46,7 @@ void createAlias(u32 start, u32 end, u32 alias) {
 void initMemory(void) {
   // memory = calloc(0xffffffff, sizeof(u8));
 
-  FILE *f = fopen("/home/heath/calc-emu-2/calc-emu-test/MyAddin.g3a", "rb");
+  FILE *f = fopen("/home/heath/graph/FastGraph.g3a", "rb");
   if (f == NULL) {
     printf("Error opening file\n");
     exit(1);
@@ -81,6 +84,11 @@ void initMemory(void) {
 
   // 4KB of ILRAM at e5200000
   allocMemArea(0xe5200000, 0xe5200000 + 0x1000);
+
+  // There is a 64k page at NULL
+  // TODO: Make this read only and mapped to the right physical address
+  // TODO: Have a way to catch null pointer errors for debugging
+  allocMemArea(0, 0x10000);
 }
 
 // Some ways of handling the endianness difference are described here:
@@ -89,9 +97,11 @@ void initMemory(void) {
 // addressing is faster but I might need to test it
 
 u32 readMemory(u32 address, u32 size) {
+  // printf("Size: %d\n", size);
   // Check for unaligned access
   if (address % size != 0) {
-    printf("Unaligned memory access at %08x, PC = %08x\n", address, cpu.reg.PC);
+    printf("Unaligned memory read at %08x, PC = %08x\n", address, cpu.reg.PC);
+    *((volatile u32* ) 1);
     exit(1);
   }
 
@@ -115,10 +125,17 @@ u32 readMemory(u32 address, u32 size) {
       return value;
     }
 
+    // TODO: Use the interrupt controller here?
     printf("Invalid memory read at %08x, PC = %08x\n", address, cpu.reg.PC);
     // exit(1);
+    #ifdef IGNORE_INVALID_ACCESS
+    if (address < 0x80000000) {
+    #endif
     cpu.reg.TEA = address;
-    raiseInterrupt(0x040, cpu.reg.VBR + 0x100);
+    raiseInterrupt(0x040, cpu.reg.VBR + 0x100, true);
+    #ifdef IGNORE_INVALID_ACCESS
+    }
+    #endif
     return 0;
   }
 
@@ -143,9 +160,10 @@ u32 readMemory(u32 address, u32 size) {
 }
 
 void writeMemory(u32 address, u32 size, u32 value) {
+  // printf("Size: %d\n", size);
   // Check for unaligned access
   if (address % size != 0) {
-    printf("Unaligned memory access at %08x\n", address);
+    printf("Unaligned memory write at %08x\n", address);
     exit(1);
   }
 
@@ -180,8 +198,31 @@ void writeMemory(u32 address, u32 size, u32 value) {
     }
 
     printf("Invalid memory write at %08x, PC = %08x\n", address, cpu.reg.PC);
+    // Scan the stack for things that look like addresses
+    // This creates a very rough stack trace
+    for (int i = 0; i < 0x800; i += 4) {
+      u32 val = readMemory(cpu.reg.r15 + i, 4);
+      if (val >= 0x00300000 && val < 0x00400000) {
+        printf("Stack trace: %08x\n", val);
+      }
+    }
+    // Also print a backtrace of the emulator C code
+    // void* backtrace_buffer[100];
+    // int backtrace_size = backtrace(backtrace_buffer, 100);
+    // backtrace_symbols_fd(backtrace_buffer, backtrace_size, 2);
+
+    // That didn't work like I wanted, just segfault so I can get a core dump
+    // Let's dereference 0x1 (a null pointer could be optimized out)
+    *(u32*)0x1 = 0;
+
+    #ifdef IGNORE_INVALID_ACCESS
+    if (address < 0x80000000) {
+    #endif
     cpu.reg.TEA = address;
-    raiseInterrupt(0x040, cpu.reg.VBR + 0x100);
+    raiseInterrupt(0x040, cpu.reg.VBR + 0x100, true);
+    #ifdef IGNORE_INVALID_ACCESS
+    }
+    #endif
     // exit(1);
     return;
   }

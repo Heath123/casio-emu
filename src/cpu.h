@@ -25,7 +25,7 @@ struct SR_parts {
 
 typedef struct {
   union {
-    u32 regArray[16 + 8 + 14];
+    u32 regArray[16 + 8 + 17];
     struct {
       u32 r0;
       u32 r1;
@@ -73,6 +73,11 @@ typedef struct {
       // Exceptions/interrupts
       u32 EXPEVT;
       u32 TRA;
+
+      // DSP repeat control
+      u32 RS;
+      u32 RE;
+      u32 RC;
     };
   };
 } CpuRegisters;
@@ -83,6 +88,11 @@ typedef struct CpuState {
   bool isBranchDelaySlot;
   bool branchDelayDone;
   u32 branchTarget;
+
+  bool interruptPending;
+  u32 interruptVector;
+  u32 interruptCode;
+  bool interruptIsException;
 
   bool isSleeping;
 } CpuState;

@@ -64,38 +64,47 @@ extern CpuState cpu;
     // case 0xa4490004:
     //   return readTimers(realAddress, value, size);
 
-void nopWrite(u32 val) {}
+void nopWrite(u32 addr, u32 val) {}
 
-u32 pvrRead(void) {
+u32 nopRead(u32 addr) {
+  return 0;
+}
+
+void nopWriteUnsized(u32 addr, u32 val, u32 size) {}
+
+u32 nopReadUnsized(u32 addr, u32 size) {
+  return 0;
+}
+
+u32 pvrRead(u32 addr) {
   return 0x10300b00;
 }
 
-u32 prRead(void) {
+u32 prRead(u32 addr) {
   return 0x00002c00;
 }
 
 // TODO: Put this in the CPU struct?
 u32 CpuOPM = 0x00a7ffd0;
 
-u16 IPR[12] = {0};
-u8 IMR[13] = {0};
-
 // TODO
 u32 PASCR = 0x00000082;
 u32 IRMCR = 0x00000000;
 
 void initCpuRegisters(void) {
-  defineRegCB("Processor Version Register", pvrRead, nopWrite, 0xff000030, 4);
-  defineRegCB("Product Register", prRead, nopWrite, 0xff000044, 4);
-  defineReg("CPU Operation Mode Register", CpuOPM, 0xff2f0000);
-  defineReg("TLB Exception Address Register", cpu.reg.TEA, 0xff00000c);
-  defineReg("TRAPA Exception Register", cpu.reg.TRA, 0xff000020);
-  defineReg("Exception Event Register", cpu.reg.EXPEVT, 0xff000024);
+  defineRegCB("Processor Version", pvrRead, nopWrite, 0xff000030, 4);
+  defineRegCB("Product", prRead, nopWrite, 0xff000044, 4);
+  defineReg("CPU Operation Mode", CpuOPM, 0xff2f0000);
+  defineReg("TLB Exception Address", cpu.reg.TEA, 0xff00000c);
+  defineReg("TRAPA Exception", cpu.reg.TRA, 0xff000020);
+  defineReg("Exception Event", cpu.reg.EXPEVT, 0xff000024);
 
-  // TODO: Move this to an interrupt controller source file
-  defineRegArray("Interrupt priority registers", IPR, 0xa4080000, 12, 2);
-  defineRegArray("Interrupt mask registers", IMR, 0xa4080080, 13, 3);
+  defineReg("Physical Address Space Control", PASCR, 0xff000070);
+  defineReg("Instruction Re-Fetch Inhibit Control", IRMCR, 0xff000078);
 
-  defineReg("Physical Address Space Control Register", PASCR, 0xff000070);
-  defineReg("Instruction Re-Fetch Inhibit Control Register", IRMCR, 0xff000078);
+  // TODO: Make these do something, or at least return a sensible value
+  u32 clockSpeedRelated[] = {0xa4150000, 0xa4150024, 0xa4150044, 0xa4150050, 0xa4150060, 0xfec10004, 0xfec10008, 0xfec1000c, 0xfec10014, 0xfec10024, 0xfec10028, 0xfec1002c, 0xfec10034};
+  for (int i = 0; i < 12; i++) {
+    defineRegCBUnsized("Clock speed related", nopReadUnsized, nopWriteUnsized, clockSpeedRelated[i]);
+  }
 }

@@ -6866,7 +6866,7 @@
           "1111"
         ],
         "shift": 0,
-        "signed": true
+        "signed": false
       },
       "r0": {
         "type": "register",
@@ -7120,7 +7120,7 @@
   },
   {
     "id": 193,
-    "name": "icbi @rn",
+    "name": "icbi rn",
     "family": "icbi",
     "formatString": "TODO",
     "opcode": [
@@ -7140,8 +7140,7 @@
           "0000"
         ],
         "shift": 8,
-        "indirect": true,
-        "indirectSize": 4,
+        "indirect": false,
         "preDecrement": false,
         "postIncrement": false
       }
@@ -7151,7 +7150,7 @@
   },
   {
     "id": 194,
-    "name": "ocbi @rn",
+    "name": "ocbi rn",
     "family": "ocbi",
     "formatString": "TODO",
     "opcode": [
@@ -7171,8 +7170,7 @@
           "0000"
         ],
         "shift": 8,
-        "indirect": true,
-        "indirectSize": 4,
+        "indirect": false,
         "preDecrement": false,
         "postIncrement": false
       }
@@ -7182,7 +7180,7 @@
   },
   {
     "id": 195,
-    "name": "ocbp @rn",
+    "name": "ocbp rn",
     "family": "ocbp",
     "formatString": "TODO",
     "opcode": [
@@ -7202,8 +7200,7 @@
           "0000"
         ],
         "shift": 8,
-        "indirect": true,
-        "indirectSize": 4,
+        "indirect": false,
         "preDecrement": false,
         "postIncrement": false
       }
@@ -7213,7 +7210,7 @@
   },
   {
     "id": 196,
-    "name": "ocbwb @rn",
+    "name": "ocbwb rn",
     "family": "ocbwb",
     "formatString": "TODO",
     "opcode": [
@@ -7233,8 +7230,7 @@
           "0000"
         ],
         "shift": 8,
-        "indirect": true,
-        "indirectSize": 4,
+        "indirect": false,
         "preDecrement": false,
         "postIncrement": false
       }
@@ -7244,7 +7240,7 @@
   },
   {
     "id": 197,
-    "name": "prefi @rn",
+    "name": "prefi rn",
     "family": "prefi",
     "formatString": "TODO",
     "opcode": [
@@ -7264,7 +7260,7 @@
           "0000"
         ],
         "shift": 8,
-        "indirect": true,
+        "indirect": false,
         "indirectSize": 4,
         "preDecrement": false,
         "postIncrement": false
@@ -7567,6 +7563,123 @@
         "indirectSize": 4,
         "preDecrement": true,
         "postIncrement": false
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 207,
+    "name": "ldrs (disp,pc)",
+    "family": "ldrs",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "1100",
+      null,
+      null
+    ],
+    "operands": {
+      "pc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 24,
+        "indirect": false,
+        "indirectSize": 2,
+        "offsetBy": "disp"
+      },
+      "rs": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 38
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 208,
+    "name": "ldre (disp,pc)",
+    "family": "ldre",
+    "formatString": "TODO",
+    "opcode": [
+      "1000",
+      "1110",
+      null,
+      null
+    ],
+    "operands": {
+      "pc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 24,
+        "indirect": false,
+        "indirectSize": 2,
+        "offsetBy": "disp"
+      },
+      "re": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 39
+      },
+      "disp": {
+        "type": "immediate",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "0000",
+          "1111",
+          "1111"
+        ],
+        "shift": 0,
+        "signed": true
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
+  },
+  {
+    "id": 209,
+    "name": "ldrc rn",
+    "family": "ldrc",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "0011",
+      "0100"
+    ],
+    "operands": {
+      "n": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "rc": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 40
       }
     },
     "delaySlotVariant": false,
