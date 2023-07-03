@@ -85,6 +85,13 @@ void initMemory(char* filename) {
   // 4KB of ILRAM at e5200000
   allocMemArea(0xe5200000, 0xe5200000 + 0x1000);
 
+  // // 8KB XRAM at e5007000
+  // allocMemArea(0xe5007000, 0xe5007000 + 0x2000);
+
+  // TODO: This is wrong! But should work for gint
+  // 16KB XYRAM at 0xe500e000
+  allocMemArea(0xe500e000, 0xe500e000 + 0x4000);
+
   // There is a 64k page at NULL
   // TODO: Make this read only and mapped to the right physical address
   // TODO: Have a way to catch null pointer errors for debugging

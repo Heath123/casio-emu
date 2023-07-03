@@ -13,6 +13,7 @@ set(SOURCES
   src/hardware/power/power.c
   src/hardware/timers/timers.c
   src/hardware/tlb/tlb.c
+  src/hardware/rtc/rtc.c
   src/memory/memory.c
   src/memory/specialAddrs.c
 
