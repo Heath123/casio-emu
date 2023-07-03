@@ -1,6 +1,13 @@
 # casio-emu
 
-A work-in-porgress emulator for the Casio CG50 calculator. It currently runs many add-ins created with [gint](https://gitea.planet-casio.com/Lephenixnoir/gint) quite well, but with no framelimit yet. Add-ins that use the USB driver will not boot and the code is quite messy and inaccurate sometimes.
+A work-in-porgress emulator for the Casio CG50 calculator. It currently runs many add-ins created with [gint](https://gitea.planet-casio.com/Lephenixnoir/gint) quite well.
+
+## Limitations
+- There is no framelimiter yet
+- This does not attempt to emulate syscalls or the OS yet, so PrizmSDK add-ins will not work
+- The key mappings are fixed and very limited (just enough so I can test things)
+- Add-ins that use the USB driver will not boot
+- The code is quite messy and inaccurate sometimes.
 
 ## Buildng
 
