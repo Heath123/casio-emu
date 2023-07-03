@@ -19,6 +19,37 @@ void delayedBranch(u32 target) {
 }
 
 void invalid(u16 instr) {
+  // TODO: Remove these special cases
+  // Currently I'm not sure if the normal instruction decoding can handle these anyway
+  int registerMap[4] = {4, 5, 2, 3};
+  // 111101AADDDD1000 -> movs.w @As+, Ds
+  if ((instr & 0b1111110000001111) == 0b1111010000001000) {
+    int a = (instr & 0b0000001100000000) >> 8;
+    a = registerMap[a];
+    int d = (instr & 0b0000000011110000) >> 4;
+    // printf("a = %d, d = %d\n", a, d);
+    if (d == 8) {
+      cpu.reg.x0 = readMemory(cpu.reg.regArray[a], 2);
+      cpu.reg.regArray[a] += 2;
+      return;
+    } else {
+      printf("Non x0 destination not yet supported\n");
+    }
+  }
+  // 111101AADDDD1001 -> movs.w Ds, @As+
+  if ((instr & 0b1111110000001111) == 0b1111010000001001) {
+    int a = (instr & 0b0000001100000000) >> 8;
+    a = registerMap[a];
+    int d = (instr & 0b0000000011110000) >> 4;
+    // printf("a = %d, d = %d\n", a, d);
+    if (d == 8) {
+      writeMemory(cpu.reg.regArray[a], 2, cpu.reg.x0);
+      cpu.reg.regArray[a] += 2;
+      return;
+    } else {
+      printf("Non x0 destination not yet supported\n");
+    }
+  }
   printf("Invalid instruction: %04x at %08x\n", instr, cpu.reg.PC - 4);
   exit(1);
 }

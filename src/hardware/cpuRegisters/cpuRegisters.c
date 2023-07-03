@@ -103,8 +103,8 @@ void initCpuRegisters(void) {
   defineReg("Instruction Re-Fetch Inhibit Control", IRMCR, 0xff000078);
 
   // TODO: Make these do something, or at least return a sensible value
-  u32 clockSpeedRelated[] = {0xa4150000, 0xa4150024, 0xa4150044, 0xa4150050, 0xa4150060, 0xfec10004, 0xfec10008, 0xfec1000c, 0xfec10014, 0xfec10024, 0xfec10028, 0xfec1002c, 0xfec10034};
-  for (int i = 0; i < 12; i++) {
+  u32 clockSpeedRelated[] = {0xa4150000, 0xa4150024, 0xa4150044, 0xa4150050, 0xa4150060, 0xfec10004, 0xfec10008, 0xfec1000c, 0xfec10014, 0xfec10024, 0xfec10028, 0xfec1002c, 0xfec10034, 0xfec15060};
+  for (int i = 0; i < 14; i++) {
     defineRegCBUnsized("Clock speed related", nopReadUnsized, nopWriteUnsized, clockSpeedRelated[i]);
   }
 }

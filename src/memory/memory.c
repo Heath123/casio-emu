@@ -46,7 +46,7 @@ void createAlias(u32 start, u32 end, u32 alias) {
 void initMemory(void) {
   // memory = calloc(0xffffffff, sizeof(u8));
 
-  FILE *f = fopen("/home/heath/graph/FastGraph.g3a", "rb");
+  FILE *f = fopen("/home/heath/mk-gint/MarioKart.g3a", "rb");
   if (f == NULL) {
     printf("Error opening file\n");
     exit(1);

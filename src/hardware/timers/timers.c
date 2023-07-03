@@ -118,7 +118,7 @@ u32 tmu_event[9] = {0x400, 0x420, 0x440, 0x9e0, 0xc20, 0xc40, 0x900, 0xd00, 0xfa
 u32 prescaler[8] = {4, 16, 64, 256, 0, 0, 0, 0};
 
 void updateTimers(void) {
-  if (count % (16384) == 0) {
+  if (count % 2048 == 0) {
     // TODO: Better value for this
 
     for (int i = 0; i < 9; i++) {

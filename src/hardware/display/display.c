@@ -292,10 +292,14 @@ void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
         ram_address_vertical = value;
         break;
       case 0x210:
-        horizontal_ram_start = value;
+        // horizontal_ram_start = value;
+        // printf("start: %d\n", value);
+        horizontal_ram_end = 395 - value;
         break;
       case 0x211:
-        horizontal_ram_end = value;
+        // horizontal_ram_end = value;
+        // printf("end: %d\n", value);
+        horizontal_ram_start = 395 - value;
         break;
       case 0x212:
         vertical_ram_start = value;
@@ -304,20 +308,22 @@ void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
         vertical_ram_end = value;
         break;
       case 0x202:
-        pixels[ram_address_vertical][ram_address_horizontal] = value;
+        pixels[ram_address_vertical + vertical_ram_start][ram_address_horizontal + horizontal_ram_start] = value;
         // printf("Set to %04x\n", value);
         // printf("%d %d\n", ram_address_horizontal, ram_address_vertical);
 
         ram_address_horizontal++;
-        if (ram_address_horizontal > horizontal_ram_end) {
-          ram_address_horizontal = horizontal_ram_start;
+        if (ram_address_horizontal > (horizontal_ram_end - horizontal_ram_start)) {
+          ram_address_horizontal = 0;
           ram_address_vertical++;
-          if (ram_address_vertical > vertical_ram_end) {
-            ram_address_vertical = vertical_ram_start;
+          if (ram_address_vertical > (vertical_ram_end - vertical_ram_start)) {
+            ram_address_vertical = 0;
           }
         }
         
-        if (ram_address_horizontal == horizontal_ram_end && ram_address_vertical == vertical_ram_end) {
+        static int count = 1;
+        // count += 1;
+        if ((ram_address_horizontal == (horizontal_ram_end - horizontal_ram_start) && ram_address_vertical == (vertical_ram_end - vertical_ram_start)) || (count % 2048) == 0) {
           // printf("Update!");
           updateDisplay(&pixels[0][0]);
         }

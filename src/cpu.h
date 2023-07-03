@@ -25,7 +25,7 @@ struct SR_parts {
 
 typedef struct {
   union {
-    u32 regArray[16 + 8 + 17];
+    u32 regArray[16 + 8 + 18];
     struct {
       u32 r0;
       u32 r1;
@@ -78,6 +78,9 @@ typedef struct {
       u32 RS;
       u32 RE;
       u32 RC;
+
+      // DSP
+      u32 x0;
     };
   };
 } CpuRegisters;

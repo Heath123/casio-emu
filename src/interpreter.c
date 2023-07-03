@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
     // printf("r9: %08X, r10: %08X, r11: %08X, r12: %08X, r13: %08X, r14: %08X, r15: %08X, PR: %08X, T: %d, SR: %08X\n", cpu.reg.r9, cpu.reg.r10, cpu.reg.r11, cpu.reg.r12, cpu.reg.r13, cpu.reg.r14, cpu.reg.r15, cpu.reg.PR, cpu.reg.SR_parts.T, cpu.reg.SR);
     if (iterations % 2048 * 2048 == 0 && !cpu.isSleeping) {
       // if (cpu.reg.PC != 0x003641dc && cpu.reg.PC != 0x003641cc && cpu.reg.PC != 0x00364224 && cpu.reg.PC != 0x003641d8 && cpu.reg.PC != 0x003f879a && cpu.reg.PC != 0x003f20aa && cpu.reg.PC != 0x0036415e) {
-        printf("PC: %08x\n", cpu.reg.PC);
+        // printf("PC: %08x\n", cpu.reg.PC);
       // }
       
       // Print the program counter
@@ -151,34 +151,36 @@ int main(int argc, char *argv[]) {
       // Set PC to PR (return)
       cpu.reg.PC = cpu.reg.PR;
     }
-    if (cpu.reg.PC == 0x80010070) {
+    if (cpu.reg.PC == 0x80020070) {
       #ifdef PRINT_INSTRUCTIONS
       printf("Syscall table call! r0 = %d\n", cpu.reg.r0);
       #endif
-      switch (cpu.reg.r0) {
-        case 0x808: {
-          // Print
-          // Read until we hit a null byte
-          u32 addr = cpu.reg.r4;
-          while (readMemory(addr, 1) != 0) {
-            printf("%c", readMemory(addr, 1));
-            addr++;
-          }
-          break;
-        }
-        case 0x807: {
-          // Locate - just treat it as a newline
-          printf("\n");
-          break;
-        }
-        default: {
-          printf("Unknown syscall %d\n", cpu.reg.r0);
-          exit(1);
-          break;
-        }
-      }
+      // switch (cpu.reg.r0) {
+      //   case 0x808: {
+      //     // Print
+      //     // Read until we hit a null byte
+      //     u32 addr = cpu.reg.r4;
+      //     while (readMemory(addr, 1) != 0) {
+      //       printf("%c", readMemory(addr, 1));
+      //       addr++;
+      //     }
+      //     break;
+      //   }
+      //   case 0x807: {
+      //     // Locate - just treat it as a newline
+      //     printf("\n");
+      //     break;
+      //   }
+      //   default: {
+      //     printf("Unknown syscall %d\n", cpu.reg.r0);
+      //     exit(1);
+      //     break;
+      //   }
+      // }
+      printf("Syscalls not implemented\n");
+      exit(1);
       // Set PC to PR (return)
-      cpu.reg.PC = cpu.reg.PR;
+      // cpu.reg.PC = cpu.reg.PR;
     }
 
     u16 instr = readMemory(cpu.reg.PC, 2);

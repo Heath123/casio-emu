@@ -35,7 +35,6 @@ void addEntry(hwRegister* entry, u32 addr) {
 }
 
 hwRegister* getEntry(u32 addr) {
-  // printf("%08x\n", addr);
   u8* addrBytes = (u8*) &addr;
   hwRegister**** reg = hwRegisters[addrBytes[0]];
   if (reg == NULL) return NULL;

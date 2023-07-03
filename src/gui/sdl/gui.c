@@ -178,7 +178,9 @@ void handleEvents(void) {
           }
           // x
           else if (event.key.keysym.sym == SDLK_x) {
-            setKeydown(76, true);
+            // setKeydown(76, true);
+            // Changed to Shift
+            setKeydown(78, true);
           }
           // Squared
           else if (event.key.keysym.sym == SDLK_2) {
@@ -222,7 +224,9 @@ void handleEvents(void) {
           }
           // x
           else if (event.key.keysym.sym == SDLK_x) {
-            setKeydown(76, false);
+            // setKeydown(76, false);
+            // Changed to Shift
+            setKeydown(78, false);
           }
           // Squared
           else if (event.key.keysym.sym == SDLK_2) {
