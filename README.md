@@ -25,4 +25,4 @@ make
 ![image](https://github.com/Heath123/casio-emu/assets/13787163/4eaf91d2-390c-4a67-932f-de5355747d50)
 ![image](https://github.com/Heath123/casio-emu/assets/13787163/d8d9a167-6cfa-4118-8d86-d8726d83020c)
 ![image](https://github.com/Heath123/casio-emu/assets/13787163/a40bcb45-8c40-4c8d-8934-732fe8ad300e)
-![image](https://github.com/Heath123/casio-emu/assets/13787163/27e53509-baeb-4394-9dc9-b181c1e18725)
+![image](https://github.com/Heath123/casio-emu/assets/13787163/1c423c2e-020c-4871-ac53-88ef4497fcb3)
