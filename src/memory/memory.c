@@ -43,10 +43,10 @@ void createAlias(u32 start, u32 end, u32 alias) {
   }
 }
 
-void initMemory(void) {
+void initMemory(char* filename) {
   // memory = calloc(0xffffffff, sizeof(u8));
 
-  FILE *f = fopen("/home/heath/mk-gint/MarioKart.g3a", "rb");
+  FILE *f = fopen(filename, "rb");
   if (f == NULL) {
     printf("Error opening file\n");
     exit(1);

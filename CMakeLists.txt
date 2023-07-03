@@ -5,7 +5,12 @@ set(SOURCES
   src/interpreter.c
   src/instructions.c
   src/interrupts.c
+  src/hardware/cpuRegisters/cpuRegisters.c
   src/hardware/display/display.c
+  src/hardware/dma/dma.c
+  src/hardware/intc/intc.c
+  src/hardware/keyboard/keyboard.c
+  src/hardware/power/power.c
   src/hardware/timers/timers.c
   src/hardware/tlb/tlb.c
   src/memory/memory.c

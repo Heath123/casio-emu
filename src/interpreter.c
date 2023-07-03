@@ -24,8 +24,13 @@ void test(void);
 
 // bool trace = false;
 
-int main(int argc, char *argv[]) {
-  initMemory();
+int main(int argc, char* argv[]) {
+  if (argc != 2) {
+    printf("Usage: %s <path to g3a>\n", argv[0]);
+    exit(1);
+  }
+
+  initMemory(argv[1]);
   initCpuRegisters();
   initTlb();
   initTimers();
