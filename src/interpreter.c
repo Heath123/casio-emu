@@ -16,6 +16,7 @@
 #include "hardware/intc/intc.h"
 #include "hardware/dma/dma.h"
 #include "hardware/power/power.h"
+#include "hardware/rtc/rtc.h"
 #include "interrupts.h"
 
 CpuState cpu = {0};
@@ -39,6 +40,7 @@ int main(int argc, char* argv[]) {
   initIntc();
   initDma();
   initPower();
+  initRtc();
   initGui();
 
   cpu.isBranchDelaySlot = false;
@@ -50,7 +52,7 @@ int main(int argc, char* argv[]) {
   // Return address
   cpu.reg.PR = 0xffffffff;
   cpu.reg.r15 = 0x8c080000; // Stack pointer, at the top of user memory
-  unsigned int iterations = 0;
+  u64 iterations = 0;
   while (true) {
     iterations++;
     if (iterations % 2048 == 0) {
@@ -87,6 +89,11 @@ int main(int argc, char* argv[]) {
     }
 
     updateTimers();
+    // TODO: Actually run this at 128Hz
+    if (iterations % ((u64) 2048 * 256) == 0) {
+      // printf("Update RTC\n");
+      updateRTC();
+    }
 
     // TODO: How do interrupts act on branch delay slots?
     if (cpu.interruptPending && !cpu.isBranchDelaySlot) {

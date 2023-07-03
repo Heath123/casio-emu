@@ -267,7 +267,8 @@ u32 dispInterfaceRead(u32 addr, u32 size) {
       }
       default:
         printf("Unimplemented read from display interface!\n");
-        exit(1);
+        printf("Mode: 0x%04x\n", mode);
+        // exit(1);
     }
   }
 }
