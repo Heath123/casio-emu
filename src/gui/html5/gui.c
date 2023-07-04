@@ -52,7 +52,7 @@ void updateDisplay(u16* vram) {
 // TODO: This doesn't belong in the GUI code
 extern u16 KIUDATA[6];
 
-static void setKeydown(int basic_keycode, bool down) {
+void setKeydown(int basic_keycode, bool down) {
   // printf("Key %d is now %s\n", basic_keycode, down ? "down" : "up");
   i32 row = basic_keycode % 10;
   i32 col = basic_keycode / 10 - 1;

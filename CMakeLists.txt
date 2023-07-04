@@ -26,9 +26,8 @@ if(EMSCRIPTEN)
   set(CMAKE_EXECUTABLE_SUFFIX ".html")
   add_executable(calcemu ${SOURCES})
   # -fsanitize=undefined on both
-  target_compile_options(calcemu PRIVATE -Wall -Wextra -Werror=implicit-function-declaration -Werror=incompatible-pointer-types -O3 -g -sSTACK_SIZE=1048576)
-  # target_link_options(calcemu PRIVATE --shell-file=../emscripten.html -g)
-  target_link_options(calcemu PRIVATE -sSTACK_SIZE=1048576 -sALLOW_MEMORY_GROWTH --embed-file=Addin.g3a)
+  target_compile_options(calcemu PRIVATE -Wall -Wextra -Werror=implicit-function-declaration -Werror=incompatible-pointer-types -O3 -flto -g -sSTACK_SIZE=1048576)
+  target_link_options(calcemu PRIVATE --shell-file=../src/gui/html5/gui.html -g -sSTACK_SIZE=1048576 -sALLOW_MEMORY_GROWTH -sEXPORTED_FUNCTIONS=_setKeydown,_main -sEXPORTED_RUNTIME_METHODS=ccall,cwrap --embed-file=Addin.g3a)
 else()
   set(SOURCES ${SOURCES}
     src/gui/sdl/gui.c

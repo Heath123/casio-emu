@@ -67,9 +67,14 @@ int main(int argc, char* argv[]) {
   cpu.reg.r15 = 0x8c080000; // Stack pointer, at the top of user memory
 
   runMainLoop(runFrame);
+  // runFrame(); runFrame(); runFrame(); runFrame();
+  // for (int i = 0; i < 90; i++) {
+  //   runFrame();
+  // }
 }
 
 u64 iterations = 0;
+u64 iterationsSleeping = 0;
 // u64 iterationsThisFrame = 0;
 
 void runFrame(void) {
@@ -88,8 +93,9 @@ void runFrame(void) {
 
     updateTimers();
     if (iterations % (ITERATIONS_PER_SEC / 128) == 0) {
-      // printf("Update RTC\n");
       updateRTC();
+      // printf("Slept for %lu iterations\n", iterationsSleeping);
+      // printf("Sleeping %f%% of the time\n", ((double) iterationsSleeping / iterations) * 100.0);
     }
 
     // TODO: How do interrupts act on branch delay slots?
@@ -99,7 +105,10 @@ void runFrame(void) {
     }
 
     // TODO: Efficient sleep
-    if (cpu.isSleeping) continue;
+    if (cpu.isSleeping) {
+      iterationsSleeping++;
+      continue;
+    }
 
     #ifdef PRINT_INSTRUCTIONS
     if (cpu.isBranchDelaySlot) {
