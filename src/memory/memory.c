@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <endian.h>
-#include <execinfo.h>
 
 #include "../int.h"
 #include "specialAddrs.h"
@@ -64,7 +63,7 @@ void initMemory(char* filename) {
   // Swap all the 4-byte longwords
   for (int i = 0; i < fsize; i += 4) {
     u32* word = (u32*) (hostMem + 0x20000 + i);
-    *word = __bswap_32(*word);
+    *word = __builtin_bswap32(*word);
   }
   fclose(f);
   // Alias at 0xa0000000 (P2)

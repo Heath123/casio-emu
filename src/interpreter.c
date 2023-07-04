@@ -4,7 +4,7 @@
 // #include <unistd.h>
 
 #include "cpu.h"
-#include "gui/sdl/gui.h"
+#include "gui/gui.h"
 #include "instructions.h"
 #include "./memory/memory.h"
 #include "config.h"
@@ -31,13 +31,20 @@ void test(void);
 #define ITERATIONS_PER_SEC ((u64) 2048 * 32768)
 #define ITERATIONS_PER_FRAME (ITERATIONS_PER_SEC / 60)
 
+void runFrame(void);
+
 int main(int argc, char* argv[]) {
+  #ifdef __EMSCRIPTEN__
+  initMemory("Addin.g3a");
+  #else
   if (argc != 2) {
     printf("Usage: %s <path to g3a>\n", argv[0]);
     exit(1);
   }
 
   initMemory(argv[1]);
+  #endif
+
   initCpuRegisters();
   initTlb();
   initTimers();
@@ -58,19 +65,26 @@ int main(int argc, char* argv[]) {
   // Return address
   cpu.reg.PR = 0xffffffff;
   cpu.reg.r15 = 0x8c080000; // Stack pointer, at the top of user memory
-  u64 iterations = 0;
-  u64 iterationsThisFrame = 0;
-  while (true) {
+
+  runMainLoop(runFrame);
+}
+
+u64 iterations = 0;
+// u64 iterationsThisFrame = 0;
+
+void runFrame(void) {
+  // while (iterations < (ITERATIONS_PER_SEC * 1)) {
+  for (int i = 0; i < ITERATIONS_PER_FRAME; i++) {
     iterations++;
-    iterationsThisFrame++;
-    if (iterations % 2048 == 0) {
-      handleEvents();
-    }
-    if (iterationsThisFrame >= ITERATIONS_PER_FRAME) {
-      // printf("Frame\n");
-      delayFrame();
-      iterationsThisFrame = 0;
-    }
+    // iterationsThisFrame++;
+    // if (iterations % 2048 == 0) {
+    //   handleEvents();
+    // }
+    // if (iterationsThisFrame >= ITERATIONS_PER_FRAME) {
+    //   // printf("Frame\n");
+    //   delayFrame();
+    //   iterationsThisFrame = 0;
+    // }
 
     updateTimers();
     if (iterations % (ITERATIONS_PER_SEC / 128) == 0) {
@@ -214,8 +228,4 @@ int main(int argc, char* argv[]) {
       cpu.reg.RC--;
     }
   }
-  
-  printf("Exit code: %d\n", cpu.reg.r0);
-
-  return 0;
 }

@@ -327,4 +327,12 @@ void delayFrame(void) {
     SDL_Delay(remainingTime);
   }
   lastTime = currentTime;
+  handleEvents();
+}
+
+void runMainLoop(void (*callback)(void)) {
+  while (true) {
+    callback();
+    delayFrame();
+  }
 }

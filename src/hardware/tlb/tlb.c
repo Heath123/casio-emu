@@ -1,4 +1,4 @@
-#include <gint/mpu/mmu.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -16,6 +16,7 @@ entry is specified by bits [13:8]. Bit [7] that is the association bit (A bit) i
 specifies whether address comparison is performed in a write to the UTLB address array.
 In the data field, bits [31:10] indicate VPN, bit [9] indicates D, bit [8] indicates V, and bits [7:0]
 indicate ASID.
+*/
 
 // utlb_addr_t - address part of a UTLB entry
 typedef struct
@@ -25,7 +26,7 @@ typedef struct
 	u32 V		:1;
 	u32 ASID	:8;
 
-} GPACKED(4) utlb_addr_t;
+} __attribute__((packed, aligned(4))) utlb_addr_t;
 
 // utlb_data_t - data part of a UTLB entry
 typedef struct
@@ -42,24 +43,21 @@ typedef struct
 	u32 SH		:1;
 	u32 WT		:1;
 
-} GPACKED(4) utlb_data_t;
-*/
+} __attribute__((packed, aligned(4))) utlb_data_t;
 
-/*
 // utlb_addr() - get the P4 address of a UTLB address entry
-GINLINE const utlb_addr_t *utlb_addr(uint E)
+const utlb_addr_t *utlb_addr(uint32_t E)
 {
 	uint32_t addr = 0xf6000000 | ((E & 0x3f) << 8);
 	return (void *)addr;
 }
 
 // utlb_data() - get the P4 address of a UTLB data entry
-GINLINE const utlb_data_t *utlb_data(uint E)
+const utlb_data_t *utlb_data(uint32_t E)
 {
 	uint32_t addr = 0xf7000000 | ((E & 0x3f) << 8);
 	return (void *)addr;
 }
-*/
 
 #define empty_addr { .VPN = 0x00000000, .D = 0, .V = 0, .ASID = 0x0 }
 // TODO: ASID?
