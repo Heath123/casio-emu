@@ -104,6 +104,8 @@ void initMemory(char* filename) {
 // addressing is faster but I might need to test it
 
 u32 readMemory(u32 address, u32 size) {
+  // printf("Address: %08x\n", address);
+
   // printf("Size: %d\n", size);
   // Check for unaligned access
   if (address % size != 0) {
@@ -167,6 +169,8 @@ u32 readMemory(u32 address, u32 size) {
 }
 
 void writeMemory(u32 address, u32 size, u32 value) {
+  // printf("Address: %08x\n", address);
+
   // printf("Size: %d\n", size);
   // Check for unaligned access
   if (address % size != 0) {

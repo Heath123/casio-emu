@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_timer.h>
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -104,6 +105,7 @@ void initGui(void) {
 //   return 0;
 }
 
+// Uint32 lastUpdateTime = 0;
 void updateDisplay(u16* vram) {
   // printf("updateDisplay called\n");
   SDL_UpdateTexture(framebuffer, NULL, vram, 396 * sizeof(uint16_t));
@@ -113,6 +115,11 @@ void updateDisplay(u16* vram) {
 
   // Sleep for 3 seconds
   // SDL_Delay(3000);
+
+  // Uint32 currentTime = SDL_GetTicks();
+  // Uint32 passed = currentTime - lastUpdateTime;
+  // printf("Frame time: %d\n", passed);
+  // lastUpdateTime = currentTime;
 }
 
 // TODO: This doesn't belong in the GUI code
@@ -190,6 +197,34 @@ void handleEvents(void) {
           else if (event.key.keysym.sym == SDLK_s) {
             setKeydown(46, true);
           }
+          // F1
+          else if (event.key.keysym.sym == SDLK_F1) {
+            setKeydown(79, true);
+          }
+          // F2
+          else if (event.key.keysym.sym == SDLK_F2) {
+            setKeydown(69, true);
+          }
+          // F3
+          else if (event.key.keysym.sym == SDLK_F3) {
+            setKeydown(59, true);
+          }
+          // F4
+          else if (event.key.keysym.sym == SDLK_F4) {
+            setKeydown(49, true);
+          }
+          // F5
+          else if (event.key.keysym.sym == SDLK_F5) {
+            setKeydown(39, true);
+          }
+          // F6
+          else if (event.key.keysym.sym == SDLK_F6) {
+            setKeydown(29, true);
+          }
+          // Exit
+          else if (event.key.keysym.sym == SDLK_BACKSPACE) {
+            setKeydown(47, true);
+          }
         }
         break;
       case SDL_KEYUP:
@@ -236,8 +271,60 @@ void handleEvents(void) {
           else if (event.key.keysym.sym == SDLK_s) {
             setKeydown(46, false);
           }
+          // F1
+          else if (event.key.keysym.sym == SDLK_F1) {
+            setKeydown(79, false);
+          }
+          // F2
+          else if (event.key.keysym.sym == SDLK_F2) {
+            setKeydown(69, false);
+          }
+          // F3
+          else if (event.key.keysym.sym == SDLK_F3) {
+            setKeydown(59, false);
+          }
+          // F4
+          else if (event.key.keysym.sym == SDLK_F4) {
+            setKeydown(49, false);
+          }
+          // F5
+          else if (event.key.keysym.sym == SDLK_F5) {
+            setKeydown(39, false);
+          }
+          // F6
+          else if (event.key.keysym.sym == SDLK_F6) {
+            setKeydown(29, false);
+          }
+          // Exit
+          else if (event.key.keysym.sym == SDLK_BACKSPACE) {
+            setKeydown(47, false);
+          }
         }
         break;
     }
   }
+}
+
+// TODO: Make this more precise
+#define FPS 60
+#define MS_PER_FRAME (1000 / FPS)
+
+bool firstFrame = true;
+Uint32 lastTime = 0;
+void delayFrame(void) {
+  Uint32 currentTime = SDL_GetTicks();
+  if (firstFrame) {
+    firstFrame = false;
+    lastTime = currentTime;
+    return;
+  }
+  int elapsedTime = currentTime - lastTime;
+  // printf("Elapsed: %dms\n", elapsedTime);
+  int remainingTime = MS_PER_FRAME - elapsedTime;
+  if (remainingTime > 0) {
+    // Use SDL_Delay to wait for the remaining time
+    // printf("Waiting %dms\n", remainingTime);
+    SDL_Delay(remainingTime);
+  }
+  lastTime = currentTime;
 }

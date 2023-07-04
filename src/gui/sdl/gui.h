@@ -6,5 +6,6 @@
 void initGui(void);
 void updateDisplay(u16* vram);
 void handleEvents(void);
+void delayFrame(void);
 
 #endif // GUI_H
