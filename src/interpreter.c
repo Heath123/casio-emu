@@ -77,26 +77,10 @@ u64 iterations = 0;
 u64 iterationsSleeping = 0;
 // u64 iterationsThisFrame = 0;
 
-void runFrame(void) {
+void runIterationsCPU(int interationsToRun) {
   // while (iterations < (ITERATIONS_PER_SEC * 1)) {
-  for (int i = 0; i < ITERATIONS_PER_FRAME; i++) {
+  for (int i = 0; i < interationsToRun; i++) {
     iterations++;
-    // iterationsThisFrame++;
-    // if (iterations % 2048 == 0) {
-    //   handleEvents();
-    // }
-    // if (iterationsThisFrame >= ITERATIONS_PER_FRAME) {
-    //   // printf("Frame\n");
-    //   delayFrame();
-    //   iterationsThisFrame = 0;
-    // }
-
-    updateTimers();
-    if (iterations % (ITERATIONS_PER_SEC / 128) == 0) {
-      updateRTC();
-      // printf("Slept for %lu iterations\n", iterationsSleeping);
-      // printf("Sleeping %f%% of the time\n", ((double) iterationsSleeping / iterations) * 100.0);
-    }
 
     // TODO: How do interrupts act on branch delay slots?
     if (cpu.interruptPending && !cpu.isBranchDelaySlot) {
@@ -104,10 +88,8 @@ void runFrame(void) {
       handleInterrupt(cpu.interruptCode, cpu.interruptVector, cpu.interruptIsException);
     }
 
-    // TODO: Efficient sleep
     if (cpu.isSleeping) {
-      iterationsSleeping++;
-      continue;
+      return;
     }
 
     #ifdef PRINT_INSTRUCTIONS
@@ -121,84 +103,8 @@ void runFrame(void) {
       cpu.branchDelayDone = true;
     }
 
-    if (cpu.reg.PC == 0xfffffe00) {
-      if (cpu.reg.r4 == 0) {
-        printf("Print: null string\n");
-      } else {
-        // Read until we hit a null byte
-        u32 addr = cpu.reg.r4;
-        while (readMemory(addr, 1) != 0) {
-          printf("%c", readMemory(addr, 1));
-          addr++;
-        }
-        // printf("\n");
-      }
-      // Set PC to PR (return)
-      cpu.reg.PC = cpu.reg.PR;
-    }
-    if (cpu.reg.PC == 0xffffff00) {
-      printf("%d\n", cpu.reg.r4);
-      // Set PC to PR (return)
-      cpu.reg.PC = cpu.reg.PR;
-    }
-    if (cpu.reg.PC == 0xfffffd00) {
-      printf("%08X\n", cpu.reg.r4);
-      // Set PC to PR (return)
-      cpu.reg.PC = cpu.reg.PR;
-    }
-    if (cpu.reg.PC == 0xfffffc00) {
-      // Copy pixels to screen
-      u16 framebuffer[396 * 224] = {0xffff};
-      u32 addr = cpu.reg.r4;
-      for (int i = 0; i < 396 * 224; i++) {
-        framebuffer[i] = 0xffff;
-      }
-      for (int i = 0; i < 396 * 224; i++) {
-        framebuffer[i] = readMemory(addr, 2);
-        addr += 2;
-      }
-      updateDisplay(framebuffer);
-      // Sleep for 3 seconds
-      // sleep(3);
-
-      // while (1) {}
-
-      // Set PC to PR (return)
-      cpu.reg.PC = cpu.reg.PR;
-    }
-    if (cpu.reg.PC == 0x80020070) {
-      #ifdef PRINT_INSTRUCTIONS
-      printf("Syscall table call! r0 = %d\n", cpu.reg.r0);
-      #endif
-      // switch (cpu.reg.r0) {
-      //   case 0x808: {
-      //     // Print
-      //     // Read until we hit a null byte
-      //     u32 addr = cpu.reg.r4;
-      //     while (readMemory(addr, 1) != 0) {
-      //       printf("%c", readMemory(addr, 1));
-      //       addr++;
-      //     }
-      //     break;
-      //   }
-      //   case 0x807: {
-      //     // Locate - just treat it as a newline
-      //     printf("\n");
-      //     break;
-      //   }
-      //   default: {
-      //     printf("Unknown syscall %d\n", cpu.reg.r0);
-      //     exit(1);
-      //     break;
-      //   }
-      // }
-      printf("Syscalls not implemented\n");
-      exit(1);
-      // Set PC to PR (return)
-      // cpu.reg.PC = cpu.reg.PR;
-    }
-
-    u16 instr = readMemory(cpu.reg.PC, 2);
+    // TODO: Check alignment
+    u16 instr = readMemory2Quick(cpu.reg.PC);
     #ifdef PRINT_INSTRUCTIONS
     printf("%x: ", cpu.reg.PC);
     #endif
@@ -237,4 +143,16 @@ void runFrame(void) {
       cpu.reg.RC--;
     }
   }
+}
+
+void runFrame(void) {
+  for (int i = 0; i < (ITERATIONS_PER_FRAME / 2048); i++) {
+    runIterationsCPU(2048);
+    updateTimers();
+    // if (iterations % ((ITERATIONS_PER_SEC / 2048) / 128) == 0) {
+    //   updateRTC();
+    // }
+  }
+  // TODO: Make this 128Hz again
+  updateRTC();
 }

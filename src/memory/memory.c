@@ -167,6 +167,14 @@ u32 readMemory(u32 address, u32 size) {
   return value;
 }
 
+
+u32 readMemory2Quick(u32 address) {
+  // Get the relevant page
+  void* page = pageTable[address / 0x1000];
+
+  return *(u16*)(page + ((address ^ 0x2) % 0x1000));
+}
+
 void writeMemory(u32 address, u32 size, u32 value) {
   // printf("Address: %08x\n", address);
 

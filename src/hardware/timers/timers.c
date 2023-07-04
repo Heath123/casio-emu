@@ -111,67 +111,60 @@ void initTimers(void) {
 }
 
 u32 count = 0;
-u32 count2 = 0;
 
 u32 tmu_event[9] = {0x400, 0x420, 0x440, 0x9e0, 0xc20, 0xc40, 0x900, 0xd00, 0xfa0};
 
 u32 prescaler[8] = {4, 16, 64, 256, 0, 0, 0, 0};
 
 void updateTimers(void) {
-  if (count % 2048 == 0) {
-    // TODO: Better value for this
-
-    for (int i = 0; i < 9; i++) {
-      bool isEtmu = i >= 3;
-      bool enabled;
+  for (int i = 0; i < 9; i++) {
+    bool isEtmu = i >= 3;
+    bool enabled;
+    if (isEtmu) {
+      enabled = E_TSTR[i - 3] & 1;
+    } else {
+      enabled = TSTR.value & (1 << i);
+    }
+    
+    if (enabled) {
+      // Prescaler
       if (isEtmu) {
-        enabled = E_TSTR[i - 3] & 1;
+        // TODO
       } else {
-        enabled = TSTR.value & (1 << i);
+        u32 index = TCR[i].bits.TPSC;
+        if (index >= 4) {
+          printf("Timer %d prescaler not implemented: %d\n", i, index);
+          exit(1);
+        }
+
+        u32 prescale = prescaler[index];
+        prescale *= 2;
+        if (count % prescale != 0) {
+          continue;
+        }
       }
-      
-      if (enabled) {
-        // Prescaler
-        if (isEtmu) {
-          // TODO
-        } else {
-          u32 index = TCR[i].bits.TPSC;
-          if (index >= 4) {
-            printf("Timer %d prescaler not implemented: %d\n", i, index);
-            exit(1);
-          }
 
-          u32 prescale = prescaler[index];
-          prescale *= 2;
-          if (count2 % prescale != 0) {
-            continue;
-          }
+      if (isEtmu) {
+        if (E_TCNT[i - 3] == 0) {
+          // Timer underflow - raise an interrupt
+          // printf("Timer %d interrupt\n", i);
+          generateIntcInterrupt(tmu_event[i]);
+          E_TCNT[i - 3] = E_TCOR[i - 3];
         }
-
-        if (isEtmu) {
-          if (E_TCNT[i - 3] == 0) {
-            // Timer underflow - raise an interrupt
-            // printf("Timer %d interrupt\n", i);
-            generateIntcInterrupt(tmu_event[i]);
-            E_TCNT[i - 3] = E_TCOR[i - 3];
-          }
-          // Decrement the timer
-          // printf("Timer %d value: %d\n", i, E_TCNT[i - 3]);
-          E_TCNT[i - 3]--;
-        } else {
-          if (TCNT[i] == 0) {
-            // Timer underflow - raise an interrupt
-            // printf("Timer %d interrupt\n", i);
-            generateIntcInterrupt(tmu_event[i]);
-            TCNT[i] = TCOR[i];
-          }
-          // Decrement the timer
-          TCNT[i]--;
+        // Decrement the timer
+        // printf("Timer %d value: %d\n", i, E_TCNT[i - 3]);
+        E_TCNT[i - 3]--;
+      } else {
+        if (TCNT[i] == 0) {
+          // Timer underflow - raise an interrupt
+          // printf("Timer %d interrupt\n", i);
+          generateIntcInterrupt(tmu_event[i]);
+          TCNT[i] = TCOR[i];
         }
+        // Decrement the timer
+        TCNT[i]--;
       }
     }
-    count2++;
   }
-
   count++;
 }
