@@ -44,7 +44,6 @@ else()
   find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
   add_executable(calcemu ${SOURCES})
-  target_compile_options(calcemu PRIVATE -O3 -flto)
+  target_compile_options(calcemu PRIVATE -O3 -flto -g)
   target_link_libraries(calcemu PRIVATE Qt5::Widgets)
 endif()
-  

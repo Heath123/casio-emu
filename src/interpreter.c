@@ -26,9 +26,11 @@ void test(void);
 
 // bool trace = false;
 
+#define SPEED_FACTOR 2048
+
 // TODO: I think this is too many CPU cycles? Or maybe not enough...
 // When adjusting this the timers will need to be adjusted too
-#define ITERATIONS_PER_SEC ((u64) 2048 * 32768)
+#define ITERATIONS_PER_SEC ((u64) SPEED_FACTOR * 32768)
 #define ITERATIONS_PER_FRAME (ITERATIONS_PER_SEC / 60)
 
 void runFrame(void);
@@ -135,14 +137,16 @@ void runIterationsCPU(int interationsToRun) {
   }
 }
 
+u64 iterationsSinceRTCTick = 0;
 void runFrame(void) {
-  for (int i = 0; i < (ITERATIONS_PER_FRAME / 2048); i++) {
-    runIterationsCPU(2048);
+  for (int i = 0; i < (ITERATIONS_PER_FRAME / SPEED_FACTOR); i++) {
+    runIterationsCPU(SPEED_FACTOR);
     updateTimers();
-    // if (iterations % ((ITERATIONS_PER_SEC / 2048) / 128) == 0) {
-    //   updateRTC();
-    // }
+
+    iterationsSinceRTCTick += SPEED_FACTOR;
+    if (iterationsSinceRTCTick >= (ITERATIONS_PER_SEC / 128)) {
+      updateRTC();
+      iterationsSinceRTCTick = 0;
+    }
   }
-  // TODO: Make this 128Hz again
-  updateRTC();
 }
