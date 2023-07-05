@@ -18,6 +18,8 @@ u16 horizontal_ram_end = 0; // 0x211
 u16 vertical_ram_start = 0; // 0x212
 u16 vertical_ram_end = 0; // 0x213
 
+u8 brightness = 255; // 0x5a1
+
 // 2D array of pixels
 u16 pixels[224][396] = {0};
 
@@ -256,6 +258,9 @@ u32 dispInterfaceRead(u32 addr, u32 size) {
       case 0x213:
         // Vertical RAM end
         return vertical_ram_end;
+      case 0x5a1:
+        // Brightness
+        return brightness;
       case 0x202: {
         static bool warned = false;
         if (!warned) {
@@ -307,6 +312,9 @@ void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
         break;
       case 0x213:
         vertical_ram_end = value;
+        break;
+      case 0x5a1:
+        brightness = value;
         break;
       case 0x202:
         pixels[ram_address_vertical + vertical_ram_start][ram_address_horizontal + horizontal_ram_start] = value;

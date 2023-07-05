@@ -33,18 +33,8 @@ void test(void);
 
 void runFrame(void);
 
-int main(int argc, char* argv[]) {
-  #ifdef __EMSCRIPTEN__
-  initMemory("Addin.g3a");
-  #else
-  if (argc != 2) {
-    printf("Usage: %s <path to g3a>\n", argv[0]);
-    exit(1);
-  }
-
-  initMemory(argv[1]);
-  #endif
-
+int startInterpreter(const char* filename) {
+  initMemory(filename);
   initCpuRegisters();
   initTlb();
   initTimers();
@@ -54,7 +44,6 @@ int main(int argc, char* argv[]) {
   initDma();
   initPower();
   initRtc();
-  initGui();
 
   cpu.isBranchDelaySlot = false;
   cpu.branchDelayDone = false;
@@ -71,6 +60,7 @@ int main(int argc, char* argv[]) {
   // for (int i = 0; i < 90; i++) {
   //   runFrame();
   // }
+  return 0;
 }
 
 u64 iterations = 0;

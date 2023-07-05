@@ -42,12 +42,12 @@ void createAlias(u32 start, u32 end, u32 alias) {
   }
 }
 
-void initMemory(char* filename) {
+void initMemory(const char* filename) {
   // memory = calloc(0xffffffff, sizeof(u8));
 
   FILE *f = fopen(filename, "rb");
   if (f == NULL) {
-    printf("Error opening file\n");
+    perror("Error opening g3a file");
     exit(1);
   }
 
@@ -166,7 +166,6 @@ u32 readMemory(u32 address, u32 size) {
 
   return value;
 }
-
 
 u32 readMemory2Quick(u32 address) {
   // Get the relevant page

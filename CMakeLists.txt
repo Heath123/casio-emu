@@ -29,15 +29,22 @@ if(EMSCRIPTEN)
   target_compile_options(calcemu PRIVATE -Wall -Wextra -Werror=implicit-function-declaration -Werror=incompatible-pointer-types -O3 -flto -g -sSTACK_SIZE=1048576)
   target_link_options(calcemu PRIVATE --shell-file=../src/gui/html5/gui.html -g -sSTACK_SIZE=1048576 -sALLOW_MEMORY_GROWTH -sEXPORTED_FUNCTIONS=_setKeydown,_main -sEXPORTED_RUNTIME_METHODS=ccall,cwrap --embed-file=Addin.g3a)
 else()
+  # set(SOURCES ${SOURCES}
+  #   src/gui/sdl/gui.c
+  # )
+
+  # find_package(SDL2 REQUIRED)
+  # include_directories(${SDL2_INCLUDE_DIRS})
+  # link_libraries(${SDL2_LIBRARIES})
+
   set(SOURCES ${SOURCES}
-    src/gui/sdl/gui.c
+    src/gui/qt/gui.cpp
   )
 
-  find_package(SDL2 REQUIRED)
-  include_directories(${SDL2_INCLUDE_DIRS})
-  link_libraries(${SDL2_LIBRARIES})
-  
+  find_package(Qt5 COMPONENTS Widgets REQUIRED)
+
   add_executable(calcemu ${SOURCES})
   target_compile_options(calcemu PRIVATE -O3 -flto)
+  target_link_libraries(calcemu PRIVATE Qt5::Widgets)
 endif()
   

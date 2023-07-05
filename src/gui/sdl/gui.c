@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "../../int.h"
+#include "../../interpreter.h"
 
 #define RGB(r,g,b) ((((r) >> 1) << 11) | ((g) << 5) | ((b) >> 1))
 
@@ -17,7 +18,12 @@ typedef uint16_t color_t;
 SDL_Renderer* renderer;
 SDL_Texture* framebuffer;
 
-void initGui(void) {
+int main(int argc, char* argv[]) {
+  if (argc != 2) {
+    printf("Usage: %s <path to g3a>\n", argv[0]);
+    exit(1);
+  }
+
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
@@ -43,66 +49,7 @@ void initGui(void) {
     exit(1);
   }
 
-  // Allocate an array to use as the framebuffer data
-  // gint_vram = calloc(396 * 224, sizeof(color_t));
-
-//   uint16_t bg_color = RGB(0, 0, 0);
-
-//   // Main loop
-//   const int target_frame_time = 1000 / 60;  // 60 FPS
-//   uint32_t last_frame_time = SDL_GetTicks();
-//   while (1) {
-//     // Handle events
-//     SDL_Event event;
-//     while (SDL_PollEvent(&event)) {
-//       switch (event.type) {
-//         case SDL_QUIT:
-//           goto cleanup;
-//           break;
-//         case SDL_KEYDOWN:
-//           if (event.key.repeat == 0) {
-//               if (event.key.keysym.sym == SDLK_SPACE) {
-//                 bg_color = RGB(63, 0, 0); // Red
-//               } else if (event.key.keysym.sym == SDLK_RETURN) {
-//                 bg_color = RGB(0, 63, 0); // Green
-//               } else if (event.key.keysym.sym == SDLK_TAB) {
-//                 bg_color = RGB(0, 0, 63); // Blue
-//               }
-//           }
-//           break;
-//       }
-//     }
-
-//     // Update the framebuffer data
-//     for (int i = 0; i < 396 * 224; i++) {
-//       framebuffer_data[i] = bg_color;
-//     }
-
-//     // Update the texture with the new framebuffer data
-//     SDL_UpdateTexture(framebuffer, NULL, framebuffer_data, 396 * sizeof(uint16_t));
-
-//     // Clear the renderer and draw the framebuffer texture
-//     SDL_RenderClear(renderer);
-//     SDL_RenderCopy(renderer, framebuffer, NULL, NULL);
-//     SDL_RenderPresent(renderer);
-
-//     // Delay to maintain 60 FPS
-//     uint32_t current_time = SDL_GetTicks();
-//     uint32_t elapsed_time = current_time - last_frame_time;
-//     if (elapsed_time < target_frame_time) {
-//       SDL_Delay(target_frame_time - elapsed_time);
-//     }
-//     last_frame_time = current_time;
-//   }
-
-// cleanup:
-//   // Clean up resources and quit SDL
-//   free(framebuffer_data);
-//   SDL_DestroyTexture(framebuffer);
-//   SDL_DestroyRenderer(renderer);
-//   SDL_DestroyWindow(window);
-//   SDL_Quit();
-//   return 0;
+  startInterpreter(argv[1]);
 }
 
 // Uint32 lastUpdateTime = 0;

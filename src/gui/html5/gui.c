@@ -4,6 +4,8 @@
 #include <stdio.h>
 
 #include "../../int.h"
+#include "../../interpreter.h"
+#include "../skin/default/skin.h"
 
 #define RGB(r,g,b) ((((r) >> 1) << 11) | ((g) << 5) | ((b) >> 1))
 
@@ -12,12 +14,33 @@ typedef uint16_t color_t;
 #define LCD_WIDTH_PX 396
 #define LCD_HEIGHT_PX 224
 
-void initGui(void) {
+int main(int argc, char* argv[]) {
+  int i = 0;
+  while (buttons[i].id != 0) {
+    EM_ASM_({
+      let button = document.createElement("button");
+      button.className = "calc-button";
+      button.style.left = $0 + "px";
+      button.style.top = $1 + "px";
+      button.style.width = $2 + "px";
+      button.style.height = $3 + "px";
+      button.onpointerdown = () => {
+        setKeydown($4, true);
+      };
+      button.onpointerup = () => {
+        setKeydown($4, false);
+      };
+      document.getElementById("buttons").appendChild(button);
+    }, buttons[i].x, buttons[i].y, buttons[i].w, buttons[i].h, buttons[i].id);
+    i++;
+  }
   emscripten_set_canvas_size(LCD_WIDTH_PX, LCD_HEIGHT_PX);
   EM_ASM_({
     window.canvasContext = Module['canvas'].getContext('2d');
     window.canvasImageData = canvasContext.getImageData(0, 0, 396, 224);
   });
+
+  startInterpreter("Addin.g3a");
 }
 
 void Copy_ToCanvas(uint32_t* ptr) {
