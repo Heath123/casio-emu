@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QDebug>
+#include <QFileDialog>
 
 // TODO: Put this in the headers instead
 extern "C" {
@@ -91,7 +92,7 @@ public:
         setScene(scene);
 
         canvas = new QPixmap(396, 224);
-        canvas->fill(Qt::red);
+        canvas->fill(Qt::black);
 
         canvasItem = scene->addPixmap(*canvas);
 
@@ -150,29 +151,20 @@ int main(int argc, char* argv[]) {
     ButtonContainer container;
     layout->addWidget(&container, 0, Qt::AlignTop);
 
-    // // Connect the pressed() signal to a slot or lambda function
-    // QObject::connect(button, &QPushButton::pressed, [&]() {
-    //     setKeydown(78, true);
-    // });
-
-    // // Connect the released() signal to a slot or lambda function
-    // QObject::connect(button, &QPushButton::released, [&]() {
-    //     setKeydown(78, false);
-    // });
-
     // Add a stretch at the end to take any available extra space
     layout->addStretch();
 
     // Create a menu bar and menus
-    QMenuBar* menuBar = mainWindow.menuBar();
-    QMenu* fileMenu = menuBar->addMenu("File");
+    // QMenuBar* menuBar = mainWindow.menuBar();
+    // QMenu* fileMenu = menuBar->addMenu("File");
 
     // Add actions to the menus if needed
-    QAction* openAction = fileMenu->addAction("Open .g3a file");
+    // QAction* openAction = fileMenu->addAction("Open .g3a file");
 
     mainWindow.show();
 
-    startInterpreter("/home/heath/Downloads/Upsilon.g3a");
+    QString filePath = QFileDialog::getOpenFileName(&mainWindow, "Open g3a add-in", "", "Add-in files (*.g3a)");
+    startInterpreter(filePath.toStdString().c_str());
 
     return app.exec();
 }
