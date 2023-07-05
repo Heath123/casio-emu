@@ -7684,5 +7684,40 @@
     },
     "delaySlotVariant": false,
     "instructionSize": 4
+  },
+  {
+    "id": 210,
+    "name": "lds rm, x0",
+    "family": "lds",
+    "formatString": "TODO",
+    "opcode": [
+      "0100",
+      null,
+      "1000",
+      "1010"
+    ],
+    "operands": {
+      "m": {
+        "type": "register",
+        "isConstant": false,
+        "mask": [
+          "0000",
+          "1111",
+          "0000",
+          "0000"
+        ],
+        "shift": 8,
+        "indirect": false,
+        "preDecrement": false,
+        "postIncrement": false
+      },
+      "x0": {
+        "type": "register",
+        "isConstant": true,
+        "constantValue": 41
+      }
+    },
+    "delaySlotVariant": false,
+    "instructionSize": 4
   }
 ]

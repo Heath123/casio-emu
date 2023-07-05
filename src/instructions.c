@@ -29,22 +29,24 @@ void invalid(u16 instr) {
     int d = (instr & 0b0000000011110000) >> 4;
     // printf("a = %d, d = %d\n", a, d);
     if (d == 8) {
-      cpu.reg.x0 = readMemory(cpu.reg.regArray[a], 2);
+      cpu.reg.x0 = readMemory(cpu.reg.regArray[a], 2) << 16;
       cpu.reg.regArray[a] += 2;
       return;
     } else {
       printf("Non x0 destination not yet supported\n");
     }
   }
-  // 111101AADDDD1001 -> movs.w Ds, @As+
-  if ((instr & 0b1111110000001111) == 0b1111010000001001) {
+  // 111101AADDDD10L1 -> movs.(w/l) Ds, @As+
+  if ((instr & 0b1111110000001101) == 0b1111010000001001) {
     int a = (instr & 0b0000001100000000) >> 8;
     a = registerMap[a];
     int d = (instr & 0b0000000011110000) >> 4;
+    // 1 is it's the movs.l version, o for movs.w
+    int l = (instr & 0b0000000000000010) >> 1;
     // printf("a = %d, d = %d\n", a, d);
     if (d == 8) {
-      writeMemory(cpu.reg.regArray[a], 2, cpu.reg.x0);
-      cpu.reg.regArray[a] += 2;
+      writeMemory(cpu.reg.regArray[a], l ? 4 : 2, cpu.reg.x0 >> (l ? 0 : 16));
+      cpu.reg.regArray[a] += l ? 4 : 2;
       return;
     } else {
       printf("Non x0 destination not yet supported\n");

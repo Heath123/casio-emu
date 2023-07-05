@@ -2745,6 +2745,19 @@ void autogen_ldrc_rn(u16 instr) {
   cpu.reg.regArray[rc] = result;
 }
 
+// lds rm, x0
+void autogen_lds_rm_x0(u16 instr) {
+  #ifdef PRINT_INSTRUCTIONS
+  printf("lds rm, x0\n");
+  #endif
+  u32 m = (instr & 0b0000111100000000) >> 8;
+  u32 x0 = 41;
+  u32 src = cpu.reg.regArray[m];
+  u32 dst = cpu.reg.regArray[x0];
+  u32 result = lds(instr, src, dst);
+  cpu.reg.regArray[x0] = result;
+}
+
 void (*instructionHandlers[65536])(u16) = {
   invalid,
   invalid,
@@ -19268,7 +19281,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -19524,7 +19537,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -19780,7 +19793,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -20036,7 +20049,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -20292,7 +20305,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -20548,7 +20561,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -20804,7 +20817,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -21060,7 +21073,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -21316,7 +21329,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -21572,7 +21585,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -21828,7 +21841,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -22084,7 +22097,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -22340,7 +22353,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -22596,7 +22609,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -22852,7 +22865,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
@@ -23108,7 +23121,7 @@ void (*instructionHandlers[65536])(u16) = {
   autogen_ldc_l_at_rm_plus_r0_bank,
   invalid,
   invalid,
-  invalid,
+  autogen_lds_rm_x0,
   invalid,
   autogen_shad_rm_rn,
   autogen_shld_rm_rn,
