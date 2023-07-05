@@ -26,7 +26,7 @@ void test(void);
 
 // bool trace = false;
 
-#define SPEED_FACTOR 2048
+#define SPEED_FACTOR 2048 * 2
 
 // TODO: I think this is too many CPU cycles? Or maybe not enough...
 // When adjusting this the timers will need to be adjusted too
