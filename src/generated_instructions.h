@@ -2455,8 +2455,8 @@ void autogen_trapa_imm(u16 instr) {
   printf("trapa #imm\n");
   #endif
   u32 imm = (instr & 0b0000000011111111) >> 0;
-  u32 src = s_ext(imm, 8);
-  u32 dst = s_ext(imm, 8);
+  u32 src = imm;
+  u32 dst = imm;
   u32 result = trapa(instr, src, dst);
 }
 

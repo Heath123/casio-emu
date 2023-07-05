@@ -830,6 +830,13 @@ u32 bsr(u16 instr, u32 src, u32 dst) {
 }
 
 u32 trapa(u16 instr, u32 src, u32 dst) {
+  if (cpu.reg.PC - 4 == 0x80020070 && src == 255) {
+    // Syscall handler
+    printf("Syscalls are not yet implemented.\n");
+    printf("Attempted to call syscall 0x%04x\n", cpu.reg.r0);
+    exit(1);
+    return dst;
+  }
   printf("trapa: not implemented\n");
   exit(1);
   return dst;

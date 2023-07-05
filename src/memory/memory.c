@@ -6,6 +6,7 @@
 #include <endian.h>
 
 #include "../int.h"
+#include "memory.h"
 #include "specialAddrs.h"
 #include "../cpu.h"
 #include "../interrupts.h"
@@ -57,22 +58,28 @@ void initMemory(const char* filename) {
   fseek(f, 0x7000, SEEK_SET);
 
   // Allocate a memory area at 0x80000000 (ROM) to store the file
-  // The file will be laoded at an offset of 0x20000 to make space for the product ID at 0x8001ffd0
-  void* hostMem = allocMemArea(0x80000000, 0x80000000 + fsize + 0x20000);
-  fread(hostMem + 0x20000, fsize, 1, f);
+  // The file will be loaded at an offset of 0x30000 to make space for the product ID at 0x8001ffd0
+  // and the syscall handler at 0x80020070
+  void* hostMem = allocMemArea(0x80000000, 0x80000000 + fsize + 0x30000);
+  fread(hostMem + 0x30000, fsize, 1, f);
   // Swap all the 4-byte longwords
   for (int i = 0; i < fsize; i += 4) {
-    u32* word = (u32*) (hostMem + 0x20000 + i);
+    u32* word = (u32*) (hostMem + 0x30000 + i);
     *word = __builtin_bswap32(*word);
   }
   fclose(f);
   // Alias at 0xa0000000 (P2)
   createAlias(0x80000000, 0x80000000 + fsize, 0xa0000000);
   // Set up an alias at 0x00300000 in virtual memory to the file
-  createAlias(0x80020000, 0x80020000 + fsize, 0x00300000);
+  createAlias(0x80030000, 0x80030000 + fsize, 0x00300000);
 
   // TODO: set the product ID? Zeroing it out should be fine for now
   // We allocated with calloc so it's already zeroed out
+
+  // Put a trapa instruction in the syscall handler
+  // This isn't really used otherwise on the calculator,
+  // so for now it's probably safe to hijack this instruction
+  writeMemory(0x80020070, 2, 0xc3ff); // trapa #255
 
   // Allocate an 8MB memory area at 0x8c000000 (RAM)
   allocMemArea(0x8c000000, 0x8c000000 + (8 * 1024 * 1024));

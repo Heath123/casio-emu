@@ -3,7 +3,7 @@
 
 #include "../int.h"
 
-void initMemory(char* filename);
+void initMemory(const char* filename);
 
 u32 readMemory(u32 address, u32 size);
 u32 readMemory2Quick(u32 address);
