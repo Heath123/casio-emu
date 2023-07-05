@@ -163,8 +163,15 @@ int main(int argc, char* argv[]) {
 
     mainWindow.show();
 
-    QString filePath = QFileDialog::getOpenFileName(&mainWindow, "Open g3a add-in", "", "Add-in files (*.g3a)");
-    startInterpreter(filePath.toStdString().c_str());
+    const char* filePath;
+    if (argc < 2) {
+        QString qFilePath = QFileDialog::getOpenFileName(&mainWindow, "Open g3a add-in", "", "Add-in files (*.g3a)");
+        filePath = qFilePath.toUtf8();
+    } else {
+        filePath = argv[1];
+    }
+
+    startInterpreter(filePath);
 
     return app.exec();
 }
