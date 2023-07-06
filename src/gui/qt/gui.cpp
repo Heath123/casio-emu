@@ -10,34 +10,58 @@
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QFileDialog>
+#include <QKeyEvent>
 
 // TODO: Put this in the headers instead
 extern "C" {
-    #include "../../interpreter.h"
     #include "../../int.h"
+    #include "../../interpreter.h"
+    #include "../../hardware/keyboard/keyboard.h"
     #include "../skin/default/skin.h"
 }
 
 // Most of this code was written by ChatGPT
 
-// TODO: This doesn't belong in the GUI code
-extern u16 KIUDATA[6];
-
-static void setKeydown(int basic_keycode, bool down) {
-  // printf("Key %d is now %s\n", basic_keycode, down ? "down" : "up");
-  i32 row = basic_keycode % 10;
-  i32 col = basic_keycode / 10 - 1;
-  i32 word = row >> 1;
-  i32 bit = col + 8 * (row & 1);
-  if (down) {
-    KIUDATA[word] |= 1 << bit;
-  } else {
-    KIUDATA[word] &= ~(1 << bit);
-  }
-}
-
 const int xOffset = -52;
 const int yOffset = -380;
+
+// Inspired by CEmu's approach to key events
+class KeyboardEventFilter : public QObject {
+    Q_OBJECT
+
+public:
+    bool eventFilter(QObject* obj, QEvent* event) override;
+};
+
+bool KeyboardEventFilter::eventFilter(QObject* obj, QEvent* event) {
+    if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease) {
+        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+        bool isPress = (event->type() == QEvent::KeyPress);
+        
+        switch (keyEvent->key()) {
+            case Qt::Key_Left:
+                setKeydown(38, isPress);
+                return true;
+            case Qt::Key_Right:
+                setKeydown(27, isPress);
+                return true;
+            case Qt::Key_Up:
+                setKeydown(28, isPress);
+                return true;
+            case Qt::Key_Down:
+                setKeydown(37, isPress);
+                return true;
+            case Qt::Key_X:
+                setKeydown(78, isPress);
+                return true;
+        }
+    }
+
+    // Let the event continue to other event filters or the original target
+    return QObject::eventFilter(obj, event);
+}
+
+KeyboardEventFilter* filter = Q_NULLPTR;
 
 class ButtonContainer : public QWidget {
 public:
@@ -48,6 +72,7 @@ public:
             QPushButton* btn = new QPushButton(button.name, this);
             btn->setGeometry(button.x + xOffset, button.y + yOffset, button.w, button.h);
             btn->setProperty("id", button.id); // Set the button's ID as a property
+            btn->installEventFilter(filter);
 
             // Connect button signals to slots
             connect(btn, &QPushButton::pressed, this, &ButtonContainer::handleButtonPressed);
@@ -136,19 +161,30 @@ int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     QMainWindow mainWindow;
 
+    // This needs to be insatlled to everything
+    filter = new KeyboardEventFilter;
+
+    mainWindow.installEventFilter(filter);
+
     // Create a central widget to hold the canvas and buttons
     QWidget* centralWidget = new QWidget(&mainWindow);
+    centralWidget->installEventFilter(filter);
     mainWindow.setCentralWidget(centralWidget);
 
     // Create a vertical layout to arrange the canvas and buttons
     QVBoxLayout* layout = new QVBoxLayout(centralWidget);
+    layout->installEventFilter(filter);
 
     // Create the canvas view
     canvasView = new CanvasView();
     canvasView->setFixedSize(396, 224);
+    canvasView->installEventFilter(filter);
     layout->addWidget(canvasView, 0, Qt::AlignTop);
 
     ButtonContainer container;
+    // Make it capture keyboard events
+    container.setFocusPolicy(Qt::StrongFocus);
+    container.installEventFilter(filter);
     layout->addWidget(&container, 0, Qt::AlignTop);
 
     // Add a stretch at the end to take any available extra space
@@ -183,3 +219,5 @@ extern "C" void updateDisplay(u16* vram) {
 extern "C" void runMainLoop(void (*callback)(void)) {
     canvasView->runMainLoop(callback);
 }
+
+#include "gui.moc"

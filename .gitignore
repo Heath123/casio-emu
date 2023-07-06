@@ -114,3 +114,4 @@ calc-emu-test
 build
 build-em
 
+compile_commands.json

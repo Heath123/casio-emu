@@ -149,4 +149,5 @@ void runFrame(void) {
       iterationsSinceRTCTick = 0;
     }
   }
+  updateDisplayFromFramebuffer();
 }

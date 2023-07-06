@@ -330,12 +330,11 @@ void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
           }
         }
         
-        static int count = 1;
+        // static int count = 1;
         // count += 1;
-        if ((ram_address_horizontal == (horizontal_ram_end - horizontal_ram_start) && ram_address_vertical == (vertical_ram_end - vertical_ram_start)) || (count % 2048) == 0) {
-          // printf("Update!");
-          updateDisplay(&pixels[0][0]);
-        }
+        // if ((ram_address_horizontal == (horizontal_ram_end - horizontal_ram_start) && ram_address_vertical == (vertical_ram_end - vertical_ram_start)) || (count % 2048) == 0) {
+        //   // printf("Update!");
+        // }
         break;
       default:
         printf("Unimplemented write to display interface!\n");
@@ -344,10 +343,14 @@ void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
   }
 }
 
-void initDisplay() {
+void initDisplay(void) {
   defineReg("Port R data", PRDR, 0xa405013c);
   // TODO: Do 1 byte writes work? Here they will
   // Also do reads, and writes of things that aren't pixel data, work too?
   // TODO: Make this work in a range
   defineRegCBUnsized("Display Interface", dispInterfaceRead, dispInterfaceWrite, 0xb4000000);
+}
+
+void updateDisplayFromFramebuffer(void) {
+  updateDisplay(&pixels[0][0]);
 }

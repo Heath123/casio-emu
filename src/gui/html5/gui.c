@@ -5,6 +5,7 @@
 
 #include "../../int.h"
 #include "../../interpreter.h"
+#include "../../hardware/keyboard/keyboard.h"
 #include "../skin/default/skin.h"
 
 #define RGB(r,g,b) ((((r) >> 1) << 11) | ((g) << 5) | ((b) >> 1))
@@ -70,22 +71,6 @@ void displayUpdateBox(u16* vram, int x, int y, int w, int h) {
 
 void updateDisplay(u16* vram) {
   displayUpdateBox(vram, 0, 0, LCD_WIDTH_PX, LCD_HEIGHT_PX);
-}
-
-// TODO: This doesn't belong in the GUI code
-extern u16 KIUDATA[6];
-
-void setKeydown(int basic_keycode, bool down) {
-  // printf("Key %d is now %s\n", basic_keycode, down ? "down" : "up");
-  i32 row = basic_keycode % 10;
-  i32 col = basic_keycode / 10 - 1;
-  i32 word = row >> 1;
-  i32 bit = col + 8 * (row & 1);
-  if (down) {
-    KIUDATA[word] |= 1 << bit;
-  } else {
-    KIUDATA[word] &= ~(1 << bit);
-  }
 }
 
 void handleEvents(void) {

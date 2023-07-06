@@ -3,7 +3,8 @@
 
 #include "../../int.h"
 
-void initDisplay();
+void initDisplay(void);
+void updateDisplayFromFramebuffer(void);
 
 // extern bool displayFastPath;
 // void fastWrite(u32 value);
