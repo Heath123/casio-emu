@@ -7,13 +7,15 @@ A work-in-porgress emulator for the Casio CG50 calculator. It currently runs man
 - Add-ins that use the USB driver will not boot
 - The code is quite messy and inaccurate sometimes.
 
-## Buildng
+## Building
 
 ```
-cd build
-cmake ..
-make
-./calcemu <path to g3a file>
+mkdir build
+# If you want to build the SDL GUI rather than Qt one, add -DUSE_SDL_GUI=ON
+# For the Emscripten build, use emcmake and emmake
+cmake . -B build
+make -C build
+./build/calcemu [optional path to g3a]
 ```
 
 ## Screenshots
