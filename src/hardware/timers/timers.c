@@ -52,6 +52,20 @@ u32 E_TCOR[6] = {0};
 u32 E_TCNT[6] = {0xffffffff};
 u8 E_TCR[6] = {0};
 
+// Compare match timer
+// TODO: Interrupts
+u16 CMSTR = 0;
+u16 CMCSR = 0;
+u32 CMCNT = 0;
+u32 CMCOR = 0;
+
+// TODO: Does this belong here?
+// TODO: Emulate this
+u8 DDCK_CNTR = 0;
+u16 DDCLKR0 = 0;
+u16 DDCLKR1 = 0;
+u16 DDCLKR2 = 0;
+
 void initTimers(void) {
   defineReg("Timer Start", TSTR.value, 0xa4490004);
 
@@ -69,27 +83,6 @@ void initTimers(void) {
     defineReg(name, TCR[i], 0xa4490010 + (i * 12));
   }
 
-  // ETMUs starting at 0xa44d0034
-
-  // /* etmu_t - extra timers on SH7337, SH7355 and SH7305 */
-  // typedef volatile struct
-  // {
-  // 	uint8_t TSTR;			/* Only bit 0 is used */
-  // 	pad(3);
-
-  // 	uint32_t TCOR;			/* Constant register */
-  // 	uint32_t TCNT;			/* Counter register */
-
-  // 	byte_union(TCR,
-  // 		uint8_t		:6;
-  // 		uint8_t UNF	:1;	/* Underflow flag */
-  // 		uint8_t UNIE	:1;	/* Underflow interrupt enable */
-  // 	);
-  // 	pad(19);
-
-  // } GPACKED(4) etmu_t;
-
-  // TODO
   for (int i = 0; i < 6; i++) {
     char *name = malloc(32);
     sprintf(name, "ETMU Timer Start Register %d", i);
@@ -108,6 +101,18 @@ void initTimers(void) {
     // TODO: Why does this work?
     defineReg(name, E_TCR[i], 0xa44d003c + (i * 32));
   }
+
+  defineReg("Compare Match Timer Start", CMSTR, 0xa44a0000);
+  defineReg("Compare Match Timer Control/Status", CMCSR, 0xa44a0060);
+  defineReg("Compare Match Timer Counter", CMCNT, 0xa44a0064);
+  defineReg("Compare Match Timer Constant", CMCOR, 0xa44a0068);
+
+  defineReg("External Clock Control", DDCK_CNTR, 0xa44c0020);
+  defineReg("External CLK1 setting", DDCLKR0, 0xa44c0000);
+  defineReg("External CLK2 setting", DDCLKR1, 0xa44c0002);
+  defineReg("External CLK3 setting", DDCLKR2, 0xa44c0004);
+
+  // E_TSTR[5] = 1;
 }
 
 u32 count = 0;
@@ -166,5 +171,30 @@ void updateTimers(void) {
       }
     }
   }
+
+  // TODO: Insyead of running this 28 times at once it should be spread out
+  for (int i = 0; i < 28; i++) {
+    bool compareMatchEnabled = (CMSTR & 0b00100000) >> 5;
+    if (compareMatchEnabled) {
+      // printf("Compare match enabled: %d/%d\n", CMCNT, CMCOR);
+      // TODO: 16-bit mode, the standby thing
+      CMCNT++;
+      if (CMCNT == UINT32_MAX) {
+        // Set the overflow flag
+        CMCSR |= 0b0100000000000000;
+      }
+      if (CMCNT == CMCOR) {
+        // Set the compare match flag
+        CMCSR |= 0b1000000000000000;
+        CMCNT = 0;
+        if (!(CMSTR & 0b0000000100000000)) { // One-shot mode
+          // Disable the compare match timer
+          // TODO: Is this correct?
+          CMSTR &= ~0b00100000;
+        }
+      }
+    }
+  }
+
   count++;
 }

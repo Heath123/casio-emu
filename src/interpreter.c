@@ -18,6 +18,7 @@
 #include "hardware/dma/dma.h"
 #include "hardware/power/power.h"
 #include "hardware/rtc/rtc.h"
+#include "hardware/ports/ports.h"
 #include "interrupts.h"
 
 CpuState cpu = {0};
@@ -46,6 +47,7 @@ int startInterpreter(const char* filename) {
   initDma();
   initPower();
   initRtc();
+  initPorts();
 
   cpu.isBranchDelaySlot = false;
   cpu.branchDelayDone = false;
@@ -95,6 +97,16 @@ void runIterationsCPU(int interationsToRun) {
       cpu.branchDelayDone = true;
     }
 
+    if (cpu.reg.PC == 0x801e7fa4) {
+      printf("Intercept: %08x\n", cpu.reg.PC);
+      cpu.reg.r0 = '\x03';
+      cpu.reg.PC = cpu.reg.PR;
+    }
+
+    if (cpu.reg.PC == 0x80020070) {
+      printf("Syscall: %04x\n", cpu.reg.r0);
+    }
+
     // TODO: Check alignment
     u16 instr = readMemory2Quick(cpu.reg.PC);
     #ifdef PRINT_INSTRUCTIONS
@@ -116,6 +128,22 @@ void runIterationsCPU(int interationsToRun) {
         cpu.reg.regArray[i + 16] = temp;
       }
     }
+
+    // if (cpu.reg.PC == 0xfffffe00) {
+    //   if (cpu.reg.r4 == 0) {
+    //     printf("Print: null string\n");
+    //   } else {
+    //     // Read until we hit a null byte
+    //     u32 addr = cpu.reg.r4;
+    //     while (readMemory(addr, 1) != 0) {
+    //       printf("%c", readMemory(addr, 1));
+    //       addr++;
+    //     }
+    //     // printf("\n");
+    //   }
+    //   // Set PC to PR (return)
+    //   cpu.reg.PC = cpu.reg.PR;
+    // }
 
     #ifdef PRINT_INSTRUCTIONS
     printf("r0: %08X, r1: %08X, r2: %08X, r3: %08X, r4: %08X, r5: %08X, r6: %08X, r7: %08X, r8: %08X,\n", cpu.reg.r0, cpu.reg.r1, cpu.reg.r2, cpu.reg.r3, cpu.reg.r4, cpu.reg.r5, cpu.reg.r6, cpu.reg.r7, cpu.reg.r8);
@@ -145,7 +173,7 @@ void runFrame(void) {
 
     iterationsSinceRTCTick += SPEED_FACTOR;
     if (iterationsSinceRTCTick >= (ITERATIONS_PER_SEC / 128)) {
-      updateRTC();
+      updateRtc();
       iterationsSinceRTCTick = 0;
     }
   }

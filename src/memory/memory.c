@@ -1,3 +1,4 @@
+#include <gint/cpu.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -43,35 +44,42 @@ void createAlias(u32 start, u32 end, u32 alias) {
   }
 }
 
-void initMemory(const char* filename) {
-  // memory = calloc(0xffffffff, sizeof(u8));
-
+void loadFile(const char* filename, void* mem, int fileOffset) {
   FILE *f = fopen(filename, "rb");
   if (f == NULL) {
-    perror("Error opening g3a file");
+    perror("Error opening file");
     exit(1);
   }
 
   fseek(f, 0, SEEK_END);
   long fsize = ftell(f);
-  // Load from 0x7000
-  fseek(f, 0x7000, SEEK_SET);
+  fseek(f, fileOffset, SEEK_SET);
 
-  // Allocate a memory area at 0x80000000 (ROM) to store the file
-  // The file will be loaded at an offset of 0x30000 to make space for the product ID at 0x8001ffd0
-  // and the syscall handler at 0x80020070
-  void* hostMem = allocMemArea(0x80000000, 0x80000000 + fsize + 0x30000);
-  fread(hostMem + 0x30000, fsize, 1, f);
+  // TODO: Take away fileOffset?
+  fread(mem, fsize, 1, f);
   // Swap all the 4-byte longwords
   for (int i = 0; i < fsize; i += 4) {
-    u32* word = (u32*) (hostMem + 0x30000 + i);
+    u32* word = (u32*) (mem + i);
     *word = __builtin_bswap32(*word);
   }
   fclose(f);
+}
+
+void initMemory(const char* filename) {
+  // memory = calloc(0xffffffff, sizeof(u8));
+
+  // Allocate a memory area at 0x80000000 (ROM)
+  int romSize = (1024 * 1024 * (32 + 2));
+  int g3aOffset = (1024 * 1024 * 32);
+  void* rom = allocMemArea(0x80000000, 0x80000000 + romSize);
+  // Load g3a
+  loadFile(filename, rom + g3aOffset, 0x7000);
+  // Load ROM dump
+  loadFile("/home/heath/dump-calc/rom.bin", rom , 0);
   // Alias at 0xa0000000 (P2)
-  createAlias(0x80000000, 0x80000000 + fsize, 0xa0000000);
+  createAlias(0x80000000, 0x80000000 + romSize, 0xa0000000);
   // Set up an alias at 0x00300000 in virtual memory to the file
-  createAlias(0x80030000, 0x80030000 + fsize, 0x00300000);
+  createAlias(0x80000000 + g3aOffset, 0x80000000 + romSize, 0x00300000);
 
   // TODO: set the product ID? Zeroing it out should be fine for now
   // We allocated with calloc so it's already zeroed out
@@ -79,14 +87,16 @@ void initMemory(const char* filename) {
   // Put a trapa instruction in the syscall handler
   // This isn't really used otherwise on the calculator,
   // so for now it's probably safe to hijack this instruction
-  writeMemory(0x80020070, 2, 0xc3ff); // trapa #255
+  // writeMemory(0x80020070, 2, 0xc3ff); // trapa #255
 
   // Allocate an 8MB memory area at 0x8c000000 (RAM)
-  allocMemArea(0x8c000000, 0x8c000000 + (8 * 1024 * 1024));
+  void* ram = allocMemArea(0x8c000000, 0x8c000000 + (8 * 1024 * 1024));
+  // Load RAM dump
+  loadFile("/home/heath/dump-calc/ram8c.bin", ram , 0);
   // Alias at 0xac000000 (P2)
   createAlias(0x8c000000, 0x8c000000 + (8 * 1024 * 1024), 0xac000000);
   // 512KB aliased to virtual memory at 0x08100000
-  createAlias(0x8c000000, 0x8c000000 + (512 * 1024), 0x08100000);
+  createAlias(0x8c160000, 0x8c160000 + (512 * 1024), 0x08100000);
 
   // 4KB of ILRAM at e5200000
   allocMemArea(0xe5200000, 0xe5200000 + 0x1000);
@@ -94,9 +104,21 @@ void initMemory(const char* filename) {
   // // 8KB XRAM at e5007000
   // allocMemArea(0xe5007000, 0xe5007000 + 0x2000);
 
-  // TODO: This is wrong! But should work for gint
-  // 16KB XYRAM at 0xe500e000
-  allocMemArea(0xe500e000, 0xe500e000 + 0x4000);
+  // 8KB XRAM at 0xe5000000 (loops)
+  allocMemArea(0xe5000000, 0xe5000000 + 0x2000);
+  for (int i = 1; i < 8; i++) {
+    createAlias(0xe5000000, 0xe5000000 + 0x2000, 0xe5000000 + (0x2000 * i));
+  }
+  // 8KB YRAM at 0xe5010000 (loops)
+  allocMemArea(0xe5010000, 0xe5010000 + 0x2000);
+  for (int i = 1; i < 8; i++) {
+    createAlias(0xe5010000, 0xe5010000 + 0x2000, 0xe5010000 + (0x2000 * i));
+  }
+
+  // 16KB RS memory at 0xfd800000
+  void* rs = allocMemArea(0xfd800000, 0xfd800000 + 0x4000);
+  // Load RS dump
+  loadFile("/home/heath/dump-calc/rs.bin", rs , 0);
 
   // There is a 64k page at NULL
   // TODO: Make this read only and mapped to the right physical address
@@ -226,7 +248,7 @@ void writeMemory(u32 address, u32 size, u32 value) {
     // This creates a very rough stack trace
     for (int i = 0; i < 0x800; i += 4) {
       u32 val = readMemory(cpu.reg.r15 + i, 4);
-      if (val >= 0x00300000 && val < 0x00400000) {
+      if ((val >= 0x00300000 && val < 0x00400000) || (val >= 0x80000000 && val < 0x82000000)) {
         printf("Stack trace: %08x\n", val);
       }
     }
@@ -237,7 +259,7 @@ void writeMemory(u32 address, u32 size, u32 value) {
 
     // That didn't work like I wanted, just segfault so I can get a core dump
     // Let's dereference 0x1 (a null pointer could be optimized out)
-    *(u32*)0x1 = 0;
+    // *(u32*)0x1 = 0;
 
     #ifdef IGNORE_INVALID_ACCESS
     if (address < 0x80000000) {
@@ -247,6 +269,7 @@ void writeMemory(u32 address, u32 size, u32 value) {
     #ifdef IGNORE_INVALID_ACCESS
     }
     #endif
+    cpu.isSleeping = true;
     // exit(1);
     return;
   }

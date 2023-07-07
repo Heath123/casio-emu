@@ -1,10 +1,14 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "../../int.h"
 #include "../../gui/gui.h"
 #include "../hwRegisters.h"
+#include "../../cpu.h"
+
+extern CpuState cpu;
 
 u8 PRDR; // Port R data register
 u16 mode;
@@ -13,15 +17,16 @@ u16 mode;
 u16	ram_address_horizontal = 0; //  0x200
 u16	ram_address_vertical = 0; // 0x201
 
-u16 horizontal_ram_start = 0; // 0x210
-u16 horizontal_ram_end = 0; // 0x211
-u16 vertical_ram_start = 0; // 0x212
-u16 vertical_ram_end = 0; // 0x213
+// TODO: These are probably wrong
+u16 horizontal_ram_start = 6; // 0x210
+u16 horizontal_ram_end = 389; // 0x211
+u16 vertical_ram_start = 1; // 0x212
+u16 vertical_ram_end = 215; // 0x213
 
 u8 brightness = 255; // 0x5a1
 
 // 2D array of pixels
-u16 pixels[224][396] = {0};
+u16 pixels[224][396] = {{0xffff}};
 
 // Set when the display is in the mode where it is receiving pixel data
 // TODO: See if the fast path actually helps
@@ -239,6 +244,7 @@ u32 dispInterfaceRead(u32 addr, u32 size) {
     // Mode select, or something
     return mode;
   } else {
+    // TODO: Update these to match below
     switch (mode) {
       case 0x200:
         // RAM address horizontal
@@ -274,6 +280,7 @@ u32 dispInterfaceRead(u32 addr, u32 size) {
         printf("Unimplemented read from display interface!\n");
         printf("Mode: 0x%04x\n", mode);
         // exit(1);
+        return 0x0000;
     }
   }
 }
@@ -292,25 +299,32 @@ void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
   } else {
     switch (mode) {
       case 0x200:
-        ram_address_horizontal = value;
+        // ram_address_horizontal = value;
+        // printf("ram_address_horizontal: %d\n", ram_address_horizontal);
+        ram_address_vertical = value;
         break;
       case 0x201:
-        ram_address_vertical = value;
+        // ram_address_vertical = value;
+        // printf("ram_address_vertical: %d\n", ram_address_vertical);
+        ram_address_horizontal = value;
         break;
       case 0x210:
         // horizontal_ram_start = value;
-        // printf("start: %d\n", value);
+        printf("hstart: %d\n", value);
+        printf("PC: %08x\n", cpu.reg.PC - 4);
         horizontal_ram_end = 395 - value;
         break;
       case 0x211:
         // horizontal_ram_end = value;
-        // printf("end: %d\n", value);
+        printf("hend: %d\n", value);
         horizontal_ram_start = 395 - value;
         break;
       case 0x212:
+        printf("vstart: %d\n", value);
         vertical_ram_start = value;
         break;
       case 0x213:
+        printf("vend: %d\n", value);
         vertical_ram_end = value;
         break;
       case 0x5a1:
@@ -338,12 +352,14 @@ void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
         break;
       default:
         printf("Unimplemented write to display interface!\n");
-        exit(1);
+        // exit(1);
     }
   }
 }
 
 void initDisplay(void) {
+  memset(pixels, 0xff, 224 * 396 * 2);
+
   defineReg("Port R data", PRDR, 0xa405013c);
   // TODO: Do 1 byte writes work? Here they will
   // Also do reads, and writes of things that aren't pixel data, work too?

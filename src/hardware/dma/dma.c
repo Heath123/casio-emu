@@ -168,7 +168,7 @@ void writeCHCR(u32 addr, u32 value) {
   if ((value & 1) == 1 && (oldVal & 1) == 0) {
     // Start DMA
     // printf("Starting DMA\n");
-    // printf("PC: %08x\n", cpu.reg.PC);
+    // printf("PC: %08x\n", cpu.reg.PC - 4);
     // printf("SAR: %08x\n", SAR[channel]);
     // printf("DAR: %08x\n", DAR[channel]);
 

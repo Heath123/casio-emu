@@ -16,6 +16,14 @@ u8 MSKCLR[13] = {0};
 u32 INTEVT;
 u32 INTEVT2;
 
+// TODO: Emulate these
+u32 INTPRI00 = 0;
+u8 INTREQ00 = 0;
+u8 INTMSK00 = 0;
+u8 INTMSKCLR00 = 0;
+u16 NMIFCR = 0;
+u32 USERIMASK = 0;
+
 void initIntc() {
   defineRegArray("Interrupt priority array", IPR, 0xa4080000, 12, 2);
   defineRegArray("Interrupt mask array", IMR, 0xa4080080, 13, 3);
@@ -25,6 +33,13 @@ void initIntc() {
 
   // TODO: ???
   defineReg("Interrupt event 2", INTEVT2, 0xa4000000);
+
+  defineReg("Interrupt priority for IRQ", INTPRI00, 0xa4140010);
+  defineReg("Interrupt request for IRQ", INTREQ00, 0xa4140024);
+  defineReg("Interrupt mask for IRQ", INTMSK00, 0xa4140044);
+  defineReg("Interrupt mask clear for IRQ", INTMSKCLR00, 0xa4140064);
+  defineReg("Interrupt control for NMI", NMIFCR, 0xa41400c0);
+  defineReg("User interrupt mask", USERIMASK, 0xa4700000);
 }
 
 // TODO: Do we need to handle NMIs? That might complicate things

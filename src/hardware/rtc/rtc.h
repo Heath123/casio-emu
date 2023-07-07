@@ -4,6 +4,6 @@
 #include "../../int.h"
 
 void initRtc(void);
-void updateRTC(void);
+void updateRtc(void);
 
 #endif // RTC_H

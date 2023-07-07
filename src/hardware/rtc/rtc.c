@@ -69,7 +69,7 @@ void initRtc(void) {
 
 // Ticks the RTC, should be called 128 times per second
 // TODO: Interrupts and alarms
-void updateRTC(void) {
+void updateRtc(void) {
   R64CNT++;
   if (R64CNT == 128) {
     R64CNT = 0;

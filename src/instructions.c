@@ -160,8 +160,20 @@ u32 movt(u16 instr, u32 src, u32 dst) {
 }
 
 u32 rotl(u16 instr, u32 src, u32 dst) {
-  printf("rotl: not implemented\n");
-  exit(1);
+  if ((dst & 0x80000000) == 0) {
+    cpu.reg.SR_parts.T = 0;
+  } else {
+    cpu.reg.SR_parts.T = 1;
+  }
+
+  dst <<= 1;
+
+  if (cpu.reg.SR_parts.T == 1) {
+    dst |= 0x00000001;
+  } else {
+    dst &= 0xFFFFFFFE;
+  }
+
   return dst;
 }
 
@@ -234,8 +246,14 @@ u32 rotcr(u16 instr, u32 src, u32 dst) {
 }
 
 u32 shal(u16 instr, u32 src, u32 dst) {
-  printf("shal: not implemented\n");
-  exit(1);
+  if ((dst & 0x80000000) == 0) {
+    cpu.reg.SR_parts.T = 0;
+  } else {
+    cpu.reg.SR_parts.T = 1;
+  }
+
+  dst <<= 1;
+
   return dst;
 }
 
