@@ -124,6 +124,15 @@ void initMemory(const char* filename) {
   // TODO: Make this read only and mapped to the right physical address
   // TODO: Have a way to catch null pointer errors for debugging
   allocMemArea(0, 0x10000);
+
+  // typedef struct {
+  // 	uint32_t SR;
+  // 	uint32_t VBR;
+  // 	uint32_t CPUOPM;
+  // } cpu_state_t;
+  // SR = 0x400001F0
+  // VBR = 0x80020F00
+  // CPUOPM = 00000300
 }
 
 // Some ways of handling the endianness difference are described here:
@@ -223,6 +232,10 @@ void writeMemory(u32 address, u32 size, u32 value) {
     //   fastWrite(value);
     //   return;
     // }
+    if ((address & 0xff000000) == 0xb4000000) {
+      dispInterfaceWrite(address, value, size);
+      return;
+    }
 
     // // Work out the bitmask used to select what bits to write
     // u32 mask;
@@ -260,6 +273,7 @@ void writeMemory(u32 address, u32 size, u32 value) {
     // That didn't work like I wanted, just segfault so I can get a core dump
     // Let's dereference 0x1 (a null pointer could be optimized out)
     // *(u32*)0x1 = 0;
+    exit(1);
 
     #ifdef IGNORE_INVALID_ACCESS
     if (address < 0x80000000) {
@@ -269,8 +283,7 @@ void writeMemory(u32 address, u32 size, u32 value) {
     #ifdef IGNORE_INVALID_ACCESS
     }
     #endif
-    cpu.isSleeping = true;
-    // exit(1);
+    // cpu.isSleeping = true;
     return;
   }
 

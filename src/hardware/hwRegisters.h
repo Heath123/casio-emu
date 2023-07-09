@@ -50,6 +50,6 @@ void defineRegCB(char *name, u32 (*read)(u32 addr), void (*write)(u32 addr, u32 
 void defineRegCBUnsized(char *name, u32 (*read)(u32 addr, u32 size), void (*write)(u32 addr, u32 value, u32 size), u32 addr);
 void defineRegArray_internal(char *name, void *var, u32 addr, u32 size, u32 count, u32 spacing);
 #define defineRegArray(name, var, addr, count, spacing) defineRegArray_internal(name, var, addr, sizeof(var[0]), count, spacing)
-void defineRegArrayCB(char *name, u32 (*read)(u32 addr, u32 index), void (*write)(u32 addr, u32 index, u32 value), u32 addr, u32 size, u32 count);
+// void defineRegArrayCB(char *name, u32 (*read)(u32 addr, u32 index), void (*write)(u32 addr, u32 index, u32 value), u32 addr, u32 size, u32 count, u32 spacing);
 
 #endif // HWREGISTERS_H

@@ -5,6 +5,7 @@
 
 void initDisplay(void);
 void updateDisplayFromFramebuffer(void);
+void dispInterfaceWrite(u32 addr, u32 value, u32 size);
 
 // extern bool displayFastPath;
 // void fastWrite(u32 value);

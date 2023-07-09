@@ -180,12 +180,12 @@ void writeCHCR(u32 addr, u32 value) {
     }
     u32 blocks = DMA_TCR[channel];
     u32 size = transfer_size * blocks;
-    // printf("DMA: Copying %d bytes\n", size);
+    printf("DMA: Copying %d bytes\n", size);
 
     u32 src = SAR[channel] | 0xa0000000;
     u32 dst = DAR[channel] | 0xa0000000;
-    // printf("src: %08x\n", src);
-    // printf("dst: %08x\n", dst);
+    printf("src: %08x\n", src);
+    printf("dst: %08x\n", dst);
     
     u32 real_transfer_size = (transfer_size > 4) ? 4 : transfer_size;
 
@@ -212,6 +212,8 @@ void writeCHCR(u32 addr, u32 value) {
         src -= real_transfer_size;
       }
     }
+
+    printf("DMA done\n");
 
     // TODO: What am I meant to do here?
     // Set TE (transfer ended)

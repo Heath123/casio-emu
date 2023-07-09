@@ -66,6 +66,79 @@ u16 DDCLKR0 = 0;
 u16 DDCLKR1 = 0;
 u16 DDCLKR2 = 0;
 
+/* Timer Unit (see tmu/tmu.c) */
+typedef struct {
+	/* Individual timers; TSTR is used for ETMU */
+	struct tmu_state_stored_timer {
+		uint32_t TCOR;
+		uint32_t TCNT;
+		uint16_t TCR;
+		uint16_t TSTR;
+	} t[9];
+	/* TSTR value for TMU */
+	uint8_t TSTR;
+} tmu_state_t;
+
+tmu_state_t os_state = {
+  .t = {
+    {
+      .TCOR = 0xffffffff,
+      .TCNT = 0xffffffff,
+      .TCR = 0x0000,
+      .TSTR = 0x5555,
+    },
+    {
+      .TCOR = 0x0002d000,
+      .TCNT = 0x0002d000,
+      .TCR = 0x0023,
+      .TSTR = 0x5555,
+    },
+    {
+      .TCOR = 0xffffffff,
+      .TCNT = 0x00000000,
+      .TCR = 0x0003,
+      .TSTR = 0x5555,
+    },
+    {
+      .TCOR = 0x00000333,
+      .TCNT = 0x00000333,
+      .TCR = 0x0000,
+      .TSTR = 0x0000,
+    },
+    {
+      .TCOR = 0x00000333,
+      .TCNT = 0x00000333,
+      .TCR = 0x0000,
+      .TSTR = 0x0000,
+    },
+    {
+      .TCOR = 0x00000333,
+      .TCNT = 0x00000333,
+      .TCR = 0x0000,
+      .TSTR = 0x0000,
+    },
+    {
+      .TCOR = 0x00000333,
+      .TCNT = 0x00000333,
+      .TCR = 0x0000,
+      .TSTR = 0x0000,
+    },
+    {
+      .TCOR = 0x00000333,
+      .TCNT = 0x00000333,
+      .TCR = 0x0000,
+      .TSTR = 0x0000,
+    },
+    {
+      .TCOR = 0xffffffff,
+      .TCNT = 0xf8a58232,
+      .TCR = 0x0000,
+      .TSTR = 0x0003,
+    }
+  },
+  .TSTR = 0x00
+};
+
 void initTimers(void) {
   defineReg("Timer Start", TSTR.value, 0xa4490004);
 
@@ -112,12 +185,41 @@ void initTimers(void) {
   defineReg("External CLK2 setting", DDCLKR1, 0xa44c0002);
   defineReg("External CLK3 setting", DDCLKR2, 0xa44c0004);
 
-  // E_TSTR[5] = 1;
+  // Restore the OS state
+  for(int i = 0; i < 3; i++)
+	{
+		TCOR[i] = os_state.t[i].TCOR;
+		TCNT[i] = os_state.t[i].TCNT;
+		TCR[i].value = os_state.t[i].TCR;
+	}
+	for(int i = 3; i < 9; i++)
+	{
+		struct tmu_state_stored_timer const *c = &os_state.t[i];
+
+    E_TCOR[i - 3] = c->TCOR;
+    E_TSTR[i - 3] = c->TSTR;
+    E_TCNT[i - 3] = c->TCNT;
+    E_TCR[i - 3] = c->TCR;
+	}
+
+  TSTR.value = os_state.TSTR;
 }
 
 u32 count = 0;
 
-u32 tmu_event[9] = {0x400, 0x420, 0x440, 0x9e0, 0xc20, 0xc40, 0x900, 0xd00, 0xfa0};
+interruptData tmu_interrupt[9] = {
+  // TMU
+  { .code = 0x400, .IMR = IMR4, .IMRbits = 0x10 },
+  { .code = 0x420, .IMR = IMR4, .IMRbits = 0x20 },
+  { .code = 0x440, .IMR = IMR4, .IMRbits = 0x40 },
+  // ETMU
+  { .code = 0x9e0, .IMR = IMR6, .IMRbits = 0x08 },
+  { .code = 0xc20, .IMR = IMR5, .IMRbits = 0x02 },
+  { .code = 0xc40, .IMR = IMR5, .IMRbits = 0x04 },
+  { .code = 0x900, .IMR = IMR2, .IMRbits = 0x01 },
+  { .code = 0xd00, .IMR = IMR6, .IMRbits = 0x10 },
+  { .code = 0xfa0, .IMR = IMR8, .IMRbits = 0x02 },
+};
 
 u32 prescaler[8] = {4, 16, 64, 256, 0, 0, 0, 0};
 
@@ -153,7 +255,7 @@ void updateTimers(void) {
         if (E_TCNT[i - 3] == 0) {
           // Timer underflow - raise an interrupt
           // printf("Timer %d interrupt\n", i);
-          generateIntcInterrupt(tmu_event[i]);
+          generateIntcInterrupt(&tmu_interrupt[i]);
           E_TCNT[i - 3] = E_TCOR[i - 3];
         }
         // Decrement the timer
@@ -163,7 +265,7 @@ void updateTimers(void) {
         if (TCNT[i] == 0) {
           // Timer underflow - raise an interrupt
           // printf("Timer %d interrupt\n", i);
-          generateIntcInterrupt(tmu_event[i]);
+          generateIntcInterrupt(&tmu_interrupt[i]);
           TCNT[i] = TCOR[i];
         }
         // Decrement the timer

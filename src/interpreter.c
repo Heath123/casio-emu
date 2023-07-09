@@ -19,6 +19,8 @@
 #include "hardware/power/power.h"
 #include "hardware/rtc/rtc.h"
 #include "hardware/ports/ports.h"
+#include "hardware/adc/adc.h"
+#include "hardware/bcd/bcd.h"
 #include "interrupts.h"
 
 CpuState cpu = {0};
@@ -48,6 +50,8 @@ int startInterpreter(const char* filename) {
   initPower();
   initRtc();
   initPorts();
+  initAdc();
+  initBcd();
 
   cpu.isBranchDelaySlot = false;
   cpu.branchDelayDone = false;
@@ -58,6 +62,8 @@ int startInterpreter(const char* filename) {
   // Return address
   cpu.reg.PR = 0xffffffff;
   cpu.reg.r15 = 0x8c080000; // Stack pointer, at the top of user memory
+
+  cpu.reg.VBR = 0x80020f00;
 
   runMainLoop(runFrame);
   // runFrame(); runFrame(); runFrame(); runFrame();
@@ -97,14 +103,33 @@ void runIterationsCPU(int interationsToRun) {
       cpu.branchDelayDone = true;
     }
 
-    if (cpu.reg.PC == 0x801e7fa4) {
-      printf("Intercept: %08x\n", cpu.reg.PC);
-      cpu.reg.r0 = '\x03';
-      cpu.reg.PC = cpu.reg.PR;
-    }
+    // if (cpu.reg.PC == 0x801e7fa4) {
+    //   printf("Intercept: %08x\n", cpu.reg.PC);
+    //   cpu.reg.r0 = '\x03';
+    //   cpu.reg.PC = cpu.reg.PR;
+    // }
 
     if (cpu.reg.PC == 0x80020070) {
       printf("Syscall: %04x\n", cpu.reg.r0);
+      // if (cpu.reg.r0 == 0x0eab) {
+      //   // GetKey
+      //   cpu.reg.r0 = 0;
+      //   // printf("ptr: %08x\n", cpu.reg.r4);
+      //   writeMemory(cpu.reg.r4, 4, 0x7534);
+      //   cpu.reg.PC = cpu.reg.PR;
+      // }
+      // if (cpu.reg.r0 == 0x12bf) {
+      //   // GetKeyWait_OS
+      //   cpu.reg.r0 = 0;
+      //   writeMemory(cpu.reg.r4, 4, 0x03);
+      //   writeMemory(cpu.reg.r5, 4, 0x02);
+      //   cpu.reg.PC = cpu.reg.PR;
+      // }
+      // if (cpu.reg.r0 == 0x0d39) {
+      //   // PRGM_GetKey_OS
+      //   // TODO?
+      //   cpu.reg.PC = cpu.reg.PR;
+      // }
     }
 
     // TODO: Check alignment

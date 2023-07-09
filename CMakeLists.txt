@@ -17,6 +17,8 @@ set(SOURCES
   src/hardware/tlb/tlb.c
   src/hardware/rtc/rtc.c
   src/hardware/ports/ports.c
+  src/hardware/adc/adc.c
+  src/hardware/bcd/bcd.c
   src/memory/memory.c
   src/memory/specialAddrs.c
 )

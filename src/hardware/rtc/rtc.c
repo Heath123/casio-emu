@@ -65,6 +65,10 @@ void initRtc(void) {
   
   defineReg("RTC Control 1", RCR1, 0xa413fedc);
   defineReg("RTC Control 2", RCR2, 0xa413fede);
+
+  RDAYCNT = bcd8(1);
+  RMONCNT = bcd8(1);
+  RYRCNT = bcd16(2010);
 }
 
 // Ticks the RTC, should be called 128 times per second

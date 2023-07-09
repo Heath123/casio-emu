@@ -96,6 +96,23 @@ void defineRegArray_internal(char *name, void *var, u32 addr, u32 size, u32 coun
   // printf("ARRAY DEF END\n");
 }
 
+// void defineRegArrayCB(char *name, u32 (*read)(u32 addr, u32 index), void (*write)(u32 addr, u32 index, u32 value), u32 addr, u32 size, u32 count, u32 spacing) {
+//   // printf("Addr: %x, size: %d, count: %d\n", addr, size, count);
+//   hwRegister* entry = malloc(sizeof(hwRegister));
+//   entry->name = name;
+//   entry->addr = addr;
+//   entry->size = size;
+//   entry->cb.read = (readCallback) { .readSized = read };
+//   entry->cb.write = (writeCallback) { .writeSized = write };
+//   entry->spacing = spacing;
+//   entry->type = REG_TYPE_ARRAY_CB;
+//   // printf("ARRAY DEF START\n");
+//   for (u32 i = 0; i < count; i++) {
+//     addEntry(entry, addr + i * (size + spacing));
+//   }
+//   // printf("ARRAY DEF END\n");
+// }
+
 bool readSpecial(u32 address, u32 size, u32* value) {
   hwRegister* entry = getEntry(address);
   if (entry == NULL) {

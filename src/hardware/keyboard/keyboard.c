@@ -1,5 +1,7 @@
 #include "../../int.h"
 #include "../hwRegisters.h"
+#include "../intc/intc.h"
+#include <stdio.h>
 
 u16 KIUDATA[6] = {0};
 
@@ -21,6 +23,12 @@ bool isKeydown(int basic_keycode) {
   return (0 != (KIUDATA[word] & 1 << bit));
 }
 
+interruptData keyboardInterrupt = {
+  .code = 0xbe0,
+  .IMR = IMR5,
+  .IMRbits = 0x80
+};
+
 void setKeydown(int basic_keycode, bool down) {
   i32 row = basic_keycode % 10;
   i32 col = basic_keycode / 10 - 1;
@@ -31,6 +39,15 @@ void setKeydown(int basic_keycode, bool down) {
   } else {
     KIUDATA[word] &= ~(1 << bit);
   }
+  printf("KEYIR: %x\n", KIUINTREG & 0b0000111100000000);
+  // TODO: Differnt modes
+  KIUINTREG &= ~0b1111111;
+  if (down) {
+    KIUINTREG |= 15;
+  } else {
+    KIUINTREG |= 102;
+  }
+  generateIntcInterrupt(&keyboardInterrupt);
 }
 
 void initKeyboard() {
