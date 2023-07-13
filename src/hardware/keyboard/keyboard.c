@@ -39,7 +39,7 @@ void setKeydown(int basic_keycode, bool down) {
   } else {
     KIUDATA[word] &= ~(1 << bit);
   }
-  printf("KEYIR: %x\n", KIUINTREG & 0b0000111100000000);
+  // printf("KEYIR: %x\n", KIUINTREG & 0b0000111100000000);
   // TODO: Differnt modes
   KIUINTREG &= ~0b1111111;
   if (down) {

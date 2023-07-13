@@ -6146,7 +6146,7 @@
           "1111"
         ],
         "shift": 0,
-        "signed": true
+        "signed": false
       },
       "gb": {
         "type": "register",
@@ -6188,7 +6188,7 @@
           "1111"
         ],
         "shift": 0,
-        "signed": true
+        "signed": false
       },
       "gb": {
         "type": "register",
@@ -6230,7 +6230,7 @@
           "1111"
         ],
         "shift": 0,
-        "signed": true
+        "signed": false
       },
       "gb": {
         "type": "register",
@@ -6272,7 +6272,7 @@
           "1111"
         ],
         "shift": 0,
-        "signed": true
+        "signed": false
       },
       "gb": {
         "type": "register",
@@ -6725,7 +6725,7 @@
           "1111"
         ],
         "shift": 0,
-        "signed": true
+        "signed": false
       },
       "r0": {
         "type": "register",
@@ -6833,7 +6833,7 @@
           "1111"
         ],
         "shift": 0,
-        "signed": true
+        "signed": false
       },
       "r0": {
         "type": "register",
@@ -6899,7 +6899,7 @@
           "1111"
         ],
         "shift": 0,
-        "signed": true
+        "signed": false
       },
       "r0": {
         "type": "register",
@@ -7012,7 +7012,7 @@
   },
   {
     "id": 190,
-    "name": "movua.l @rm, r0",
+    "name": "movua.l rm, r0",
     "family": "movua",
     "formatString": "TODO",
     "opcode": [
@@ -7031,11 +7031,7 @@
           "0000",
           "0000"
         ],
-        "shift": 8,
-        "indirect": true,
-        "indirectSize": 4,
-        "preDecrement": false,
-        "postIncrement": false
+        "shift": 8
       },
       "r0": {
         "type": "register",
@@ -7048,7 +7044,7 @@
   },
   {
     "id": 191,
-    "name": "movua.l @rm+, r0",
+    "name": "movua.l rm+, r0",
     "family": "movua",
     "formatString": "TODO",
     "opcode": [
@@ -7067,11 +7063,7 @@
           "0000",
           "0000"
         ],
-        "shift": 8,
-        "indirect": true,
-        "indirectSize": 4,
-        "preDecrement": false,
-        "postIncrement": true
+        "shift": 8
       },
       "r0": {
         "type": "register",

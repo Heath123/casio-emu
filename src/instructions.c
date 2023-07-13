@@ -875,9 +875,19 @@ u32 movli(u16 instr, u32 src, u32 dst) {
 }
 
 u32 movua(u16 instr, u32 src, u32 dst) {
-  printf("movua: not implemented\n");
-  exit(1);
-  return dst;
+  int reg = (instr & 0b0000111100000000) >> 8;
+  bool isPostIncrement = (instr & 0b0000000001000000) >> 6;
+
+  u32 result =
+    (readMemory(src + 0, 1) << 24) |
+    (readMemory(src + 1, 1) << 16) |
+    (readMemory(src + 2, 1) <<  8) |
+    (readMemory(src + 3, 1) <<  0);
+
+  if (isPostIncrement) {
+    cpu.reg.regArray[reg] += 4;
+  }
+  return result;
 }
 
 u32 movca(u16 instr, u32 src, u32 dst) {

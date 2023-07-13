@@ -21,6 +21,7 @@
 #include "hardware/ports/ports.h"
 #include "hardware/adc/adc.h"
 #include "hardware/bcd/bcd.h"
+#include "hardware/debug/debug.h"
 #include "interrupts.h"
 
 CpuState cpu = {0};
@@ -29,7 +30,7 @@ void test(void);
 
 // bool trace = false;
 
-#define SPEED_FACTOR ((u64) 2048 * 2)
+#define SPEED_FACTOR ((u64) 2048 * 1)
 
 // TODO: I think this is too many CPU cycles? Or maybe not enough...
 // When adjusting this the timers will need to be adjusted too
@@ -52,12 +53,14 @@ int startInterpreter(const char* filename) {
   initPorts();
   initAdc();
   initBcd();
+  initDebug();
 
   cpu.isBranchDelaySlot = false;
   cpu.branchDelayDone = false;
   cpu.branchTarget = 0;
 
   cpu.reg.PC = 0x00300000;
+  // cpu.reg.PC = 0xA0000000;
 
   // Return address
   cpu.reg.PR = 0xffffffff;
@@ -110,7 +113,7 @@ void runIterationsCPU(int interationsToRun) {
     // }
 
     if (cpu.reg.PC == 0x80020070) {
-      printf("Syscall: %04x\n", cpu.reg.r0);
+      // printf("Syscall: %04x\n", cpu.reg.r0);
       // if (cpu.reg.r0 == 0x0eab) {
       //   // GetKey
       //   cpu.reg.r0 = 0;

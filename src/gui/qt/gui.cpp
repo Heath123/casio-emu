@@ -11,6 +11,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QKeyEvent>
+#include <qnamespace.h>
 
 // TODO: Put this in the headers instead
 extern "C" {
@@ -52,8 +53,11 @@ bool KeyboardEventFilter::eventFilter(QObject* obj, QEvent* event) {
                 setKeydown(37, isPress);
                 return true;
             case Qt::Key_X:
+            case Qt::Key_Space:
                 setKeydown(78, isPress);
                 return true;
+            case Qt::Key_Shift:
+                setKeydown(77, isPress);
         }
     }
 

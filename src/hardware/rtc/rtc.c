@@ -19,6 +19,10 @@ u8 RCR1 = 0;
 // TODO: Emulate the functionality of this register
 u8 RCR2 = 0;
 
+// TODO: Emulate watchdog
+u16 RWTCNT = 0;
+u16 RWTCSR = 0;
+
 // BCD functions from gint source code
 /* int8(), int16(): Convert BCD to integer */
 static int int8(uint8_t bcd)
@@ -65,6 +69,9 @@ void initRtc(void) {
   
   defineReg("RTC Control 1", RCR1, 0xa413fedc);
   defineReg("RTC Control 2", RCR2, 0xa413fede);
+
+  defineReg("Watchdog timer counter", RWTCNT, 0xa4520000);
+  defineReg("Watchdog control", RWTCSR, 0xa4520004);
 
   RDAYCNT = bcd8(1);
   RMONCNT = bcd8(1);

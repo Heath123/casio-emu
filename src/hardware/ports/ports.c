@@ -56,10 +56,40 @@ u16 PSELF = 0;
 u16 PSELG = 0;
 u16 PSELH = 0;
 
+u16 HIZCRA = 0;
+u16 HIZCRB = 0;
+u16 HIZCRC = 0;
+u16 MSELCRA = 0;
+u16 MSELCRB = 0;
+u16 DRVCRA = 0;
+u16 DRVCRB = 0;
+u16 DRVCRC = 0;
+u16 DRVCRD = 0;
+u8 PULCRBSC = 0;
+u8 PULCRTRST = 0;
+u8 PULCRA = 0;
+u8 PULCRB = 0;
+u8 PULCRC = 0;
+u8 PULCRD = 0;
+u8 PULCRE = 0;
+u8 PULCRF = 0;
+u8 PULCRG = 0;
+u8 PULCRH = 0;
+u8 PULCRJ = 0;
+u8 PULCRK = 0;
+u8 PULCRL = 0;
+u8 PULCRM = 0;
+u8 PULCRN = 0;
 u8 PULCRP = 0;
+u8 PULCRQ = 0;
+u8 PULCRR = 0;
+u8 PULCRS = 0;
+u8 PULCRT = 0;
+u8 PULCRU = 0;
+u8 PULCRV = 0;
 
 // TODO: This doesn't belong here
-u32 SDCR = 0;
+// u32 SDCR = 0;
 
 void initPorts(void) {
   defineReg("Port A Control", PACR, 0xa4050100);
@@ -82,6 +112,38 @@ void initPorts(void) {
   defineReg("Port T Control", PTCR, 0xa4050140);
   defineReg("Port U Control", PUCR, 0xa4050142);
   defineReg("Port V Control", PVCR, 0xa4050144);
+
+  defineReg("Data pin Hi-Z control A", HIZCRA, 0xa4050158);
+  defineReg("Data pin Hi-Z control B", HIZCRB, 0xa405015a);
+  defineReg("Data pin Hi-Z control C", HIZCRC, 0xa405015c);
+  defineReg("Module function select A", MSELCRA, 0xa4050180);
+  defineReg("Module function select B", MSELCRB, 0xa4050182);
+  defineReg("Buffer drive control A", DRVCRA, 0xa4050186);
+  defineReg("Buffer drive control B", DRVCRB, 0xa4050188);
+  defineReg("Buffer drive control C", DRVCRC, 0xa405018a);
+  defineReg("Buffer drive control D", DRVCRD, 0xa4050184);
+  defineReg("BSC pull-up/down control", PULCRBSC, 0xa40501c3);
+  defineReg("TRST pull-up/down select", PULCRTRST, 0xa40501c5);
+  defineReg("Port A pull-up/down control", PULCRA, 0xa4050190);
+  defineReg("Port B pull-up/down control", PULCRB, 0xa4050191);
+  defineReg("Port C pull-up/down control", PULCRC, 0xa4050192);
+  defineReg("Port D pull-up/down control", PULCRD, 0xa4050193);
+  defineReg("Port E pull-up/down control", PULCRE, 0xa4050194);
+  defineReg("Port F pull-up/down control", PULCRF, 0xa4050195);
+  defineReg("Port G pull-up/down control", PULCRG, 0xa4050196);
+  defineReg("Port H pull-up/down control", PULCRH, 0xa4050197);
+  defineReg("Port J pull-up/down control", PULCRJ, 0xa4050198);
+  defineReg("Port K pull-up/down control", PULCRK, 0xa4050199);
+  defineReg("Port L pull-up/down control", PULCRL, 0xa405019a);
+  defineReg("Port M pull-up/down control", PULCRM, 0xa405019b);
+  defineReg("Port N pull-up/down control", PULCRN, 0xa405019c);
+  defineReg("Port P pull-up/down control", PULCRP, 0xa40501c6);
+  defineReg("Port Q pull-up/down control", PULCRQ, 0xa405019d);
+  defineReg("Port R pull-up/down control", PULCRR, 0xa405019e);
+  defineReg("Port S pull-up/down control", PULCRS, 0xa405019f);
+  defineReg("Port T pull-up/down control", PULCRT, 0xa40501c0);
+  defineReg("Port U pull-up/down control", PULCRU, 0xa40501c1);
+  defineReg("Port V pull-up/down control", PULCRV, 0xa40501c2);
 
   defineReg("Port A data", PADR, 0xa4050120);
   defineReg("Port B data", PBDR, 0xa4050122);
@@ -113,7 +175,7 @@ void initPorts(void) {
   defineReg("Pin group G select", PSELG, 0xa40501c8);
   defineReg("Pin group H select", PSELH, 0xa40501d6);
 
-  defineReg("Port P pull-up/down control", PULCRP, 0xa40501c6);
+  // defineReg("Port P pull-up/down control", PULCRP, 0xa40501c6);
 
-  defineReg("SDRAM control", SDCR, 0xfec10044);
+  // defineReg("SDRAM control", SDCR, 0xfec10044);
 }

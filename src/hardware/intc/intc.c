@@ -1,5 +1,6 @@
 #include "intc.h"
 
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -79,6 +80,8 @@ void initIntc() {
 // TODO: Interrupt sources
 void generateIntcInterrupt(interruptData* data) {
   // TODO: Interrupt priority
+
+  // printf("Interrupt type: 0x%03x\n", data->code);
 
   // If the interrupt is masked then ignore it
   // printf("IMR: %d\n", IMR[data->IMR] & data->IMRbits);

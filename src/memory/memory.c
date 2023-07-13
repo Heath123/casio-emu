@@ -1,4 +1,3 @@
-#include <gint/cpu.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -133,6 +132,13 @@ void initMemory(const char* filename) {
   // SR = 0x400001F0
   // VBR = 0x80020F00
   // CPUOPM = 00000300
+
+  // TODO: Emulate the holes and banking
+  // PRAM0
+  allocMemArea(0xfe200000, 0xfe200000 + (160 * 1024));
+  // XRAM0
+  allocMemArea(0xfe240000, 0xfe240000 + (224 * 1024));
+  // TODO: The rest
 }
 
 // Some ways of handling the endianness difference are described here:
@@ -141,13 +147,13 @@ void initMemory(const char* filename) {
 // addressing is faster but I might need to test it
 
 u32 readMemory(u32 address, u32 size) {
-  // printf("Address: %08x\n", address);
+  // printf("Read address: %08x\n", address);
 
   // printf("Size: %d\n", size);
   // Check for unaligned access
   if (address % size != 0) {
     printf("Unaligned memory read at %08x, PC = %08x\n", address, cpu.reg.PC);
-    *((volatile u32* ) 1);
+    // *((volatile u32* ) 1);
     exit(1);
   }
 
@@ -209,10 +215,18 @@ u32 readMemory2Quick(u32 address) {
   // Get the relevant page
   void* page = pageTable[address / 0x1000];
 
+  if (page == NULL) {
+    return readMemory(address, 2);
+  }
+
   return *(u16*)(page + ((address ^ 0x2) % 0x1000));
 }
 
 void writeMemory(u32 address, u32 size, u32 value) {
+  if (address >= 0x00300000 && address < 0x00500000) {
+    printf("Write to ROM at %08x\n", cpu.reg.PC - 4);
+  }
+
   // printf("Address: %08x\n", address);
 
   // printf("Size: %d\n", size);
@@ -261,7 +275,7 @@ void writeMemory(u32 address, u32 size, u32 value) {
     // This creates a very rough stack trace
     for (int i = 0; i < 0x800; i += 4) {
       u32 val = readMemory(cpu.reg.r15 + i, 4);
-      if ((val >= 0x00300000 && val < 0x00400000) || (val >= 0x80000000 && val < 0x82000000)) {
+      if ((val >= 0x00300000 && val < 0x00500000) || (val >= 0x80000000 && val < 0x82000000)) {
         printf("Stack trace: %08x\n", val);
       }
     }
