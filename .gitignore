@@ -113,5 +113,8 @@ a.out
 calc-emu-test
 build
 build-em
-
+calcemu_autogen
+CMakeFiles
 compile_commands.json
+CMakeCache.txt
+
