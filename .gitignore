@@ -117,4 +117,7 @@ calcemu_autogen
 CMakeFiles
 compile_commands.json
 CMakeCache.txt
-
+cmake_install.cmake
+calcemu
+Makefile
+*.json
