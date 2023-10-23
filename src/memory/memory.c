@@ -73,8 +73,6 @@ void initMemory(const char* filename) {
   void* rom = allocMemArea(0x80000000, 0x80000000 + romSize);
   // Load g3a
   loadFile(filename, rom + g3aOffset, 0x7000);
-  // Load ROM dump
-  loadFile("/home/heath/dump-calc/rom.bin", rom , 0);
   // Alias at 0xa0000000 (P2)
   createAlias(0x80000000, 0x80000000 + romSize, 0xa0000000);
   // Set up an alias at 0x00300000 in virtual memory to the file
@@ -90,8 +88,6 @@ void initMemory(const char* filename) {
 
   // Allocate an 8MB memory area at 0x8c000000 (RAM)
   void* ram = allocMemArea(0x8c000000, 0x8c000000 + (8 * 1024 * 1024));
-  // Load RAM dump
-  loadFile("/home/heath/dump-calc/ram8c.bin", ram , 0);
   // Alias at 0xac000000 (P2)
   createAlias(0x8c000000, 0x8c000000 + (8 * 1024 * 1024), 0xac000000);
   // 512KB aliased to virtual memory at 0x08100000
@@ -116,8 +112,6 @@ void initMemory(const char* filename) {
 
   // 16KB RS memory at 0xfd800000
   void* rs = allocMemArea(0xfd800000, 0xfd800000 + 0x4000);
-  // Load RS dump
-  loadFile("/home/heath/dump-calc/rs.bin", rs , 0);
 
   // There is a 64k page at NULL
   // TODO: Make this read only and mapped to the right physical address
