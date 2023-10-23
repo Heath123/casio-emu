@@ -223,9 +223,9 @@ u32 readMemory2Quick(u32 address) {
 }
 
 void writeMemory(u32 address, u32 size, u32 value) {
-  if (address >= 0x00300000 && address < 0x00500000) {
-    printf("Write to ROM at %08x\n", cpu.reg.PC - 4);
-  }
+  // if (address >= 0x00300000 && address < 0x00500000) {
+  //   printf("Write to ROM at %08x\n", cpu.reg.PC - 4);
+  // }
 
   // printf("Address: %08x\n", address);
 
